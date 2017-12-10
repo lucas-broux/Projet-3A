@@ -1,0 +1,10 @@
+\select@language {french}
+\beamer@sectionintoc {2}{Introduction}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Sujet choisi, probl\IeC {\'e}matique g\IeC {\'e}n\IeC {\'e}rale}{4}{0}{1}
+\beamer@subsectionintoc {2}{2}{Objectifs du projet}{6}{0}{1}
+\beamer@sectionintoc {3}{Compr\IeC {\'e}hension actuelle du probl\IeC {\`e}me}{13}{0}{2}
+\beamer@subsectionintoc {3}{1}{Mod\IeC {\'e}lisation math\IeC {\'e}matique}{14}{0}{2}
+\beamer@subsectionintoc {3}{2}{Jeu d'hypoth\IeC {\`e}ses}{14}{0}{2}
+\beamer@subsectionintoc {3}{3}{Raisonnement}{14}{0}{2}
+\beamer@sectionintoc {4}{Simulations}{14}{0}{3}
+\beamer@sectionintoc {5}{Conclusion}{15}{0}{4}

@@ -1,0 +1,87 @@
+\documentclass[french]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{babel}
+
+% This is the file main.tex
+
+\usetheme{Berlin}
+\title{Modélisation et détection de délit d'initié \\ Soutenance mi-parcours P3A}
+\author{Heang Kitiyavirayuth, Lucas Broux}
+\date{\today}
+
+% Create a frame at the beginning of a section.
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+% Document.
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section*{Outline}
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+
+\section{Introduction}
+\subsection{Sujet choisi, problématique générale}
+\begin{frame}
+  \begin{itemize}[<+->]
+    \item \textbf{Modélisation et détection de délit d'initié.}
+    \item Problématique concrète mais actuellement assez mal résolue.
+\end{itemize}
+\frametitle{Sujet choisi}
+\end{frame}
+
+\subsection{Objectifs du projet}
+\begin{frame}
+  \begin{itemize}[<+->]
+    \item Comprendre et analyser des articles sur le sujet :
+    \begin{itemize}
+%    \item [1] A. Grorud, M. Pontier, Comment détecter le délit d'initié, C.R. Acad. Sci. Paris, t. 324, p. 1137-1142, 1997.
+	\item [1] A. Grorud, M. Pontier, Insider trading in a continuous time market model, International Journal of Theoretical and Applied Finance, 1, p. 331-347, 1998.
+	\item [2] H. Föllmer, P. Imkeller, Anticipation cancelled by a Girsanov transformation: a paradox on Wiener space, Ann. Inst. H. Poincaré Probab. Statist 29.4, 569-586, 1993.
+	\end{itemize}
+    \item Pour la suite du projet : à préciser :
+    \begin{itemize}
+    \item Réalisation de simulations numériques.
+    \item Analyse théorique de cas particuliers.
+    \item ...
+    \end{itemize}
+\end{itemize}
+\frametitle{Objectifs du projet}
+\end{frame}
+
+\section{Compréhension actuelle du problème}
+\subsection{Modélisation mathématique}
+% Problème qui revient à l'étude du comportement lorsqu'on étend la filtration, ...
+\subsection{Jeu d'hypothèses}
+% Mettre en évidence le jeu d'hypothèses qui permettent d'appliquer les théorèmes voulus : elles sont techniques et on s'est accordé sur le fait de ne pas les étudier en détail pour le moment.
+\subsection{Raisonnement}
+
+\section{Simulations}
+% Ou plutot, tentatives de simulation ...
+
+\section{Conclusion}
+\begin{frame}
+\frametitle{Conclusion}
+\end{frame}
+
+
+\begin{frame}
+\end{frame} % to enforce entries in the table of contents
+\end{document}
