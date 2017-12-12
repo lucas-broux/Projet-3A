@@ -56,12 +56,7 @@
 	\item [1] A. Grorud, M. Pontier, Insider trading in a continuous time market model, International Journal of Theoretical and Applied Finance, 1, p. 331-347, 1998.
 	\item [2] H. Föllmer, P. Imkeller, Anticipation cancelled by a Girsanov transformation: a paradox on Wiener space, Ann. Inst. H. Poincaré Probab. Statist 29.4, 569-586, 1993.
 	\end{itemize}
-    \item Pour la suite du projet : à préciser :
-    \begin{itemize}
-    \item Réalisation de simulations numériques.
-    \item Analyse théorique de cas particuliers.
-    \item ...
-    \end{itemize}
+    \item Pour la suite du projet ? A préciser...
 \end{itemize}
 \frametitle{Objectifs du projet}
 \end{frame}
@@ -299,27 +294,11 @@ On se place dans la situation simplifiée suivante :
 	\item La variable aléatoire connue par l'initié est $L = \ln\left(S_{1} \left(T \right) \right) - \ln\left( S_{2} \left( T \right) \right)$
 	\item La fonction d'utilité à optimiser est logarithmique : $U_{i} = \log$
 \end{itemize}
-\end{frame}
-
-\begin{frame}
 On note : 
 \begin{itemize}
-	\item $\eta := \sigma^{-1} \left( b - r \mathds{1} \right) = \begin{bmatrix} \dfrac{b_{1} - r}{\sigma_{1}} \\ \dfrac{b_{2} - r}{\sigma_{2}} \end{bmatrix}$
-	\item $\gamma := \begin{bmatrix} \sigma_{1} \\ - \sigma_{2} \end{bmatrix}$
 	\item $A$ : temps final considéré
 	\item $x$ : richesse initiale.
 \end{itemize}
-\end{frame}
-
-\begin{frame}
-Les hypothèse de l'article sont vérifiées, et en notant 
-\begin{displaymath}
-	l_{r} := \left( \dfrac{\gamma\cdot \left( W_{T} - W_{r} \right)}{T - r} \right) \gamma \quad \text{pour } r \in \left[ 0; A\right],
-\end{displaymath}
-On définit un $\left( \Omega, \mathcal{Y}, \mathbb{P} \right)$ - mouvement brownien par :
-\begin{displaymath}
-	B_{t} := W_{t} - \int_{0}^{t} l_{u} du \quad \text{pour } t \in \left[ 0; A\right],
-\end{displaymath}
 \end{frame}
 
 \begin{frame}
@@ -340,6 +319,17 @@ où ($t \in \left[0; A \right]$) :
 \end{displaymath}
 \end{frame}
 
+\begin{frame}
+Avec
+\begin{itemize}
+	\item $\eta := \sigma^{-1} \left( b - r \mathds{1} \right) = \begin{bmatrix} \dfrac{b_{1} - r}{\sigma_{1}} \\ \dfrac{b_{2} - r}{\sigma_{2}} \end{bmatrix}$
+	\item $\gamma := \begin{bmatrix} \sigma_{1} \\ - \sigma_{2} \end{bmatrix}$
+	\item $l_{r} := \left( \dfrac{\gamma\cdot \left( W_{T} - W_{r} \right)}{T - r} \right) \gamma \quad \text{pour } r \in \left[ 0; A\right]$
+	\item $B_{t} := W_{t} - \int_{0}^{t} l_{u} du \quad \text{pour } t \in \left[ 0; A\right]$ \newline
+\end{itemize}
+Code : \href{https://github.com/lucas-broux/Projet-3A}{https://github.com/lucas-broux/Projet-3A}
+\end{frame}
+
 
 \subsection{Résultats obtenus}
 \begin{frame}
@@ -347,7 +337,7 @@ où ($t \in \left[0; A \right]$) :
   \centering
     \includegraphics[width=0.7\textwidth]{images/market.png}
   \caption{Marché simulé}
-\end{figure} 
+\end{figure}
 \frametitle{Marché}
 \end{frame}
 
