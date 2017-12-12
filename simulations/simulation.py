@@ -143,7 +143,7 @@ if __name__ == '__main__':
     # We compute l on [0, ..., A] with the formula:          #
     # l(r) = 1 / (T - r) * int(gamma . dWs, [r, T]) * gamma. #
     ##########################################################
-    l = [ ((gamma[0] * (W1[-1] - W1[r]) + gamma[0] * (W2[-1] - W2[r])) / (n - r)) * gamma for r in range(int(A * n / T)) ]
+    l = [ ((gamma[0] * (W1[-1] - W1[r]) + gamma[1] * (W2[-1] - W2[r])) / (n - r)) * gamma for r in range(int(A * n / T)) ]
 
 
     #################################################
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     # We compute B on [0, ..., A] with the formula: #
     # B(t) = W(t) - int(l(u) . du, [0, t])          #
     #################################################
-    B = [np.array([W1[r], W2[r]]) - sum(l[:(r + 1)])/(r + 1) for r in tqdm(range(int(A * n / T)), desc = 'Computing Bt', leave = False)]
+    B = [np.array([W1[r], W2[r]]) - sum(l[:(r)]) * (T / n) for r in tqdm(range(int(A * n / T)), desc = 'Computing Bt', leave = False)]
 
 
     ###################################
@@ -164,7 +164,7 @@ if __name__ == '__main__':
     # Computation of M_tilda.
     f = [v + eta for v in l]
     int_1 = np.array( [sum([np.dot(f[s], B[s + 1] - B[s]) for s in range(r)]) for r in tqdm(range(int(A * n / T)), desc = 'Computing M_tilda', leave = False)] )
-    int_2 = np.array( [(sum([np.dot(f[s], f[s]) for s in range(r)]) / (r + 1)) for r in tqdm(range(int(A * n / T)), desc = 'Computing M_tilda', leave = False)] )
+    int_2 = np.array( [(sum([np.dot(f[s], f[s]) for s in range(r)]) * (T / n)) for r in tqdm(range(int(A * n / T)), desc = 'Computing M_tilda', leave = False)] )
     M_tilda = np.exp(-int_1 - 0.5 * int_2)
 
     ######################################
@@ -182,5 +182,5 @@ if __name__ == '__main__':
 
     # Current output:
     # The optimal wealth at time A is (knowing X_0 = 1):
-    #      For the non_insider: 12.5449866272
-    #      For the insider: 24.3289606262
+    #          For the non_insider: 12.5449866272
+    #          For the insider: 12.5452076961
