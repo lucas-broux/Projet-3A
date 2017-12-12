@@ -69,6 +69,7 @@
 \section{Compréhension actuelle du problème}
 \subsection{Modélisation mathématique}
 \begin{frame}
+\frametitle{Modèle de marché financier}
 On considère un modèle de marché financier sur l'espace de probabilité $(\Omega, (\mathcal{F}_t, t \in [0,T]), \mathbb{P})$. Les prix des actions (ici $d$ actions) évoluent selon l'équation différentielle stochastique linéaire : 
 \begin{center}
 $\displaystyle S^i_t = S^i_0 + \int_{0}^{t} S^i_s b^i_s ds +  \int_{0}^{t} S^i_s \sigma^i_s dW_s,$\
@@ -78,6 +79,7 @@ $0 \leq t \leq T, S_0 \in \mathbb{R}^d, i = 1, ... , d$
 \newpage
 
 \begin{frame}
+\frametitle{Modèle de marché financier}
 où : 
 \begin{itemize}
 \item $W$ est un mouvement brownien de $d$-dimension.
@@ -85,19 +87,21 @@ où :
 \item La matrice $\sigma_t$ est inversible.
 \item $S^0$ évolue d'après l'équation $S^0_t = 1 +\int_{0}^{t}S^0_s r_s ds$.
 \end{itemize}
+\
+
+\textbf{H1} : La matrice $\sigma$ est inversible, $dt \otimes d\mathbb{P}$ -presque sûrement, $\eta_t = \sigma^{-1}_t (b_t - r_t \textbf{1})$ vérifie $\exists A \in ]0, T[, \exists C, \exists k > 0, \forall s \in [0, A]$, $\mathbb{E}_{\mathbb{P}}[exp(k||\eta_s||^2)] \leq C$.\
 \end{frame}
-\newpage
 
 \begin{frame}
-\begin{itemize}
-\item Un des investisseurs sur le marché connait l'information $\mathcal{F}_t$ qui est l'information normalement disponible au temps $t$, et il connait aussi une variable aléatoire $L \in L^1(\mathcal{F}_T)$. L'information totale dont il dispose est donc $\mathcal{F}_t \vee \sigma(L)$ (que l'on note $\mathcal{Y}_t$), qui est à priori plus grande que $\mathcal{F}_t$.
-\item Avec cette information $\mathcal{Y}_t$, l'initié cherche à optimiser sa stratégie de consommation et de placement sur le marché.
-\end{itemize}
+\frametitle{Informations sur l'initié}
+Un des investisseurs sur le marché connait l'information $\mathcal{F}_t$ qui est l'information normalement disponible au temps $t$, et il connait aussi une variable aléatoire $L \in L^1(\mathcal{F}_T)$. L'information totale dont il dispose est donc $\mathcal{F}_t \vee \sigma(L)$ (que l'on note $\mathcal{Y}_t$), qui est à priori plus grande que $\mathcal{F}_t$.\\
+\
+
+Avec cette information $\mathcal{Y}_t$, l'initié cherche à optimiser sa stratégie de consommation et de placement sur le marché.
 \end{frame}
-\newpage
 
 \begin{frame}
-\textbf{Les informations sur l'initié} : 
+\frametitle{Informations sur l'initié}
 \begin{itemize}
 \item L'initié dispose d'un capital $X_0$ à l'instant $t=0$.
 \item Il consomme à une vitesse $c$ qui est un processus positif et $\mathcal{Y}$-adapté, vérifiant $\int_{0}^{T} c_sds < \infty$ p.s. 
@@ -108,13 +112,13 @@ $X_t = \sum_{i=0}^{d} \theta^i_t S^i_t - \int_{0}^{t} c_s ds$.
 \end{center}
 \end{itemize}
 \end{frame}
-\newpage 
 
 \begin{frame}
+\frametitle{Informations sur l'initié}
 \begin{itemize}
 \item Son portefeuille est considéré autofinançant, c'est-à-dire : 
 \begin{center}
-$dX_t = \sum_{i=0}^{d}\theta^i_t dS^i_t - c_t dt$.
+\textbf{H2} : $dX_t = \sum_{i=0}^{d}\theta^i_t dS^i_t - c_t dt$.
 \end{center}
 \item En notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, sous la probabilité $\mathbb{P}$, la richesse $X$ actualisée vérifie l'équation : 
 \begin{center}
@@ -122,15 +126,161 @@ $X_t R_t + \int_{0}^{t} R_s c_s ds = X_0 +  \int_{0}^{t} \langle R_s\pi_s, b_s -
 \end{center}
 \end{itemize}
 \end{frame}
-\newpage
 
 \begin{frame}
-\textbf{La méthode du grossissement de la filtration brownienne}
+\frametitle{Méthode du grossissement de la filtration brownienne}
+\textbf{HC} : $L \in \mathbb{D}^{2,1}$ est tel que $\int_{t}^{T} ||D_u L||^2 du >0, \mathbb{P}-p.s. \forall t \in [0,T[$,\\
+ou $D$ est le gradient stochastique usuel associé à W et $\mathbb{D}^{p,q}$ est l'espace de Sobolev construit à l'aide de $D$.\\
+\
+
+Sous \textbf{HC}, on a : 
+\begin{itemize}
+\item La loi conditionnelle de $L$ sachant $\mathcal{F}_t$ est absolument continue et il existe une version mesurable de la densité conditionnelle $(\omega, t, x) \longmapsto p(\omega, t, x) = p(0,x) + \int_{0}^{t} \alpha(\omega, t, x)dW_s$, qui est une $(\mathcal{F}, \mathbb{P})$-martingale.
+\end{itemize}
 \end{frame}
 
-% Problème qui revient à l'étude du comportement lorsqu'on étend la filtration, ...
-\subsection{Jeu d'hypothèses}
-% Mettre en évidence le jeu d'hypothèses qui permettent d'appliquer les théorèmes voulus : elles sont techniques et on s'est accordé sur le fait de ne pas les étudier en détail pour le moment.
+\begin{frame}
+\frametitle{Méthode du grossissement de la filtration brownienne}
+\begin{itemize}
+\item Si $M = M_0 + \int_{0}^{t} \beta_s dW_s$ est une $(\mathcal{F}, \mathbb{P})$-martingale locale continue, alors le crochet $d\langle M,P \rangle_t = \langle \alpha, \beta \rangle_tdt$ et le processus $\tilde{M_t} = M_t - \int_{0}^{t}\frac{\langle \alpha(.,x),\beta\rangle_{u|x=L}}{p(u,L)}du$ est une $(\mathcal{Y}, \mathbb{P})$-martingale locale.
+\item En corollaire, on obtient que le processus vectoriel $(B_t = W_t - \int_{0}^{t} l_udu, t \in [0,T[)$ est un mouvement brownien sur l'espace de probabilité filtré $(\Omega, (\mathcal{Y}_t , t \in [0, T[), \mathbb{P})$, où $l_u = \frac{\alpha(u,L)}{p(u,L)}$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Changement de probabilité}
+On effectue un changement de probabiliteé pour se ramener à une mesure neutre au risque.
+\begin{itemize}
+\item Pour ce faire, il faut définir $\xi_t = - l_t - \eta_t $.\\
+\end{itemize}
+\textbf{HN} : $\mathbb{E}_\mathbb{P} [exp\frac{1}{2} \int_{0}^{A} ||\xi_s||^2 ds] < \infty$.\\
+\textbf{HP} : $\exists C, \exists k >0, \forall s \in [0,A], \mathbb{E}_\mathbb{P}[exp k||\xi_s||^2] \leq C$.\\
+\begin{itemize}
+\item Posons $M_t = exp[\int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 ds], t \in [0,A]$. Alors $M_t$ est une $(\mathcal{Y}, \mathbb{P})$-martingale uniformément intégrable.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Changement de probabilité}
+\begin{itemize}
+\item Sous $\mathbb{Q} = M. \mathbb{P}$, le processus $(\tilde{B}_t = B_t - \int_{0}^{t} \xi_s ds, t \in [0, A])$ est un mouvement brownien sur l'espace de probabilité filtré $(\Omega, (\mathcal{Y}_t , t \in [0, A]), \mathbb{Q})$.
+\item La richesse $X$ actualisée de l'initié vérifie alors, sous la probabilité $\mathbb{Q}$, l'équation : 
+\begin{center}
+$X_t R_t + \int_{0}^{t} R_s c_s ds = X_0 + \int_{0}^{t} \langle R_s \pi_s, \sigma_s d\tilde{B}_s \rangle$
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Stratégie de consommation-placement $\mathcal{Y}$-admissible}
+Une stratégie de consommation-placement $(\pi, c)$ $\mathcal{Y}$-admissible est un couple de processus $\mathcal{Y}$-adaptés tels que $c\geq 0$, $\int_{0}^{T}c_s ds <\infty$ $p.s.$, $\sigma* \pi$ appartient presque sûrement à $L^2[0,T]$, et la richesse $X^{\pi,c}$ obtenue par cette stratégie est à valeurs positives ou nulles $dt \otimes d\mathbb{P}$-presque sûrement.
+\end{frame}
+
+\begin{frame}
+\frametitle{Proposition (Contrainte)}
+\begin{itemize}
+\item Sous \textbf{HC} et \textbf{HN} ou \textbf{HP}, soit $X_0$ une variable $\mathcal{Y}_0$-mesurable positive. Alors pour $(\pi, c)$ un couple admissible, et $X^{\pi,c}_A$ la richesse finale associée, on a :
+\begin{center}
+$\mathbb{E}_Q [X^{\pi,c}_A R_A + \int_{0}^{A} R_t c_t dt | \mathcal{Y}_0] \leq X_0$.
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proposition (Contrainte)}
+\begin{itemize}
+\item Réciproquement, pour une richesse initiale strictement positive $X_0 \in L^1(\mathcal{Y}_0)$ donnée, une consommation $c$, un processus $\mathcal{Y}$-adapté positif tel que $\int_{0}^{A} c_s ds < \infty$ $\mathbb{Q}$-p.s., et une variable aléatoire $Z \in L^1(\mathcal{Y}_A, \mathbb{Q})$ telle que $\mathbb{E}_Q [X^{\pi,c}_A R_A + \int_{0}^{A} R_t c_t dt | \mathbb{Y}_0] = X_0$, alors il existe un portefeuille $\pi$ $\mathcal{Y}$-prévisible tel que $(\pi, c)$ est admissible et $X^{\pi, c}_A = Z$.
+\end{itemize}
+\
+
+Cette proposition sera notre contrainte du problème d'optimisation.
+\end{frame}
+
+\begin{frame}
+\frametitle{Problème d'optimisation}
+\begin{itemize}
+\item L'initié essaie d'optimiser sa stratégie pour maximiser sa richesse et sa consommation.
+\item On choisit comme critère d'optimisation de la stratégie un couple de fonctions d'utilité $(U_1, U_2)$ croissantes, concaves et positives. 
+\item Il s'agit donc de réaliser : 
+\begin{center}
+$\displaystyle \max_{(\pi, c)} \{J(\pi, c) = \mathbb{E}_{\mathbb{P}}[\int_{0}^{A} U_1(c_t)dt + U_2(X^{\pi,c}_A) | \mathcal{Y}_0] \}$\\
+sous contrainte $\displaystyle \mathbb{E}_Q [X^{\pi,c}_A R_A + \int_{0}^{A} R_t c_t dt | \mathcal{Y}_0] \leq X_0$.
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Résolution du problème d'optimisation}
+Sous \textbf{H1}, \textbf{H2}, \textbf{HC} et \textbf{HN} ou \textbf{HP}, en utilisant la méthode des multiplicateurs de Lagrange, il existe une stratégie optimale $(\pi*, c*)$ telle que 
+\begin{center}
+$J(\pi^*, c^*) =$ max$\{ J(\pi, c), (\pi, c)$ admissibles $\}$
+\end{center}
+ de la forme : 
+\begin{center}
+$c^*_t = I_1(\lambda^* M_t R_t)$\\
+$X^{\pi^*, c^*}_A = I_2(\lambda^* M_A R_A)$\\
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Résolution du problème d'optimisation}
+où \\
+$I_i = (U'_i)^{-1}$ \\
+$\chi (y) = \mathbb{E}_p[\int_{0}^{A} R_t M_t I_1(yR_t M_t)dt + R_A M_A I_2(yR_A M_A) | \mathcal{Y}_0]$\\
+\
+
+La valeur optimale du problème est donc : 
+\begin{center}
+$\mathbb{E}_{\mathbb{P}} [ U_2 \circ I_2 (\lambda^* M_A R_A) + \int_{0}^{A} U_1 \circ I_1 (\lambda^* M_t R_t)dt | \mathcal{Y}_0]$.
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test statistique}
+\begin{itemize}
+\item On construit un test statistique en se donnant comme fonctions d'utilité $U_i (x) = log(x), i = 1, $.
+\item Donc $I_i (x) = (U'_i)^{-1}(x) = \frac{1}{x}$.
+\item $\chi(\lambda) = \mathbb{E}_{\mathbb{P}}[\int_{0}^{A} \frac{1}{\lambda}dt + \frac{1}{\lambda}|\mathcal{Y}_0] = \frac{A+1}{\lambda} = X_0$\\
+$\Rightarrow \lambda^* = \frac{A+1}{X_0}$.
+\item On obtient donc : \\
+$c^*_t = I_1(\lambda^* M_t R_t) = \frac{X_0}{A+1} (M_t R_t)^{-1} \Rightarrow c^*_t R_t= \frac{X_0}{A+1} (M_t)^{-1}$.
+$X^*_A = I_2(\lambda^* M_A R_A) = \frac{X_0}{A+1} (M_A R_A)^{-1} \Rightarrow X^*_A R_A= \frac{X_0}{A+1} (M_A)^{-1}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test statistique}
+\begin{itemize}
+\item L'objet du test est de savoir si l'investisseur ne connait que $\mathcal{F}_t$ ($L = 0 \Leftrightarrow l_s = \frac{\alpha(s,L)}{p(s, L)} = 0$, un non initié$)$ ou si il connait $\mathcal{Y}_t$ $(L \neq 0 \Leftrightarrow l_s \neq 0$, un initié$)$.
+\item $H_0 : l_s = 0$ vs $H_1 : l_s \neq 0$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test statistique}
+\begin{itemize}
+\item Sous $H_0$, \\
+$R_t c^*_t = \frac{X_0}{A+1} (M_t)^{-1} = \frac{X_0}{A+1} exp[\int_{0}^{t}\eta_s dW_s + \frac{1}{2} \int_{0}^{t} ||\eta_s||^2 ds]$.\\
+$\Rightarrow log(R_t c^*_t) = log(\frac{X_0}{A+1}) + \int_{0}^{t}\eta_s dW_s + \frac{1}{2} \int_{0}^{t} ||\eta_s||^2 ds$.
+\item Sous $H_1$, \\
+$R_t c^*_t = \frac{X_0}{A+1} (M_t)^{-1} = \frac{X_0}{A+1} exp[\int_{0}^{t}(l_s +\eta_s) dB_s + \frac{1}{2} \int_{0}^{t} ||l_s + \eta_s||^2 ds]$.\\
+$\Rightarrow log(R_t c^*_t) = log(\frac{X_0}{A+1}) + \int_{0}^{t}(l_s + \eta_s) dB_s + \frac{1}{2} \int_{0}^{t} ||l_s + \eta_s||^2 ds$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Test statistique}
+\begin{itemize}
+\item Posons $Y_i = log(\frac{R_{t_{i+1}}c_{t_{i+1}}}{R_{t_{i}}c_{t_{i}}})$\\
+\item Sous $H1$,\\
+$Y_i = \int_{t_{i}}^{t_{i+1}} \eta_s dW_s  + \frac{1}{2}\int_{t_{i}}^{t_{i+1}} ||\eta_s||^2 ds$\\
+suit une loi $\mathcal{N}(\frac{1}{2}\int_{t_{i}}^{t_{i+1}} ||\eta_s||^2 ds, \int_{t_{i}}^{t_{i+1}} \eta_s ds)$.
+\item Donc on peut construire un test raisonnable de région critique au niveau $\alpha = 0.05$ : 
+\begin{center}
+$RC_i = \Large \{ \omega : \large |Y_i (\omega) - \frac{1}{2}\int_{t_{i}}^{t_{i+1}} ||\eta_s||^2 ds \large| > 1.96 \sqrt{\int_{t_{i}}^{t_{i+1}} \eta_s ds} \Large \}$
+\end{center}
+\end{itemize}
+\end{frame}
 
 
 \section{Simulations}

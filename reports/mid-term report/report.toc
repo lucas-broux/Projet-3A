@@ -4,8 +4,7 @@
 \beamer@subsectionintoc {2}{2}{Objectifs du projet}{6}{0}{1}
 \beamer@sectionintoc {3}{Compr\IeC {\'e}hension actuelle du probl\IeC {\`e}me}{13}{0}{2}
 \beamer@subsectionintoc {3}{1}{Mod\IeC {\'e}lisation math\IeC {\'e}matique}{14}{0}{2}
-\beamer@subsectionintoc {3}{2}{Jeu d'hypoth\IeC {\`e}ses}{20}{0}{2}
-\beamer@sectionintoc {4}{Simulations}{20}{0}{3}
-\beamer@subsectionintoc {4}{1}{Mod\IeC {\`e}le et hypoth\IeC {\`e}ses}{21}{0}{3}
-\beamer@subsectionintoc {4}{2}{R\IeC {\'e}sultats obtenus}{25}{0}{3}
-\beamer@sectionintoc {5}{Conclusion}{28}{0}{4}
+\beamer@sectionintoc {4}{Simulations}{33}{0}{3}
+\beamer@subsectionintoc {4}{1}{Mod\IeC {\`e}le et hypoth\IeC {\`e}ses}{34}{0}{3}
+\beamer@subsectionintoc {4}{2}{R\IeC {\'e}sultats obtenus}{38}{0}{3}
+\beamer@sectionintoc {5}{Conclusion}{41}{0}{4}
