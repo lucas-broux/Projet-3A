@@ -173,7 +173,7 @@ $X_t R_t + \int_{0}^{t} R_s c_s ds = X_0 + \int_{0}^{t} \langle R_s \pi_s, \sigm
 
 \begin{frame}
 \frametitle{Stratégie de consommation-placement $\mathcal{Y}$-admissible}
-Une stratégie de consommation-placement $(\pi, c)$ $\mathcal{Y}$-admissible est un couple de processus $\mathcal{Y}$-adaptés tels que $c\geq 0$, $\int_{0}^{T}c_s ds <\infty$ $p.s.$, $\sigma* \pi$ appartient presque sûrement à $L^2[0,T]$, et la richesse $X^{\pi,c}$ obtenue par cette stratégie est à valeurs positives ou nulles $dt \otimes d\mathbb{P}$-presque sûrement.
+Une stratégie de consommation-placement $(\pi, c)$ $\mathcal{Y}$-admissible est un couple de processus $\mathcal{Y}$-adaptés tels que $c\geq 0$, $\int_{0}^{T}c_s ds <\infty$ $p.s.$, ${\sigma}^{*} \pi$ appartient presque sûrement à $L^2[0,T]$, et la richesse $X^{\pi,c}$ obtenue par cette stratégie est à valeurs positives ou nulles $dt \otimes d\mathbb{P}$-presque sûrement.
 \end{frame}
 
 \begin{frame}
@@ -237,49 +237,55 @@ $\mathbb{E}_{\mathbb{P}} [ U_2 \circ I_2 (\lambda^* M_A R_A) + \int_{0}^{A} U_1 
 
 \begin{frame}
 \frametitle{Test statistique}
+On veut proposer un test statistique dans le cas :
 \begin{itemize}
-\item On construit un test statistique en se donnant comme fonctions d'utilité $U_i (x) = log(x), i = 1, $.
-\item Donc $I_i (x) = (U'_i)^{-1}(x) = \frac{1}{x}$.
-\item $\chi(\lambda) = \mathbb{E}_{\mathbb{P}}[\int_{0}^{A} \frac{1}{\lambda}dt + \frac{1}{\lambda}|\mathcal{Y}_0] = \frac{A+1}{\lambda} = X_0$\\
-$\Rightarrow \lambda^* = \frac{A+1}{X_0}$.
-\item On obtient donc : \\
-$c^*_t = I_1(\lambda^* M_t R_t) = \frac{X_0}{A+1} (M_t R_t)^{-1} \Rightarrow c^*_t R_t= \frac{X_0}{A+1} (M_t)^{-1}$.
-$X^*_A = I_2(\lambda^* M_A R_A) = \frac{X_0}{A+1} (M_A R_A)^{-1} \Rightarrow X^*_A R_A= \frac{X_0}{A+1} (M_A)^{-1}$.
+\item $U_i (x) = log(x), i = 1, 2$, donc $I_i (x) = (U'_i)^{-1}(x) = \frac{1}{x}$.
+\item $L = \ln\left(S_{1} \left(T \right) \right) - \ln\left( S_{2} \left( T \right) \right)$
+\end{itemize}
+L'optimisation s'explicite:
+\begin{itemize}
+\item $\lambda^* = \frac{A+1}{X_0}$.
+\item $c^*_t R_t= \frac{X_0}{A+1} (M_t)^{-1}$.
+\item $X^*_A R_A= \frac{X_0}{A+1} (M_A)^{-1}$.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Test statistique}
+On oppose les deux hypothèses:
 \begin{itemize}
-\item L'objet du test est de savoir si l'investisseur ne connait que $\mathcal{F}_t$ ($L = 0 \Leftrightarrow l_s = \frac{\alpha(s,L)}{p(s, L)} = 0$, un non initié$)$ ou si il connait $\mathcal{Y}_t$ $(L \neq 0 \Leftrightarrow l_s \neq 0$, un initié$)$.
-\item $H_0 : l_s = 0$ vs $H_1 : l_s \neq 0$.
+\item $H_{0} : L \in \mathcal{F}_{0}$ (L'agent n'est pas initié)
+\item $H_{1} : L \notin \mathcal{F}_{0}$ (L'agent est initié)
+\end{itemize}
+L'idée est de comparer les consommations : 
+\begin{itemize}
+\item $log(R_t c^*_t) = log(\frac{X_0}{A+1}) + \int_{0}^{t}\eta_s dW_s + \frac{1}{2} \int_{0}^{t} ||\eta_s||^2 ds$ sous $H_{0}$
+\item $log(R_t c^*_t) = log(\frac{X_0}{A+1}) + \int_{0}^{t}\eta_s dW_s + \frac{1}{2} \int_{0}^{t} ||\eta_s||^2 ds + \log q\left(t, L \right)$ sous $H_{1}$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Test statistique}
-\begin{itemize}
-\item Sous $H_0$, \\
-$R_t c^*_t = \frac{X_0}{A+1} (M_t)^{-1} = \frac{X_0}{A+1} exp[\int_{0}^{t}\eta_s dW_s + \frac{1}{2} \int_{0}^{t} ||\eta_s||^2 ds]$.\\
-$\Rightarrow log(R_t c^*_t) = log(\frac{X_0}{A+1}) + \int_{0}^{t}\eta_s dW_s + \frac{1}{2} \int_{0}^{t} ||\eta_s||^2 ds$.
-\item Sous $H_1$, \\
-$R_t c^*_t = \frac{X_0}{A+1} (M_t)^{-1} = \frac{X_0}{A+1} exp[\int_{0}^{t}(l_s +\eta_s) dB_s + \frac{1}{2} \int_{0}^{t} ||l_s + \eta_s||^2 ds]$.\\
-$\Rightarrow log(R_t c^*_t) = log(\frac{X_0}{A+1}) + \int_{0}^{t}(l_s + \eta_s) dB_s + \frac{1}{2} \int_{0}^{t} ||l_s + \eta_s||^2 ds$.
-\end{itemize}
+On partitionne $ \left[0; T \right]$ en $0 \leq t_{0} < t_{1} < ... < t_{n} = T$ et on définit pour $0 \leq i \leq n - 1$,
+\begin{displaymath}
+Y_{i} := \log \left( R_{t_{i + 1}} c_{t_{i + 1}}\right) - \log \left( R_{t_{i}} c_{t_{i}}\right)
+\end{displaymath}
+Sous $H_{0}$,
+\begin{displaymath}
+	\begin{split}
+	Y_{i} &=  \int_{t_{i}}^{t_{i + 1}}\eta_s dW_s + \frac{1}{2} \int_{t_{i}}^{t_{i + 1}} ||\eta_s||^2 ds \\
+		  &\sim N \left(\frac{1}{2} \int_{t_{i}}^{t_{i + 1}} ||\eta_s||^2 ds, \int_{t_{i}}^{t_{i + 1}} ||\eta_s||^2 ds \right)
+	\end{split}
+\end{displaymath}
+Sous $H_{1}$, il y a un terme supplémentaire $log \dfrac{q\left( t_{i + 1}, L\right)}{q\left( t_{i}, L\right)}$
 \end{frame}
 
 \begin{frame}
 \frametitle{Test statistique}
-\begin{itemize}
-\item Posons $Y_i = log(\frac{R_{t_{i+1}}c_{t_{i+1}}}{R_{t_{i}}c_{t_{i}}})$\\
-\item Sous $H1$,\\
-$Y_i = \int_{t_{i}}^{t_{i+1}} \eta_s dW_s  + \frac{1}{2}\int_{t_{i}}^{t_{i+1}} ||\eta_s||^2 ds$\\
-suit une loi $\mathcal{N}(\frac{1}{2}\int_{t_{i}}^{t_{i+1}} ||\eta_s||^2 ds, \int_{t_{i}}^{t_{i+1}} \eta_s ds)$.
-\item Donc on peut construire un test raisonnable de région critique au niveau $\alpha = 0.05$ : 
-\begin{center}
-$RC_i = \Large \{ \omega : \large |Y_i (\omega) - \frac{1}{2}\int_{t_{i}}^{t_{i+1}} ||\eta_s||^2 ds \large| > 1.96 \sqrt{\int_{t_{i}}^{t_{i+1}} \eta_s ds} \Large \}$
-\end{center}
-\end{itemize}
+On teste donc la variable $Y_{i}$ par un test de région critique au niveau $\alpha = 0.05$ : 
+	\begin{center}
+	$RC_i = \left\lbrace \omega : \large \|Y_i (\omega) - \frac{1}{2}\int_{t_{i}}^{t_{i+1}} ||\eta_s||^2 ds \large| > 1.96 \sqrt{\int_{t_{i}}^{t_{i+1}} \eta_s ds} \right\rbrace$
+	\end{center}
 \end{frame}
 
 
@@ -299,7 +305,7 @@ On se place dans la situation simplifiée suivante :
 On note : 
 \begin{itemize}
 	\item $\eta := \sigma^{-1} \left( b - r \mathds{1} \right) = \begin{bmatrix} \dfrac{b_{1} - r}{\sigma_{1}} \\ \dfrac{b_{2} - r}{\sigma_{2}} \end{bmatrix}$
-	\item $\gamma := \begin{bmatrix} \sigma_{1} \\ \sigma_{2} \end{bmatrix}$
+	\item $\gamma := \begin{bmatrix} \sigma_{1} \\ - \sigma_{2} \end{bmatrix}$
 	\item $A$ : temps final considéré
 	\item $x$ : richesse initiale.
 \end{itemize}
@@ -349,7 +355,7 @@ où ($t \in \left[0; A \right]$) :
 \begin{figure}[H]
   \centering
     \includegraphics[width=0.7\textwidth]{images/wealths.png}
-  \caption{Richesse des agents}
+  \caption{Richesse optimale des agents en A}
 \end{figure} 
 \frametitle{Richesses}
 \end{frame}
@@ -375,7 +381,7 @@ où ($t \in \left[0; A \right]$) :
 \begin{frame}
 Approfondissement théorique : 
 \begin{itemize}
-	\item Cas plus réaliste : "bonds" de valeur dans le marché.
+	\item Cas plus réaliste : "sauts" de valeur dans le marché.
 	\item Études de cas particuliers.
 	\item ...
 \end{itemize}
