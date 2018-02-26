@@ -237,18 +237,3 @@ class SimpleModel:
         """
         self.critical_regions_insider = self.__compute_critical_region([(i * self.T / self.n, self.c_insider[i]) for i in range(len(self.c_insider))])
         self.critical_regions_outsider = self.__compute_critical_region([(i * self.T / self.n, self.c_outsider[i]) for i in range(len(self.c_outsider))])
-
-
-
-if __name__ == "__main__":
-    # Initialize model.
-    model = SimpleModel()
-    # Simulate market.
-    model.simulate()
-    # Compute optimal strategies for agents.
-    model.compute_optimal_strategy()
-    # Apply statistical test.
-    model.apply_statistical_test()
-    # Print results.
-    print(sum(model.critical_regions_outsider))
-    print(sum(model.critical_regions_insider))
