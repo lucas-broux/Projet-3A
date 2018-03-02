@@ -65,13 +65,43 @@ Ceci est réalisable grâce aux études de modélisation d'un initié et à la mise en
 \end{itemize}
 \
 
-Il existe plusieurs modélisations de l'information privée. Nous avons étudié, pour les deux types de marché financier, le cas où l'initié connait ds informations sur le futur et grâce à la méthode du grossissement de filtration, au théorème de Girsanov, et aux plusieurs hypothèses que nous définirons dans la suite, nous arrivons à voir le comportement et l'évolution de la richesse de l'initié et de la comparer avec celle du non-initié pour les deux types de marché, et à faire un test statistique pour le marché dont les prix des actifs sont dirigés par le mouvement brownien.
+Il existe plusieurs modélisations de l'information privée. Nous avons étudié, pour les deux types de marché financier, le cas où l'initié connait ds informations sur le futur et grâce à la méthode du grossissement de filtration, au théorème de Girsanov, et aux plusieurs hypothèses que nous définirons dans la suite, nous arrivons à voir le comportement et l'évolution de la richesse de l'initié et de la comparer avec celle du non-initié pour les deux types de marché, et à faire un test statistique pour le marché dont les prix des actifs sont dirigés par le mouvement brownien.\\
+
+Notre projet est basé sur l'études des 4 principaux articles : \\
+
+\begin{itemize}
+\item A. Grorud, M. Pontier, Insider trading in a continuous time market model, International Journal of Theoretical and Applied Finance, Vol. 1, No. 3, p. 331-347, 1998.
+\item A. Grorud, M. Pontier, Comment détecter le délit d'initiés ?, C. R. Acad. Sci. Paris, t. 324, Série 1, Probabilités/Probability, p. 1137-1142, 1997.
+\item H. Föllmer, P. Imkeller, Anticipation cancelled by b Girsanov transformation: a paradox on Wiener space, Ann. Inst. H. Poincaré Probabilités et Statististiques, Vol. 29, No. 4, p. 569-586, 1993.
+\item C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, Université Paul Sabatier, UFR MIG, Laboratoire de Statistique et Probabilités, 118 route de Narbonne, 31062 Toulouse cedex 4, France.
+\item L. Denis, A. Grorud, M. Pontier, Formes de Dirichlet sur un espace de Wiener-Poisson. Application au grossissement de filtration, Séminaire de probabilités (Strasbourg), tome 34, p. 198-217, 2000.
+\end{itemize}
+
+
 
 
 
 \pagebreak
 \section{Modèles de marché}
-Pour notre projet, nous avons analysé deux types de modèles de marché différents. Le premier est celui
+Pour notre projet, nous avons étudié deux types de modèles de marché différents. Le premier est le marché financier dont les prix sont dirigés par un mouvement brownien et le deuxième est celui dont les prix sont dirigés par un mouvement brownien et un processus ponctuel ou le processus de Poisson (les prix avec sauts).
+
+\subsection{Les prix sans sauts}
+Nous considérons un modèle de marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$, dont les prix des actions (ici $d$ actions) évoluent selon l'équation différentielle stochastique : 
+\begin{equation}
+\displaystyle S_t = S_0 + \int_{0}^{t} S_s b_s ds +  \int_{0}^{t} S_s \sigma_s dW_s, 0\leq t \leq T, S_0 \in \mathbb{R}^d, i = 1, ..., d
+\end{equation}
+où : \\
+
+\begin{itemize}
+\item $W$ est un mouvement brownien de $d$-dimension,
+\item Les paramètres $b, \sigma$ et $r$ sont dans $\mathbb{R}^d, \mathbb{R}^{d\times d}, \mathbb{R}$ respectivement et sont supposés bornés sur $[0,T]$ et $\mathcal{F}$-adaptés.
+\item La matrice $\sigma_t$ est inversible,
+\item $S^0$ évolue d'après l'équation $S^0_t = 1 +\int_{0}^{t}S^0_s r_s ds$.
+\end{itemize}
+\
+
+
+
 \end{document}
 
 

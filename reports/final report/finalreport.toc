@@ -1,3 +1,4 @@
 \select@language {french}
 \contentsline {section}{\numberline {1}Introduction}{3}
 \contentsline {section}{\numberline {2}Mod\`eles de march\'e}{5}
+\contentsline {subsection}{\numberline {2.1}Les prix sans sauts}{5}
