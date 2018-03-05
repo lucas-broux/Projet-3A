@@ -9,6 +9,11 @@
 \usepackage{url}
 \usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
 \usepackage{makeidx}
+\makeatletter
+\newcommand{\mathleft}{\@fleqntrue\@mathmargin0pt}
+\newcommand{\mathcenter}{\@fleqnfalse}
+\makeatother
+\setlength\parindent{0pt}
 
 \title{Rapport Intermédiaire}
 \makeindex
@@ -121,7 +126,38 @@ et la deuxième est l'hypothèse d'autofinancement :
 \textbf{H2} : $dX_t = \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt$
 \end{center}
 
-Avec ces deux hypothèses, en notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, et en utilisation la formule d'Itô, la richesse $X$ actualisée vérifie
+D'après \textbf{H2},
+Avec ces deux hypothèses, en notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, en utilisation la formule d'Itô, 
+\mathleft
+\begin{flalign*}
+dX_t &= \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt \\
+& = \displaystyle \sum_{i=1}^{d} \theta^i_t dS_t^i + \theta^0_t dS_t^0 - c_t dt, \text{ avec } dS_t^0 = S^0_t r_t dt \\
+& = \displaystyle \sum_{i=1}^{d} \theta^i_t \big(S^i_t b^i_t dt +  S^i_t \sigma^i_t dW_t \big) + \theta^0_t S^0_t r_t dt - c_t dt\\
+& = \displaystyle \sum_{i=1}^{d} \pi^i_t S^i_t b^i_t dt +  \sum_{i=1}^{d} \pi^i_tS^i_t \sigma^i_t dW_t + (X_t - \sum_{i=1}^{d} \pi^i_t)r_t dt - c_t dt\\
+& = (X_t r_t - c_t)dt +  \sum_{i=1}^{d}\pi^i_t(b^i_t - r_t)dt + \sum_{i=1}^{d} \pi^i_tS^i_t \sigma^i_t dW_t \\
+&= (X_t r_t - c_t)dt + (\pi_t, b_t - r_t\textbf{1})dt + (\pi_t, \sigma_t dW_t) \\
+\end{flalign*}
+
+En notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, et en appliquant la forume d'Itô,
+\begin{flalign*}
+d(R_t) &= \displaystyle -\frac{dS^0_t}{(S^0_t)^2} + \frac{1}{2(S_t^0)^3} d<S^0>_t\\
+& = \displaystyle -\frac{r_t}{S^0_t}dt = -r_t R_t dt
+\end{flalign*}
+
+La formule d'Itô nous donne pour la fonction $f(x,r) = xr$ nous donne:
+\begin{flalign*}
+d(X_t R_t) &= X_t dR_t + R_t dX_t + d<X, R>_t \\
+&= -X_t r_t R_t dt + R_t (X_t r_t - c_t)dt + R_t(\pi_t, b_t - r_t\textbf{1})dt + R_t (\pi_t, \sigma_t dW_t)\\
+& = -R_t c_t dt + (R_t \pi_t,  b_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dW_t)
+\end{flalign*}
+Donc la richesse $X$ actualisée vérifie l'équation : 
+\begin{center}
+$\displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds + \int_{0}^{t} (R_s \pi_s,  b_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dW_s)$
+\end{center}
+
+
+
+
 \end{document}
 
 
