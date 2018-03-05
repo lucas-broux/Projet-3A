@@ -37,8 +37,8 @@
 \begin{center}
 \LARGE{Tuteur : DENIS Laurent}\\
 \vspace{0.5cm}
-\LARGE{HEANG Kitiyavirayuth}\\
-\LARGE{BROUX Lucas}
+\LARGE{BROUX Lucas}\\
+\LARGE{HEANG Kitiyavirayuth}
 \end{center}
 
 \pagebreak
@@ -65,7 +65,7 @@ Ceci est réalisable grâce aux études de modélisation d'un initié et à la mise en
 \end{itemize}
 \
 
-Il existe plusieurs modélisations de l'information privée. Nous avons étudié, pour les deux types de marché financier, le cas où l'initié connait ds informations sur le futur et grâce à la méthode du grossissement de filtration, au théorème de Girsanov, et aux plusieurs hypothèses que nous définirons dans la suite, nous arrivons à voir le comportement et l'évolution de la richesse de l'initié et de la comparer avec celle du non-initié pour les deux types de marché, et à faire un test statistique pour le marché dont les prix des actifs sont dirigés par le mouvement brownien.\\
+Il existe plusieurs modélisations de l'information privée. Nous avons étudié, pour les deux types de marché financier, le cas où l'initié connait des informations sur le futur et grâce à la méthode du grossissement de filtration, au théorème de Girsanov, et aux plusieurs hypothèses que nous définirons dans la suite, nous arrivons à voir le comportement et l'évolution de la richesse de l'initié et de la comparer avec celle du non-initié pour les deux types de marché, et à faire un test statistique pour le marché dont les prix des actifs sont dirigés par le mouvement brownien.\\
 
 Notre projet est basé sur l'études des 4 principaux articles : \\
 
@@ -88,20 +88,40 @@ Pour notre projet, nous avons étudié deux types de modèles de marché différents.
 \subsection{Les prix sans sauts}
 Nous considérons un modèle de marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$, dont les prix des actions (ici $d$ actions) évoluent selon l'équation différentielle stochastique : 
 \begin{equation}
-\displaystyle S_t = S_0 + \int_{0}^{t} S_s b_s ds +  \int_{0}^{t} S_s \sigma_s dW_s, 0\leq t \leq T, S_0 \in \mathbb{R}^d, i = 1, ..., d
+\displaystyle S_t = S_0 + \int_{0}^{t} S_s b_s ds +  \int_{0}^{t} S_s \sigma_s dW_s, 0\leq t \leq T, S_0 \in \mathbb{R}^d
 \end{equation}
 où : \\
 
 \begin{itemize}
-\item $W$ est un mouvement brownien de $d$-dimension,
+\item $W$ est un mouvement brownien de dimension $d$ sur $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$ et $\mathcal{F}$ est la filtration naturelle qu'il engendre,
 \item Les paramètres $b, \sigma$ et $r$ sont dans $\mathbb{R}^d, \mathbb{R}^{d\times d}, \mathbb{R}$ respectivement et sont supposés bornés sur $[0,T]$ et $\mathcal{F}$-adaptés.
 \item La matrice $\sigma_t$ est inversible,
 \item $S^0$ évolue d'après l'équation $S^0_t = 1 +\int_{0}^{t}S^0_s r_s ds$.
 \end{itemize}
 \
 
+L'information $\mathcal{F}_t$ est celle au temps $t$ que connaissent tous les investisseurs sur le marché. Pour l'initié, nous supposons qu'il a, dès le début de son investissement à $t=0$, des informations sur le futur (dont les autres ne disposent pas), une variable aléatoire $L \in L^1(\Omega, \mathcal{F}_T)$ sur l'espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$. Dans le cas que nous avons étudié, $L = lnS^1_T - lnS^2_T$, le rapport au temps $T$ des deux actifs de prix $S^1$ et $S^2$. Notons alors $\mathcal{Y}$ la filtration "naturelle" de l'initié obtenue par grossissement initial de $\mathcal{F}$, lui adjoignant la variable aléatoire $L : \mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$.\\
+
+Pour ce modèle de marché, nous commencerons par la méthode de grossissement de filtration pour construire un nouveau mouvement brownien (que l'on appellera $B$) sur le nouvel espace de probabilité filtré $(\Omega, \mathcal{Y}, \mathbb{P})$. Ensuite avec le nouveau mouvement brownien, nous effectuons un changement de probabilité pour nous ramener à une mesure neutre au risque (que l'on appellera $Q$). Sur ce nouvel espace de probabilité neutre au risque, nous combinons ensemble l'hypothèse d'autofinancement, la stratégie de consommation-placement $\mathcal{Y}$-admissible et une proposition qui nous donne une contrainte qui est une fonction de la richesse d'investisseur, nous pourrons comprendre et résoudre le problème d'optimisation de l'initié (car avec l'information $\mathcal{Y}_t$ l'initié cherche à optimiser sa stratégie de consommation et de placement sur le marché financier) et finalement mettre en place un test statistique à partir des solutions optimales du problème d'optimisation pour voir si un investisseur est un initié ou un non-initié. \\
+
+À l'instant $t=0$, l'initié dispose d'un capital $X_0$. Il consomme à une vitesse $c$, un processus positif $\mathcal{Y}$-adapté, vérifiant $\int_{0}^{T} c_s ds < \infty$, et place sur l'actif $i$ la quantité $\theta^i$. Notons $\pi_t^i = \theta^i_t S_t^i$ la somme investie sur la $i$-ième action pour $i =1, ..., d$. Sa richesse au temps $t$ s'exprime donc par : 
+\begin{center}
+$X_t = \displaystyle \sum_{i=0}^{d} \theta^i_t S_t^i - \int_{0}^{t} c_s ds$
+\end{center}
 
 
+Nous introduisons nos deux premières hypothèses. La première donne l'existence à la variable $\eta_t = \sigma_t^{-1}(b_t - r_t \textbf{1})$ : 
+\begin{center}
+\textbf{H1} : La matrice $\sigma$ est inversible, $dt \otimes d\mathbb{P}$-presque sûrement, \\
+$\eta_t$ vérifie $\exists C, \exists k > 0, \forall s \in [0, A], A < T, \mathbb{E}[\text{exp}k||\eta_s||^2] \leq C$.\\
+\end{center}
+
+et la deuxième est l'hypothèse d'autofinancement :
+\begin{center}
+\textbf{H2} : $dX_t = \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt$
+\end{center}
+
+Avec ces deux hypothèses, en notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, et en utilisation la formule d'Itô, la richesse $X$ actualisée vérifie
 \end{document}
 
 
