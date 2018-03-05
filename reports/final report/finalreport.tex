@@ -14,9 +14,9 @@
 \newcommand{\mathcenter}{\@fleqnfalse}
 \makeatother
 \setlength\parindent{0pt}
+\makeindex
 
 \title{Rapport Intermédiaire}
-\makeindex
 
 \begin{document}
 
@@ -151,9 +151,27 @@ d(X_t R_t) &= X_t dR_t + R_t dX_t + d<X, R>_t \\
 & = -R_t c_t dt + (R_t \pi_t,  b_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dW_t)
 \end{flalign*}
 Donc la richesse $X$ actualisée vérifie l'équation : 
-\begin{center}
-$\displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds + \int_{0}^{t} (R_s \pi_s,  b_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dW_s)$
-\end{center}
+
+\begin{equation}
+\displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds + \int_{0}^{t} (R_s \pi_s,  b_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dW_s)
+\end{equation}
+
+\subsection{Les prix avec sauts}
+
+Pour la deuxième partie de notre projet, nous avons étudié un modèle de marché financier qui est différent du premier en raison de la présence d'un processus ponctuel, ou un processus de Poisson qui fait de sorte que les prix comportent des sauts.\\
+
+Nous considérons un marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0, T], \mathbb{P})$ dont les prix des actions sont dirigés par un mouvement brownien et un processus ponctuel et évoluent selon l'équation : 
+
+\begin{equation}
+S_t = S_0 = \displaystyle \int_{0}^{t}S_s (b_s ds + \sigma_s dW_s) + \int_{0}^{t} S^i_s \phi^i(x,s)N(dx, ds) , 0 \leq t \leq T, S_0 \in \mathbb{R}^d
+\end{equation}
+
+
+
+
+
+
+
 
 
 
