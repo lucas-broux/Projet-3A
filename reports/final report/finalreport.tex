@@ -20,9 +20,9 @@
 
 \begin{document}
 
-\begin{center}
-\includegraphics[scale=0.2]{../../../Desktop/logo.jpg}
-\end{center}
+%\begin{center}
+%\includegraphics[scale=0.2]{../../../Desktop/logo.jpg}
+%\end{center}
 
 \vspace{1.5cm}
 \begin{center}
@@ -51,37 +51,51 @@
 \pagebreak
 
 \section{Introduction}
-Un délit d'initié, d'après sa définition, est un délit de marché qu'un investisseur commet délibérément en valeurs mobilières en utilisant des informations sensibles, qui lui sont extérieures, qui sont de nature confidentielles et surtout dont les autres investisseurs sur le marché ne disposent pas. \\
+\par L'un des enjeux majeurs des mathématiques financières est de concevoir des modèles d'évolution de marchés suffisamment complexes pour proposer une description relativement fidèle de la réalité, mais suffisamment simples pour que les résultats obtenus soit exploitables. \\
 
-Quand les transactions sur les actions d'une entreprise sont faites par les employés de l'entreprise et  ne sont faites qu'avec les informations sur l'entreprise qui sont accessibles à tout public, il s'agit du délit d'initié légal (legal insider trading). Autrement dit, le délit d'initié n'est légal qu'au moment où toute sorte de transactions est faite sans que les investisseurs ou les agents aient bénéficié des informations non publiques, et il sera considéré illégal le moment où les transactions sont manipulées pour générer des profits ou éviter des pertes en utilisant des informations dont ne disposent pas les autres investisseurs, ce qui pourrait potentiellement être une menace pour le marché financier. \\
+\par En particulier, la majorité de ces modèles formulent l'hypothèse simplificatrice suivante : les acteurs qui évoluent sur le marché disposent tous au temps $t$ des mêmes informations, à savoir les prix des actions jusqu'au temps $t$. Or, celle-ci est contestable puisqu'en réalité certains acteurs, de par leurs affinités, peuvent connaître des informations sensibles et confidentielles - par exemple l'évolution future d'une action - grâce auxquelles ils vont pouvoir établir une stratégie d'investissement plus performante que les autres acteurs du marché : ce sont les \emph{initiés}. \\
 
-Dans une transaction illégale, un initié dans une entreprise achète l'action et partage les informations sur le prix de cette action-là avec un certain nombre d'investisseurs qui l'achèteront et passeront le mot au public, ce qui créera une grande demande artificielle pour cette action en particulier et une croissance remarquable du prix. Une fois que le prix atteint un "niveau de satisfaction", l'initié quitte le marché avec ses investisseurs en vendant l'actions et faisant des profits. Le prix de cette action baissera, à cause de la vente venant d'un nombre considérable d'investisseurs, et ceci entraînera une grande perte pour les autres investisseurs dans le marché. Cet impact est considéré aussi négatif pour les petits investisseurs que pour les marchés. Le délit d'initié supprime la justice et la stabilité de demandes et d'offres et les investisseurs commenceront à ne plus faire confiance aux marchés et retirer leurs capitaux et à la fin, il y aura un grand vide dans le flux global de l'économie.\\
+\par En pratique, si certains scandales de délit d'initié ont été très médiatisés pour les quantités d'argent impressionnantes en jeu (donnons l'exemple de Steve Cohen qui, à la tête du \emph{hedge fund} SAC Capital, a empoché en 2008 plus de 276 millions de dollars grâce à l'obtention d'informations non publiques sur un médicament), et si les autorités de surveillance ont réussi à faire des progrès dans la détection du délit d'initié grâce à des algorithmes de recherche d'anomalies dans les données du marché, la modélisation théorique du phénomène n'en permet actuellement qu'une analyse limitée.
+\\
 
-L'un des plus grands exemples du délit d'initié et comment ceci a influencé le marché financier est l'affaire de SAC Capital. Le trader américain Mathew Martoma était, à la fin des années 2000, au coeur de "la plus lucrative affaire de délit d'initié de toute l'histoire", d'après le procureur de Manhattan preet Bharara. La justice, à travers lui s'attelait à faire tomber son patron, le multimilliardaire Steve Cohen, à la tête de SAC Captial qui a empoché en 2008, 276 millions de dollars (soit 202 millions d'euros) grâce à l'obtention d'informations non publiques sur un médicament. Mathew Martoma, ayant été informé par un médecin qu'un médicament anti-Alzheimer développé par deux sociétés, Elan et Wyeth, n'allait pas recevoir l'aval de l'Agence américaine des produits alimentaires et médicamenteux (The Food and Drug Administration, FDA), a vendu toutes les parts de ces deux compagnies que SAC Capital possédaient, évitant ainsi une importante perte et réalisant un profit conséquent. Mathew Martoma a été condamné en 2014 à 9 ans de prison et le fonds SAC Capital n'est pas sorti indemne de cette enquête. En 2013, il a versé 1,2 millard de dollars d'amende à la justice américaine, ainsi que 600 millions à la Securities and Exchange Commission et en 2014, il a été obligé de plaider coupable pour "délits d'initiés" et a été contraint par les autorités de renoncer à gérer les investissements de clients extérieurs.\\
-
-Pour éviter ce type de catastrophe, de nombreuses mesures ont été mises en place. En France, l'AMF (Autorité des Marchés financiers) est chargée de surveiller les opérations boursières. Depuis une dizaine d'années, ces autorités de surveillance ont fait beaucoup de progrès dans la détection de comportement initié grâce notamment à de meilleures techniques de surveillance. \\
-
-Ceci est réalisable grâce aux études de modélisation d'un initié et à la mise en place d'un test de détection, ce qui est l'objectif de notre sujet. Nous nous plaçons dans deux cadres de marché financier. Le premier est celui dont les prix des actifs sont dirigés par un mouvement brownien et le deuxième est un marché financier dont les prix comportent des sauts. L'information minimale dont disposent les agents pour résoudre leur problème d'optimisation est celle obtenue par l'observation du processus des prix. Cependant, il semble que les agents sont informés de manière hétérogène et reçoivent un flux d'information qui leur est propre. Pour de tels initiés, nous étudierons, pour chacun des deux types de marché : \\
+\par Le but de ce projet est de présenter les résultats actuels de cette modélisation dans deux modèles de marché. Le premier correspond au modèle brownien usuel, tandis que dans le deuxième, nous ajouterons des "sauts" sous la forme de processus de Poisson, afin de modéliser des périodes de "catastrophes" (krachs, ...). Pour chaque modèle de marché, nous considérerons un agent non-initié et un agent initié qui connaitra, en plus des informations publiques, une variable aléatoire $L$ correspondant à un renseignement supplémentaire. Nous étudierons alors :
+\\
 
 \begin{itemize}
 \item Les problèmes d'arbitrage et de réplication d'actifs risqués.
 \item Le gain de l'initié (par rapport à un non-initié).
-\item Les simulations de l'évolution de la richesse de l'initié et du non-initié pour voir la différence et éventuellement la mise en oeuvre de test de détection.
+\item Les simulations de l'évolution de la richesse de l'initié et du non-initié; et dans certains cas la mise en oeuvre d'un test de détection.
 \end{itemize}
 \
+\par Nous verrons que, dans les modélisations étudiées, nous pourrons déterminer les stratégies optimales pour l'initié et pour le non initié, que nous expliciterons dans des cas particuliers. Dans certaines situations, nous pourrons même exhiber un test statistique pour la détection du délit d'initié, mais celui-ci sera conditionné par la variable aléatoire $L$ connue par ce dernier.
 
-Il existe plusieurs modélisations de l'information privée. Nous avons étudié, pour les deux types de marché financier, le cas où l'initié connait des informations sur le futur et grâce à la méthode du grossissement de filtration, au théorème de Girsanov, et aux plusieurs hypothèses que nous définirons dans la suite, nous arrivons à voir le comportement et l'évolution de la richesse de l'initié et de la comparer avec celle du non-initié pour les deux types de marché, et à faire un test statistique pour le marché dont les prix des actifs sont dirigés par le mouvement brownien.\\
+%Ceci est réalisable grâce aux études de modélisation d'un initié et à la mise en place d'un test de détection, ce qui est l'objectif de notre sujet. Nous nous plaçons dans deux cadres de marché financier. Le premier est celui dont les prix des actifs sont dirigés par un mouvement brownien et le deuxième est un marché financier dont les prix comportent des sauts. L'information minimale dont disposent les agents pour résoudre leur problème d'optimisation est celle obtenue par l'observation du processus des prix. Cependant, il semble que les agents sont informés de manière hétérogène et reçoivent un flux d'information qui leur est propre. Pour de tels initiés, nous étudierons, pour chacun des deux types de marché : \\
 
-Notre projet est basé sur l'études des 4 principaux articles : \\
 
-\begin{itemize}
-\item A. Grorud, M. Pontier, Insider trading in a continuous time market model, International Journal of Theoretical and Applied Finance, Vol. 1, No. 3, p. 331-347, 1998.
-\item A. Grorud, M. Pontier, Comment détecter le délit d'initiés ?, C. R. Acad. Sci. Paris, t. 324, Série 1, Probabilités/Probability, p. 1137-1142, 1997.
-\item H. Föllmer, P. Imkeller, Anticipation cancelled by b Girsanov transformation: a paradox on Wiener space, Ann. Inst. H. Poincaré Probabilités et Statististiques, Vol. 29, No. 4, p. 569-586, 1993.
-\item C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, Université Paul Sabatier, UFR MIG, Laboratoire de Statistique et Probabilités, 118 route de Narbonne, 31062 Toulouse cedex 4, France.
-\item L. Denis, A. Grorud, M. Pontier, Formes de Dirichlet sur un espace de Wiener-Poisson. Application au grossissement de filtration, Séminaire de probabilités (Strasbourg), tome 34, p. 198-217, 2000.
-\end{itemize}
+%Il existe plusieurs modélisations de l'information privée. Nous avons étudié, pour les deux types de marché financier, le cas où l'initié connait des informations sur le futur et grâce à la méthode du grossissement de filtration, au théorème de Girsanov, et aux plusieurs hypothèses que nous définirons dans la suite, nous arrivons à voir le comportement et l'évolution de la richesse de l'initié et de la comparer avec celle du non-initié pour les deux types de marché, et à faire un test statistique pour le marché dont les prix des actifs sont dirigés par le mouvement brownien.\\
 
+%Un délit d'initié, d'après sa définition, est un délit de marché qu'un investisseur commet délibérément en valeurs mobilières en utilisant des informations sensibles, qui lui sont extérieures, qui sont de nature confidentielles et surtout dont les autres investisseurs sur le marché ne disposent pas. \\
+%
+%Quand les transactions sur les actions d'une entreprise sont faites par les employés de l'entreprise et ne sont faites qu'avec les informations sur l'entreprise qui sont accessibles à tout public, il s'agit du délit d'initié légal (legal insider trading). Autrement dit, le délit d'initié n'est légal qu'au moment où toute sorte de transactions est faite sans que les investisseurs ou les agents aient bénéficié des informations non publiques, et il sera considéré illégal le moment où les transactions sont manipulées pour générer des profits ou éviter des pertes en utilisant des informations dont ne disposent pas les autres investisseurs, ce qui pourrait potentiellement être une menace pour le marché financier. \\
+%
+%Dans une transaction illégale, un initié dans une entreprise achète l'action et partage les informations sur le prix de cette action-là avec un certain nombre d'investisseurs qui l'achèteront et passeront le mot au public, ce qui créera une grande demande artificielle pour cette action en particulier et une croissance remarquable du prix. Une fois que le prix atteint un "niveau de satisfaction", l'initié quitte le marché avec ses investisseurs en vendant l'actions et faisant des profits. Le prix de cette action baissera, à cause de la vente venant d'un nombre considérable d'investisseurs, et ceci entraînera une grande perte pour les autres investisseurs dans le marché. Cet impact est considéré aussi négatif pour les petits investisseurs que pour les marchés. Le délit d'initié supprime la justice et la stabilité de demandes et d'offres et les investisseurs commenceront à ne plus faire confiance aux marchés et retirer leurs capitaux et à la fin, il y aura un grand vide dans le flux global de l'économie.\\
+%
+%L'un des plus grands exemples du délit d'initié et comment ceci a influencé le marché financier est l'affaire de SAC Capital. Le trader américain Mathew Martoma était, à la fin des années 2000, au coeur de "la plus lucrative affaire de délit d'initié de toute l'histoire", d'après le procureur de Manhattan preet Bharara. La justice, à travers lui s'attelait à faire tomber son patron, le multimilliardaire Steve Cohen, à la tête de SAC Captial qui a empoché en 2008, 276 millions de dollars (soit 202 millions d'euros) grâce à l'obtention d'informations non publiques sur un médicament. Mathew Martoma, ayant été informé par un médecin qu'un médicament anti-Alzheimer développé par deux sociétés, Elan et Wyeth, n'allait pas recevoir l'aval de l'Agence américaine des produits alimentaires et médicamenteux (The Food and Drug Administration, FDA), a vendu toutes les parts de ces deux compagnies que SAC Capital possédaient, évitant ainsi une importante perte et réalisant un profit conséquent. Mathew Martoma a été condamné en 2014 à 9 ans de prison et le fonds SAC Capital n'est pas sorti indemne de cette enquête. En 2013, il a versé 1,2 millard de dollars d'amende à la justice américaine, ainsi que 600 millions à la Securities and Exchange Commission et en 2014, il a été obligé de plaider coupable pour "délits d'initiés" et a été contraint par les autorités de renoncer à gérer les investissements de clients extérieurs.\\
+%
+%Pour éviter ce type de catastrophe, de nombreuses mesures ont été mises en place. En France, l'AMF (Autorité des Marchés financiers) est chargée de surveiller les opérations boursières. Depuis une dizaine d'années, ces autorités de surveillance ont fait beaucoup de progrès dans la détection de comportement initié grâce notamment à de meilleures techniques de surveillance. \\
+
+
+% -> A mettre dans la partie "bibliographie".
+%Notre projet est basé sur l'études des 4 principaux articles : \\
+%
+%\begin{itemize}
+%\item A. Grorud, M. Pontier, Insider trading in a continuous time market model, International Journal of Theoretical and Applied Finance, Vol. 1, No. 3, p. 331-347, 1998.
+%\item A. Grorud, M. Pontier, Comment détecter le délit d'initiés ?, C. R. Acad. Sci. Paris, t. 324, Série 1, Probabilités/Probability, p. 1137-1142, 1997.
+%\item H. Föllmer, P. Imkeller, Anticipation cancelled by b Girsanov transformation: a paradox on Wiener space, Ann. Inst. H. Poincaré Probabilités et Statististiques, Vol. 29, No. 4, p. 569-586, 1993.
+%\item C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, Université Paul Sabatier, UFR MIG, Laboratoire de Statistique et Probabilités, 118 route de Narbonne, 31062 Toulouse cedex 4, France.
+%\item L. Denis, A. Grorud, M. Pontier, Formes de Dirichlet sur un espace de Wiener-Poisson. Application au grossissement de filtration, Séminaire de probabilités (Strasbourg), tome 34, p. 198-217, 2000.
+%\end{itemize}
+%
 
 
 

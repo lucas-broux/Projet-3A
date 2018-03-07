@@ -1,5 +1,5 @@
-\select@language {french}
+\babel@toc {french}{}
 \contentsline {section}{\numberline {1}Introduction}{3}
-\contentsline {section}{\numberline {2}Mod\`eles de march\'e}{5}
-\contentsline {subsection}{\numberline {2.1}Les prix sans sauts}{5}
-\contentsline {subsection}{\numberline {2.2}Les prix avec sauts}{7}
+\contentsline {section}{\numberline {2}Mod\`eles de march\'e}{4}
+\contentsline {subsection}{\numberline {2.1}Les prix sans sauts}{4}
+\contentsline {subsection}{\numberline {2.2}Les prix avec sauts}{6}
