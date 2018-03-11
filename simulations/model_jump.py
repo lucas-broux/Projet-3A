@@ -20,7 +20,7 @@ from tqdm import tqdm
 
 from process_simulation import ProcessesGenerator
 from integrate import Integrate
-
+from scipy import integrate
 
 class JumpModel:
     """
@@ -36,9 +36,6 @@ class JumpModel:
         """
         Constructor for the class. Initialize variables of the class by setting them to false.
         """
-        # Set seed for reproductibility.
-        np.random.seed(42)
-
         # Parameters of the model.
         self.T = False                          # Total time (arbitrary unit).
         self.A = False                          # Time at which to compute wealth.
@@ -57,6 +54,8 @@ class JumpModel:
         self.i_1 = False                        # The insider knows L = ln(P_{i_1}(T)) - ln(P_{i_2}(T)).
         self.i_2 = False                        # The insider knows L = ln(P_{i_1}(T)) - ln(P_{i_2}(T)).
 
+        self.nb_terms_sum = False               # Number of terms computed in the sum defining Z.
+
         # Other useful variables.
 
         self.theta = False                      # Theta.
@@ -66,6 +65,8 @@ class JumpModel:
         self.prices = False                     # Prices of the process.
         self.L = False                          # Value of the variable L = ln(P_{i_1}(T)) - ln(P_{i_2}(T)) known by the insider.
         self.y_0 = False                        # Strategy of non_insider.
+        self.Z = False                          # Optimal factor of insider.
+        self.y = False                          # Optimal strategy of insider.
 
         # Actually initialize parameters of the model if parameters == 'default'.
         if (parameters == 'default'):
@@ -87,11 +88,14 @@ class JumpModel:
                           [-0.09, -0.4, -0.03, 0.035],
                           [0.048, -0.12, 0.1, -0.12],
                           [0.075, 0.26, 0.31, -0.28],
-                          ])                   # Volatility of assets.
+                          ])                    # Volatility of assets.
 
             # Insider knowledge input.
             self.i_1 = 1
             self.i_2 = 2
+
+            # Other.
+            self.nb_terms_sum = 1              # Number of terms computed in the sum defining Z.
 
 
     def __str__(self):
@@ -153,7 +157,7 @@ class JumpModel:
         # Compute bond.
         self.prices = [np.array([np.exp(self.r * t) for t in self.time_steps])]
 
-        # Compute other arrays.
+        # Compute prices of other assets.
         for i in range(self.d):
             riemann_fun = self.b[i] * np.ones(self.n_discr)
             jump_fun = self.sigma[i][self.m:] * np.ones((self.n_discr, self.n))
@@ -248,21 +252,125 @@ class JumpModel:
             sum_t = sum_t - integrator.riemann_integrate(fun = riemann_fun, low = 0, upp = self.T, T = self.T, return_all_values = True)
 
             # Compute the numerator of the formula that computes Z.
-            product = 1
-            for j in range(self.n):
-                pass
+            p_num = []
+            for i in tqdm(range(self.n_discr), leave = False, desc = "Computing Z"):
+                t = self.time_steps[i]
+                x = self.L
+                sig = sum_t[i]
+                m = m_t[i]
+                # Compute product.
+                product = 1
+                for j in range(self.n):
+                    # Compute the sum with the approximation of only calculating self.nb_terms_sum terms.
+                    s = 0
+                    for k_j in range(1, self.nb_terms_sum + 1):
+                        # First, we compute the factor in the sum.
+                        factor = np.exp(- self.kappa[j] * (self.T - t)) * (self.kappa[j] ** k_j) / np.sqrt(2 * np.pi * sig)
+                        # Now, we compute the integral. Define the constants involved.
+                        alpha_x_t = (x - m)
+                        beta = np.log((1 + self.sigma[self.i_1][self.m:]) / (1 + self.sigma[self.i_2][self.m:]))
+                        # print(x, m, alpha_x_t, beta)
+                        # Define the integration function.
+                        def f(*v):
+                            integrand = alpha_x_t
+                            for ind, b in enumerate(beta):
+                                for l in range(k_j):
+                                    integrand -= b * (v[k_j * ind + l])
+                            # print(np.exp(- integrand ** 2))
+                            return np.exp((-integrand ** 2) / (2 * sig))
+                        # Define the integration bounds.
+                        bounds = []
+                        for l in range(k_j * self.n):
+                            if l % k_j == 0:
+                                bounds.insert(0, lambda *args : [t, self.T])
+                            else:
+                                bounds.insert(0, lambda *args : [args[0], self.T])
+                        # Actually compute integral.
+                        # print(integrate.nquad(f, bounds)[0])
+                        s += factor * integrate.nquad(f, bounds)[0]
+                    # Actualize product.
+                    product *= s
+                # Actualize the array containing numerator values.
+                p_num.append(product)
 
+            # Renormalize p.
+            self.Z = np.array(p_num) / p_num[0]
+
+
+    def _compute_Y_insider(self):
+        """
+        Compute the process Y which gives all wanted informations about the strategy of the insider.
+
+        It is obtained by multiplying Y_0 (strategy of non_insider) with the factor Z.
+        """
+        # Do the multiplication.
+        self.y = self.y_0 / self.Z
+
+
+    def _plot_Z(self):
+        """
+        Plots the evolution of Z.
+        """
+        plt.figure(1)
+        plt.plot(self.time_steps, self.Z, label = r"$Z$")
+        plt.title(r"$Z$")
+        plt.xlabel("Time")
+        plt.ylabel(r"$Z$")
+        plt.legend(loc = 'best')
+        plt.show()
+
+
+    def _plot_Y_insider(self):
+        """
+        Plots the evolution of the strategy of the insider.
+        """
+        plt.figure(1)
+        plt.plot(self.time_steps, 1 / self.y, label = r"$\frac{1}{Y}$ (insider)")
+        plt.title(r"$\frac{1}{Y}$ (insider)")
+        plt.xlabel("Time")
+        plt.ylabel(r"$\frac{1}{Y}$ (insider)")
+        plt.legend(loc = 'best')
+        plt.show()
+
+
+    def _plot_both_agents(self):
+        """
+        Plots the compared evolution of the strategy of both insider and non-insider.
+        """
+        plt.figure(1)
+        plt.plot(self.time_steps, 1 / self.y, label = r"$\frac{1}{Y}$ (insider)")
+        plt.plot(self.time_steps, 1 / self.y_0, label = r"$\frac{1}{Y_0}$ (non insider)")
+        plt.title(r"$\frac{1}{Y}$ compared for insider and non_insider")
+        plt.xlabel("Time")
+        plt.ylabel(r"$\frac{1}{Y}$")
+        plt.legend(loc = 'best')
+        plt.show()
 
 
 if __name__ == "__main__":
+    """
+    Main part of the class.
+    """
+    # Define the jump model, print parameters and check validity.
     jump_model = JumpModel()
-    print(jump_model)
-    print("Model validity: " + str(jump_model._check_model_validity()))
+    # print(jump_model)
+    # print("Model validity: " + str(jump_model._check_model_validity()))
+
+    # Simulate market model and plot prices.
     jump_model._simulate_prices()
     # jump_model._plot_prices_evolution()
     jump_model._compute_L()
-    print("Value of the variable known to the insider: L = " + str(jump_model.L))
+    # print("Value of the variable known to the insider: L = " + str(jump_model.L))
+
+    # Compute the optimal strategy for non insider.
     jump_model._compute_theta_Q()
     jump_model._compute_Y_non_insider()
     # jump_model._plot_Y_non_insider()
+
+    # Compute the optimal strategy for the insider.
     jump_model._compute_Z()
+    # jump_model._compute_Y_insider()
+    jump_model._plot_Z()
+    # print(jump_model.Z)
+    # jump_model._plot_Y_insider()
+    # jump_model._plot_both_agents()

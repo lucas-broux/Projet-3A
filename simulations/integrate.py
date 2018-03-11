@@ -177,7 +177,7 @@ if __name__ == "__main__":
     plt.ylabel("Price")
     plt.legend(loc = 'best')
     # plt.savefig('wealths.png')
-    plt.show() """
+    plt.show()
 
     integrator = Integrate()
     s = 100  # Size of discretisation.
@@ -189,3 +189,37 @@ if __name__ == "__main__":
     riemann_fun_2 = np.array([[[ (x + y + z) ** 2 for x in time_steps] for y in time_steps] for z in time_steps])
     int_2 = integrator.riemann_integrate_nd(riemann_fun_2, low = 0, upp = T, T = T, return_all_values = False)
     print(int_2)
+    """
+    from scipy import integrate
+    import matplotlib.pyplot as plt
+    def f(*v):
+        [x, y, z] = v
+        return x*y*z
+
+    def bounds_x():
+        return [0, 1]
+
+    def bounds_y(*args):
+        return [args[0], 1]
+
+    def bounds_z(*args):
+        return [args[0], 1]
+
+    # print(integrate.nquad(f, [bounds_z, bounds_y, bounds_x]))
+
+    def g(s):
+        return np.exp(-(0.1 - 2 * s) ** 2 / (1.0 - t))
+
+    time_steps = np.array([i / (500 - 1) for i in range(500)])
+    l = []
+    for t in time_steps:
+        l.append(np.exp(t - 1) / np.sqrt(1-t) * integrate.nquad(lambda s : np.exp(-(0.1 - 5 * t + 2 * s) ** 2 / (1.0 - t)), [lambda *args : [t, 1]])[0])
+
+
+    plt.figure(1)
+    plt.plot(time_steps, l, label = "integral")
+    plt.title("integral")
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.legend(loc = 'best')
+    plt.show()
