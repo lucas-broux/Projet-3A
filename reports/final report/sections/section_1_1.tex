@@ -1,45 +1,39 @@
-Dans cette première partie, nous considérons un modèle de marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$, dont les prix des actions (un actif sans risque et $d$ actifs risqués) évoluent selon l'équation : 
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+
+\par Dans cette première partie, nous considérons un modèle de marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$, dont les prix des actions (un actif sans risque et $d$ actifs risqués) sont régis selon l'équation : 
 \begin{equation}
 \begin{cases}
 S^0_t &= S_0^0 + \int_{0}^{t} S^0_s r_s ds \\
 \displaystyle S_t^i &= S_0^i + \int_{0}^{t} S_s^i b_s^i ds +  \int_{0}^{t} S_s^i \sigma_s^i dW_s, 0\leq t \leq T, i = 1,...,d
 \end{cases}
 \end{equation}
-où : \\
+où :
 
 \begin{itemize}
 \item $W$ est un mouvement brownien de dimension $d$ sur $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$ et $\mathcal{F}$ est la filtration naturelle qu'il engendre,
 \item Les paramètres $b, \sigma$ et $r$ sont dans $\mathbb{R}^d, \mathbb{R}^{d\times d}, \mathbb{R}$ respectivement et sont supposés bornés sur $[0,T]$ et $\mathcal{F}$-adaptés.
-\item La matrice $\sigma_t$ est inversible.
+\item La matrice $\sigma_t$ est inversible $dt \otimes d\mathbb{P}$-presque sûrement.
 \end{itemize}
 \
 
-L'information $\mathcal{F}_t$ est celle au temps $t$ que connaissent tous les investisseurs sur le marché.
-Nous supposons qu'en outre l'initié dispose , dès le début de son investissement à $t=0$, d'une informations supplémentaire sous la forme d'une variable aléatoire $L \in L^1(\Omega, \mathcal{F}_T)$ sur l'espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$. 
+\par L'information connue au temps $t$ par les investisseurs sur le marché est $\mathcal{F}_t$.
+Nous supposons que l'initié dispose en outre, dès le début de son investissement à $t=0$, d'une information supplémentaire sous la forme d'une variable aléatoire $L \in L^1(\Omega, \mathcal{F}_T)$ sur l'espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$. 
 %Dans le cas que nous avons étudié, $L = lnS^1_T - lnS^2_T$, le rapport au temps $T$ des deux actifs de prix $S^1$ et $S^2$. 
 Notons alors $\mathcal{Y}$ la filtration "naturelle" de l'initié obtenue par grossissement initial de $\mathcal{F}$, lui adjoignant la variable aléatoire $L : \mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$.\\
 
-Pour ce modèle de marché, nous commencerons par la méthode de grossissement de filtration pour construire un nouveau mouvement brownien (que l'on appellera $B$) sur le nouvel espace de probabilité filtré $(\Omega, \mathcal{Y}, \mathbb{P})$. Ensuite avec le nouveau mouvement brownien, nous effectuons un changement de probabilité pour nous ramener à une mesure neutre au risque (que l'on appellera $Q$). Sur ce nouvel espace de probabilité neutre au risque, nous combinons ensemble l'hypothèse d'autofinancement, la stratégie de consommation-placement $\mathcal{Y}$-admissible et une proposition qui nous donne une contrainte qui est une fonction de la richesse d'investisseur, nous pourrons comprendre et résoudre le problème d'optimisation de l'initié (car avec l'information $\mathcal{Y}_t$ l'initié cherche à optimiser sa stratégie de consommation et de placement sur le marché financier) et finalement mettre en place un test statistique à partir des solutions optimales du problème d'optimisation pour voir si un investisseur est un initié ou un non-initié. \\
-
-A l'instant $t=0$, l'initié dispose d'un capital $X_0$. Il consomme à une vitesse $c$, un processus positif $\mathcal{Y}$-adapté, vérifiant $\int_{0}^{T} c_s ds < \infty$, et place sur l'actif $i$ la quantité $\theta^i$. Notons $\pi_t^i = \theta^i_t S_t^i$ la somme investie sur la $i$-ième action pour $i =1, ..., d$. Sa richesse au temps $t$ s'exprime donc par : 
+\par A l'instant $t=0$, l'initié dispose d'un capital $X_0$. Il consomme à une vitesse $c$, un processus positif $\mathcal{Y}$-adapté, vérifiant $\int_{0}^{T} c_s ds < \infty$, et place sur l'actif $i$ la quantité $\theta^i$. Notons $\pi_t^i = \theta^i_t S_t^i$ la somme investie sur la $i$-ième action pour $i =1, ..., d$. Sa richesse au temps $t$ s'exprime donc par : 
 \begin{center}
 $X_t = \displaystyle \sum_{i=0}^{d} \theta^i_t S_t^i - \int_{0}^{t} c_s ds$
 \end{center}
 
-
-Nous introduisons nos deux premières hypothèses. La première donne l'existence de la variable $\eta_t = \sigma_t^{-1}(b_t - r_t \textbf{1})$ : 
-\begin{center}
-\textbf{H1} : La matrice $\sigma$ est inversible, $dt \otimes d\mathbb{P}$-presque sûrement, \\
-$\eta_t$ vérifie $\exists C, \exists k > 0, \forall s \in [0, A], A < T, \mathbb{E}[\text{exp}k||\eta_s||^2] \leq C$.\\
-\end{center}
-
-et la deuxième est l'hypothèse d'autofinancement :
+\par Exploitons cette première équation en introduisant l'hypothèse naturelle d'autofinancement :
 \begin{center}
 \textbf{H2} : $dX_t = \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt$
 \end{center}
 
-D'après \textbf{H2},
-Avec ces deux hypothèses, en notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, en utilisation la formule d'Itô, 
+\par Notons $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, alors la formule d'Itô donne 
 \mathleft
 \begin{flalign*}
 dX_t &= \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt \\
@@ -50,20 +44,47 @@ dX_t &= \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt \\
 &= (X_t r_t - c_t)dt + (\pi_t, b_t - r_t\textbf{1})dt + (\pi_t, \sigma_t dW_t) \\
 \end{flalign*}
 
-En notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, et en appliquant la forume d'Itô,
+\par Nous avons encore par Itô
 \begin{flalign*}
 d(R_t) &= \displaystyle -\frac{dS^0_t}{(S^0_t)^2} + \frac{1}{2(S_t^0)^3} d<S^0>_t\\
 & = \displaystyle -\frac{r_t}{S^0_t}dt = -r_t R_t dt
 \end{flalign*}
 
-La formule d'Itô nous donne pour la fonction $f(x,r) = xr$ nous donne:
+Et
 \begin{flalign*}
 d(X_t R_t) &= X_t dR_t + R_t dX_t + d<X, R>_t \\
 &= -X_t r_t R_t dt + R_t (X_t r_t - c_t)dt + R_t(\pi_t, b_t - r_t\textbf{1})dt + R_t (\pi_t, \sigma_t dW_t)\\
 & = -R_t c_t dt + (R_t \pi_t,  b_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dW_t)
 \end{flalign*}
-Donc la richesse $X$ actualisée vérifie l'équation : 
+Ainsi, la richesse $X$ actualisée vérifie l'équation : 
 
 \begin{equation}
 \displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds + \int_{0}^{t} (R_s \pi_s,  b_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dW_s)
 \end{equation}
+\
+
+\par Étudions désormais la stratégie de l'initié. Nous supposons que celui-ci optimise sa stratégie au sens suivant : il optimise la fonction de perte :
+\begin{align*}
+      J \colon &\mathcal{A} \to \mathbb{R} \\
+       &\left( \pi, c \right) \xmapsto{\phantom{\mathcal{A}}} J \left( X_0, \pi, c \right) = \mathbb{E} \left[ \int_0^A U_1 \left( c_t \right) dt + U_2 \left( X_A^{\pi, c} \right) \left\vert\right. \mathcal{Y}_0 \right]
+\end{align*}
+
+où : 
+\begin{itemize}
+\item $\mathcal{A}$ est l'ensemble des stratégies \emph{admissibles} i.e. des stratégies $\left( \pi, c \right)$ telles que $\pi$ est $\mathcal{Y}$-prévisible, $c$ est $\mathcal{Y}$-adapté, $c >0, \int_0^T c_s ds < + \infty$ et $\sigma^* \pi \in L^2 \left[ 0; T \right] \enskip \mathbb{P}$-p.s., et telle que la richesse engendrée par cette stratégie satisfasse $X^{\pi, c} \geq 0 \enskip dt \otimes d \mathbb{P}$-p.s.
+\item $U_1$ et $U_2$ sont des \emph{fonctions d'utilité} i.e. positives, croissantes, concaves, $\mathcal{C}^1$ avec \\ $\lim_{x \to +\infty} U_i^{'} \left( x \right) = 0$. Par la suite, nous supposerons $U_1 = U_2 = \log$.
+\item $A$ est un temps strictement inférieur à T, qui correspondra au \emph{temps final} de notre analyse. En effet, des phénomènes d'explosion en temps fini lorsque $A \to 1$, décrits avec précision dans \cite{art3}, nous empêchent d'étudier l'évolution de l'initié sur $\left[ 0; T \right]$ tout entier. 
+\end{itemize}
+\
+
+\par L'interprétation est la suivante : l'initié choisit, parmi toutes les stratégies admissibles, celle qui optimise en moyenne son utilité (fonction de sa consommation et de sa richesse finale) sachant les informations connues sur le marché en $t = 0$ ainsi que l'information supplémentaire $L$.\\
+
+\par La difficulté ici est de caractériser $\mathcal{A}$. En effet, $W$ est un mouvement brownien sur $\left(\Omega, \mathcal{F}, \mathbb{P} \right) $ mais pas sur $\left(\Omega, \mathcal{Y}, \mathbb{P} \right)$, ce qui nous empêche de faire un simple changement de probabilité comme dans les cas usuels pour nous ramener à la probabilité risque-neutre. Le raisonnement est adapté suivant les étapes suivantes :
+
+\begin{enumerate}
+\item \textit{Changement de probabilité} : nous construisons une probabilité $\mathbb{Q}$ pour laquelle $W$ est un $\left(\Omega, \mathcal{Y}, \mathbb{Q} \right)$-mouvement brownien
+\item \textit{Grossissement de filtration} : nous construisons un nouveau mouvement brownien $B$ sur l'espace de probabilité filtré  $(\Omega, \mathcal{Y}, \mathbb{P})$.
+\item \textit{Changement de probabilité} : nous construisons un mouvement brownien $\tilde{B}$ sur $\left(\Omega, \mathcal{Y}, \mathbb{Q}_1 \right)$, avec $\mathbb{Q}_1$ probabilité risque-neutre sur $\mathcal{Y}$.
+\end{enumerate}
+
+\end{document}

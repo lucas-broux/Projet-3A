@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}
+
+\bibitem{art4}
+L.~Denis, A.~Grorud, and M.~Pontier.
+\newblock Formes de dirichlet sur un espace de wiener-poisson. application au
+  grossissement de filtration.
+\newblock In {\em S{\'e}minaire de Probabilit{\'e}s XXXIV}, pages 198--217.
+  Springer, 2000.
+
+\bibitem{art3}
+H.~Föllmer and P.~Imkeller.
+\newblock Anticipation cancelled by b girsanov transformation: a paradox on
+  wiener space.
+\newblock {\em Ann. Inst. H. Poincaré Probabilités et Statististiques}, 1993.
+
+\bibitem{art1}
+A.~Grorud and M.~Pontier.
+\newblock Comment détecter le délit d'initié ?
+\newblock {\em C. R. Acad. Sci. Paris}, 1997.
+
+\bibitem{art2}
+A.~Grorud and M.~Pontier.
+\newblock Insider trading in a continuous time market model.
+\newblock {\em International Journal of Theoretical and Applied Finance}, 1998.
+
+\bibitem{art5}
+C.~Hillairet.
+\newblock Comparison of insiders’ optimal strategies depending on the type of
+  side-information.
+\newblock {\em Stochastic Processes and their Applications}, 115(10):1603 --
+  1627, 2005.
+
+\end{thebibliography}

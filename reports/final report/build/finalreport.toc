@@ -1,0 +1,10 @@
+\babel@toc {french}{}
+\contentsline {section}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {2}Mod\IeC {\`e}le diffusif}{3}
+\contentsline {subsection}{\numberline {2.1}\IeC {\'E}volution des prix et de la richesse}{3}
+\contentsline {subsection}{\numberline {2.2}Grossissement de filtration}{5}
+\contentsline {subsection}{\numberline {2.3}Strat\IeC {\'e}gies optimales}{6}
+\contentsline {subsection}{\numberline {2.4}Cas particulier : }{7}
+\contentsline {section}{\numberline {3}Mod\IeC {\`e}le avec sauts}{8}
+\contentsline {subsection}{\numberline {3.1}Raisonnement}{8}
+\contentsline {subsection}{\numberline {3.2}Cas particulier : }{8}
