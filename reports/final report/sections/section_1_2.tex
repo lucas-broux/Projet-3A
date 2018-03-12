@@ -1,0 +1,48 @@
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+
+La méthode de grossissement de filtration est un utile crucial dans notre projet, qui nous permet de construire le mouvement brownien sur la filtration $\mathcal{Y}$ de l'initié, qui est à priori plus grand que celle du non initié $\mathcal{F}$.\\
+
+Le grossissement de filtration est une étude très large et complexe, provenu des questions d'Itô, Meyer et Williams sur l'extension des intégrales stochastiques. Ceci étant dit, nous n'avons pas pu étudier tous ses éléments en détaille. Les résultats utilisés viennent des articles que nous avons lus au cours du projet.\\
+
+Notons $D$ le gradient stochastique usuel associé à $W$ e, pour $p > 1$ et $q \in \mathbb{N}, \mathbb{D}^{p,q}$ l'espace de Sobolev construit à l'aide de $D$. Définissons l'hypothèse : 
+\begin{center}
+\textbf{HC} : $L \in \mathbb{D}^{2,1}$, est tel que $\displaystyle \int_{t}^{T} || D_u L||^2 du >0, \mathbb{P}$-p.s. pour tout $t \in [0,T[$.
+\end{center}
+
+\textbf{Proposition : } Sous \textbf{HC}, la loi conditionnelle de $L$ sachant $\mathcal{F}_t$ est absolument continue et \\
+
+\begin{itemize}
+\item il existe une version mesurable de la densité conditionnelle $(\omega, t, x) \mapsto p(\omega, t, x)$ qui est une $\mathcal{F}$-martingale et se représente par $ p(\omega, t, x) = p(0, x) + \int_{0}^{t}\alpha(\omega, s, x) dW_s$\
+\item si $M$ est une $\mathcal{F}$-martingale locale continue égale à $ M_0 + \int_{0}^{t} \beta_s dW_s$, alors le crochet $d<M,P>_t$ est égal à $d<\alpha, \beta>_t dt$ et le processus $\tilde{M}_t = M_t + \int_{0}^{t}\frac{<\alpha(.,x),\beta>_u |_{x=L}}{p(u, L)} du$ est une $\mathcal{Y}$-martingale locale continue.
+\end{itemize}
+\
+
+En corollaire, le processus vectoriel $(B_t = W_t - \int_{0}^{t} \frac{\alpha(u, L)}{p(u, L)}du, t \in [0, T[)$ est un mouvement brownien sur l'espace de probabilité filtré $(\Omega, \mathcal{Y}, \mathbb{P})$, qui est l'espace de probabilité de l'initié. \\
+
+Sur cet nouvel espace de probabilité filtré $(\Omega, \mathcal{Y}, \mathbb{P})$, en remplaçant $dW_t$ par $dB_t + l_t dt$ où $l_s = \frac{\alpha(s, L)}{p(s, L)}$, l'équation (1) des prix des actions sur le marché financier devient 
+\begin{equation}
+S_t^i = S_0^i + \displaystyle \int_{0}^{t} S_s^i (b_s^i + l_s^i)ds + \int_{0}^{t} S_s^i \sigma_s^i dB_s, 0 \leq t < T, i = 1,...,d.
+\end{equation}
+Avec cette nouvelle équation, 
+\begin{flalign*}
+dX_t &= \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt \\
+& = \displaystyle \sum_{i=1}^{d} \theta^i_t \big(S^i_t b^i_t dt + S^i_t l^i_t dt +  S^i_t \sigma^i_t dB_t \big) + \theta^0_t S^0_t r_t dt - c_t dt\\
+& = \displaystyle \sum_{i=1}^{d} \pi^i_t  (b^i_t + l^i_t)dt +  \sum_{i=1}^{d} \pi^i_t \sigma^i_t dB_t + (X_t - \sum_{i=1}^{d} \pi^i_t)r_t dt - c_t dt\\
+& = (X_t r_t - c_t)dt +  \sum_{i=1}^{d}\pi^i_t(b^i_t + l^i_t - r_t)dt + \sum_{i=1}^{d} \pi^i_t \sigma^i_t dB_t \\
+&= (X_t r_t - c_t)dt + (\pi_t, b_t + l_t - r_t\textbf{1})dt + (\pi_t, \sigma_t dB_t) \\
+\end{flalign*}
+\begin{flalign*}
+\Rightarrow d(X_t R_t) &= X_t dR_t + R_t dX_t + d<X, R>_t \\
+&= -X_t r_t R_t dt + R_t (X_t r_t - c_t)dt + R_t(\pi_t, b_t + l_t - r_t\textbf{1})dt + R_t (\pi_t, \sigma_t dB_t)\\
+& = -R_t c_t dt + (R_t \pi_t,  b_t + l_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dB_t)
+\end{flalign*}
+\
+Donc, sur $(\Omega, \mathcal{Y}, \mathbb{P})$, la richesse $X$ actualisée de l'initié vérifie l'équation : 
+\begin{equation}
+\displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds = X_0 \int_{0}^{t} (R_s \pi_s,  b_s + l_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dB_s)
+\end{equation}
+Nous pouvons voir ici que le processus $l_s$ représente les informations dont dispose l'initié. Si $l_s = 0, 0\leq s \leq t \leq T$, nous retrouvons l'équation (2) de richesse du non initié.
+ 
+\end{document}

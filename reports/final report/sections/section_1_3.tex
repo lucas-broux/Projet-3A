@@ -1,0 +1,15 @@
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+
+L'étape suivante consiste à employer le Théorème de Girsanov pour faire un changement de probabilité afin de nous ramener à une mesure neutre au risque. La forme du processus $l$ pose un problème pour ce changement de probabilité car il ne nous permet de faire le changement que sur l'intervalle $[0, A], A <T$ et pas sur $[0, T]$. Au delà de $[0, A]$, il n'est pas sûr que la martingale locale de changement de probabilité soit une vraie martingale jusqu'en $T$ et le processus explose aussi. Dans le sens économique, les informations dont ne dispose que l'initié sont celles qu'il a obtenues dès le début de son investissement, il n'y a pas d'interêt de voir en $T$ si il est initié ou pas car à la fin nous aurions pu voir déjà. \\
+
+Pour résoudre ce problème, nous introduisons un nouveau processus $\xi_t = -l_t - \eta_t$ et son existence est rassuré par hypothèse. \\
+
+\textbf{Proposition} : Posons $M_t = exp( \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d), t \in [0,A] , A<T$. Alors $M$ est une $(\mathcal{Y}, \mathbb{P})$-martingale uniformément intégrable et, sous $\mathbb{Q} = M.\mathbb{P}$, le processus
+\begin{center}
+ $\tilde{B}_t = B_t - \displaystyle \int_{0}^{t}\xi_s ds$
+ \end{center}
+ est un $(\mathcal{Y}, \mathbb{Q})$-mouvement brownien et les prix actualisés sont des $(\mathcal{Y}, \mathbb{Q})$-martingales locales.
+ 
+\end{document}
