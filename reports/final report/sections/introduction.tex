@@ -1,0 +1,31 @@
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+
+\par L'un des enjeux majeurs des mathématiques financières est de concevoir des modèles d'évolu\-tion de marchés suffisamment complexes pour proposer une description relativement fidèle de la réalité, mais suffisamment simples pour que les résultats obtenus soit exploitables.
+
+\vspace{5mm}
+
+\par En particulier, la majorité de ces modèles formulent l'hypothèse simplificatrice suivante : les acteurs qui évoluent sur le marché disposent tous au temps $t$ des mêmes informations, à savoir les prix des actions jusqu'au temps $t$. Or, celle-ci est contestable puisqu'en réalité certains acteurs, de par leurs affinités, peuvent connaître des informations sensibles et confidentielles - par exemple l'évolution future d'une action - grâce auxquelles ils vont pouvoir établir une stratégie d'investissement plus performante que les autres acteurs du marché : ce sont les \emph{initiés}. 
+
+\vspace{5mm}
+
+\par En pratique, si certains scandales de délit d'initié ont été très médiatisés pour les quantités d'argent impressionnantes en jeu (donnons l'exemple de Steve Cohen qui, à la tête du \emph{hedge fund} SAC Capital, a empoché en 2008 plus de 276 millions de dollars grâce à l'obtention d'informations non publiques sur un médicament), et si les autorités de surveillance ont réussi à faire des progrès dans la détection du délit d'initié grâce à des algorithmes de recherche d'anomalies dans les données du marché, la modélisation théorique du phénomène n'en permet actuellement qu'une analyse limitée.
+
+\vspace{5mm}
+
+\par Le but de ce projet est de présenter les résultats actuels de cette modélisation dans deux modèles de marché. Le premier correspond au modèle brownien usuel, tandis que dans le deuxième, nous ajouterons des "sauts" sous la forme de processus de Poisson, afin de modéliser des périodes de "catastrophes" (krachs, ...). Pour chaque modèle de marché, nous considére\-rons un agent non-initié et un agent initié qui connaitra, en plus des informations publiques, une variable aléatoire $L$ correspondant à un renseignement supplémentaire. Nous étudierons alors :
+
+\vspace{5mm}
+
+\begin{itemize}
+\item Les problèmes d'arbitrage et de réplication d'actifs risqués.
+\item Le gain de l'initié (par rapport à un non-initié).
+\item Les simulations de l'évolution de la richesse de l'initié et du non-initié; et dans certains cas la mise en oeuvre d'un test de détection.
+\end{itemize}
+
+\vspace{5mm}
+
+\par Nous verrons que, dans les modélisations étudiées, nous pourrons déterminer les stratégies optimales pour l'initié et pour le non initié, que nous expliciterons dans des cas particuliers. Dans certaines situations, nous pourrons même exhiber un test statistique pour la détection du délit d'initié, mais celui-ci sera conditionné par la variable aléatoire $L$ connue par ce dernier.
+
+\end{document}

@@ -1,0 +1,23 @@
+Pour la deuxième partie de notre projet, nous avons étudié un modèle de marché financier qui est différent du premier en raison de la présence d'un processus ponctuel, ou un processus de Poisson qui fait de sorte que les prix comportent des sauts.\\
+
+Nous considérons un marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0, T], \mathbb{P})$ dont les prix des actions sont dirigés par un mouvement brownien et un processus ponctuel et évoluent selon l'équation : 
+
+\begin{equation}
+S_t^i = S_0^i + \displaystyle \int_{0}^{t}S_s^i b_s^i ds + \int_{0}^{t}S_s^i \sum_{j = 1}^{d} d(W^*, N^*)^{*}_j(s), 0 \leq t \leq T, i = 1, ..., d
+\end{equation}
+
+où\\
+
+\begin{itemize} 
+\item $W$ est un mouvement brownien de dimension $m$ sur l'espace de probabilité filtré $(\Omega^W, \mathcal{F}^W_t; t \in [0, T], \mathbb{P}^W)$,
+\item $N$ est un processus de Poisson de dimension $n$ sur l'espace de probabilité filtré $(\Omega^N, \mathcal{F}^N_t; t \in [0, T], \mathbb{P}^N)$,
+\item $d = m+n$ et $X^*$ est le transposé de $X$,
+\item $b$ et $\phi$ sont déterministes et bornés sur $[0, T]$,
+\item $\sigma$ est une matrice déterministe $d \times d$,
+\item $S_0$ évolue selon l'équation $dS^0_t = S^0_t r_t dt$.
+\end{itemize}
+\
+
+Soit $(\Omega, \mathcal{F}_t; t\in [0, T], \mathbb{P}) := (\Omega^W \times \Omega^N, \mathcal{F}^W \otimes \mathcal{F}^N, \mathbb{P}^W \otimes \mathbb{P}^N)$. $W$ et $N$ sont indépendants. \\
+
+Les procédures sont pareilles. L'initié a des informations sur le futur, représentées par la variable $L$, qui ne sont pas accessibles aux autres investisseurs sur le marché et nous notons $\mathcal{Y}$ sa filtration dite naturelle qui est $\mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$. La méthode de grossissement de filtration, le changement de probabilité pour nous ramener à une mesure neutre au risque, et certaines hypothéses (que nous n'expliciterons pas en détaille mais se trouvent dans l'article de \itshape{C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, Université Paul Sabatier, UFR MIG, Laboratoire de Statistique et Probabilités, 118 route de Narbonne, 31062 Toulouse cedex 4, France.}) nous donneront en résultat la richesse et le portefeuille optimal de l'initié.

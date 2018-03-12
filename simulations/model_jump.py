@@ -89,7 +89,16 @@ class JumpModel:
                           [0.048, -0.12, 0.1, -0.12],
                           [0.075, 0.26, 0.31, -0.28],
                           ])                    # Volatility of assets.
-
+            """
+            self.n = 1                          # Dimension of the Poisson process.
+            self.d = self.m + self.n            # Total dimension.
+            self.kappa = np.array([3])       # Intensity of the Poisson process.
+            self.b = np.array([0.15, 0.1, 0.084])    # Drift of assets.
+            self.sigma = np.array([[-0.4, -0.1, 0.15],
+                          [-0.09, -0.4, 0.03],
+                          [0.048, -0.12, 0.1],
+                          ])                    # Volatility of assets.
+                          """
             # Insider knowledge input.
             self.i_1 = 1
             self.i_2 = 2

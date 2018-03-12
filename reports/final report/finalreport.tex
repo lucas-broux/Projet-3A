@@ -1,5 +1,5 @@
 \documentclass[11pt,letterpaper]{article}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -16,7 +16,14 @@
 \setlength\parindent{0pt}
 \makeindex
 
-\title{Rapport Intermédiaire}
+% Define 2 graphic paths to images.
+\graphicspath{{images/}{../images/}}
+
+% Import subfiles package. 
+\usepackage{subfiles}
+
+
+\title{Rapport IntermÃ©diaire}
 
 \begin{document}
 
@@ -24,10 +31,11 @@
 %\includegraphics[scale=0.2]{../../../Desktop/logo.jpg}
 %\end{center}
 
+% Front page.
 \vspace{1.5cm}
 \begin{center}
-\huge{Département de Mathématiques Appliquées}\\
-\vspace{1cm}
+\huge{DÃ©partement de MathÃ©matiques AppliquÃ©es\\Ã‰cole polytechnique \\}
+\vspace{1.5cm}
 \LARGE{Projet 3A MAP511}\\
 \vspace{0.3cm}
 \LARGE{Rapport final}
@@ -35,7 +43,7 @@
 
 \vspace{1.5cm}
 \begin{center}
-\Huge{Modélisation et détection de délit d'initié}
+\Huge{ModÃ©lisation et dÃ©tection de dÃ©lit d'initiÃ©}
 \end{center}
 \vspace{1.5cm}
 
@@ -46,195 +54,38 @@
 \LARGE{HEANG Kitiyavirayuth}
 \end{center}
 
+% Page of contents.
 \pagebreak
 \tableofcontents
 \pagebreak
 
+% Introduction.
 \section{Introduction}
-\par L'un des enjeux majeurs des mathématiques financières est de concevoir des modèles d'évolution de marchés suffisamment complexes pour proposer une description relativement fidèle de la réalité, mais suffisamment simples pour que les résultats obtenus soit exploitables. \\
-
-\par En particulier, la majorité de ces modèles formulent l'hypothèse simplificatrice suivante : les acteurs qui évoluent sur le marché disposent tous au temps $t$ des mêmes informations, à savoir les prix des actions jusqu'au temps $t$. Or, celle-ci est contestable puisqu'en réalité certains acteurs, de par leurs affinités, peuvent connaître des informations sensibles et confidentielles - par exemple l'évolution future d'une action - grâce auxquelles ils vont pouvoir établir une stratégie d'investissement plus performante que les autres acteurs du marché : ce sont les \emph{initiés}. \\
-
-\par En pratique, si certains scandales de délit d'initié ont été très médiatisés pour les quantités d'argent impressionnantes en jeu (donnons l'exemple de Steve Cohen qui, à la tête du \emph{hedge fund} SAC Capital, a empoché en 2008 plus de 276 millions de dollars grâce à l'obtention d'informations non publiques sur un médicament), et si les autorités de surveillance ont réussi à faire des progrès dans la détection du délit d'initié grâce à des algorithmes de recherche d'anomalies dans les données du marché, la modélisation théorique du phénomène n'en permet actuellement qu'une analyse limitée.
-\\
-
-\par Le but de ce projet est de présenter les résultats actuels de cette modélisation dans deux modèles de marché. Le premier correspond au modèle brownien usuel, tandis que dans le deuxième, nous ajouterons des "sauts" sous la forme de processus de Poisson, afin de modéliser des périodes de "catastrophes" (krachs, ...). Pour chaque modèle de marché, nous considérerons un agent non-initié et un agent initié qui connaitra, en plus des informations publiques, une variable aléatoire $L$ correspondant à un renseignement supplémentaire. Nous étudierons alors :
-\\
-
-\begin{itemize}
-\item Les problèmes d'arbitrage et de réplication d'actifs risqués.
-\item Le gain de l'initié (par rapport à un non-initié).
-\item Les simulations de l'évolution de la richesse de l'initié et du non-initié; et dans certains cas la mise en oeuvre d'un test de détection.
-\end{itemize}
-\
-\par Nous verrons que, dans les modélisations étudiées, nous pourrons déterminer les stratégies optimales pour l'initié et pour le non initié, que nous expliciterons dans des cas particuliers. Dans certaines situations, nous pourrons même exhiber un test statistique pour la détection du délit d'initié, mais celui-ci sera conditionné par la variable aléatoire $L$ connue par ce dernier.
-
-%Ceci est réalisable grâce aux études de modélisation d'un initié et à la mise en place d'un test de détection, ce qui est l'objectif de notre sujet. Nous nous plaçons dans deux cadres de marché financier. Le premier est celui dont les prix des actifs sont dirigés par un mouvement brownien et le deuxième est un marché financier dont les prix comportent des sauts. L'information minimale dont disposent les agents pour résoudre leur problème d'optimisation est celle obtenue par l'observation du processus des prix. Cependant, il semble que les agents sont informés de manière hétérogène et reçoivent un flux d'information qui leur est propre. Pour de tels initiés, nous étudierons, pour chacun des deux types de marché : \\
-
-
-%Il existe plusieurs modélisations de l'information privée. Nous avons étudié, pour les deux types de marché financier, le cas où l'initié connait des informations sur le futur et grâce à la méthode du grossissement de filtration, au théorème de Girsanov, et aux plusieurs hypothèses que nous définirons dans la suite, nous arrivons à voir le comportement et l'évolution de la richesse de l'initié et de la comparer avec celle du non-initié pour les deux types de marché, et à faire un test statistique pour le marché dont les prix des actifs sont dirigés par le mouvement brownien.\\
-
-%Un délit d'initié, d'après sa définition, est un délit de marché qu'un investisseur commet délibérément en valeurs mobilières en utilisant des informations sensibles, qui lui sont extérieures, qui sont de nature confidentielles et surtout dont les autres investisseurs sur le marché ne disposent pas. \\
-%
-%Quand les transactions sur les actions d'une entreprise sont faites par les employés de l'entreprise et ne sont faites qu'avec les informations sur l'entreprise qui sont accessibles à tout public, il s'agit du délit d'initié légal (legal insider trading). Autrement dit, le délit d'initié n'est légal qu'au moment où toute sorte de transactions est faite sans que les investisseurs ou les agents aient bénéficié des informations non publiques, et il sera considéré illégal le moment où les transactions sont manipulées pour générer des profits ou éviter des pertes en utilisant des informations dont ne disposent pas les autres investisseurs, ce qui pourrait potentiellement être une menace pour le marché financier. \\
-%
-%Dans une transaction illégale, un initié dans une entreprise achète l'action et partage les informations sur le prix de cette action-là avec un certain nombre d'investisseurs qui l'achèteront et passeront le mot au public, ce qui créera une grande demande artificielle pour cette action en particulier et une croissance remarquable du prix. Une fois que le prix atteint un "niveau de satisfaction", l'initié quitte le marché avec ses investisseurs en vendant l'actions et faisant des profits. Le prix de cette action baissera, à cause de la vente venant d'un nombre considérable d'investisseurs, et ceci entraînera une grande perte pour les autres investisseurs dans le marché. Cet impact est considéré aussi négatif pour les petits investisseurs que pour les marchés. Le délit d'initié supprime la justice et la stabilité de demandes et d'offres et les investisseurs commenceront à ne plus faire confiance aux marchés et retirer leurs capitaux et à la fin, il y aura un grand vide dans le flux global de l'économie.\\
-%
-%L'un des plus grands exemples du délit d'initié et comment ceci a influencé le marché financier est l'affaire de SAC Capital. Le trader américain Mathew Martoma était, à la fin des années 2000, au coeur de "la plus lucrative affaire de délit d'initié de toute l'histoire", d'après le procureur de Manhattan preet Bharara. La justice, à travers lui s'attelait à faire tomber son patron, le multimilliardaire Steve Cohen, à la tête de SAC Captial qui a empoché en 2008, 276 millions de dollars (soit 202 millions d'euros) grâce à l'obtention d'informations non publiques sur un médicament. Mathew Martoma, ayant été informé par un médecin qu'un médicament anti-Alzheimer développé par deux sociétés, Elan et Wyeth, n'allait pas recevoir l'aval de l'Agence américaine des produits alimentaires et médicamenteux (The Food and Drug Administration, FDA), a vendu toutes les parts de ces deux compagnies que SAC Capital possédaient, évitant ainsi une importante perte et réalisant un profit conséquent. Mathew Martoma a été condamné en 2014 à 9 ans de prison et le fonds SAC Capital n'est pas sorti indemne de cette enquête. En 2013, il a versé 1,2 millard de dollars d'amende à la justice américaine, ainsi que 600 millions à la Securities and Exchange Commission et en 2014, il a été obligé de plaider coupable pour "délits d'initiés" et a été contraint par les autorités de renoncer à gérer les investissements de clients extérieurs.\\
-%
-%Pour éviter ce type de catastrophe, de nombreuses mesures ont été mises en place. En France, l'AMF (Autorité des Marchés financiers) est chargée de surveiller les opérations boursières. Depuis une dizaine d'années, ces autorités de surveillance ont fait beaucoup de progrès dans la détection de comportement initié grâce notamment à de meilleures techniques de surveillance. \\
-
-
-% -> A mettre dans la partie "bibliographie".
-%Notre projet est basé sur l'études des 4 principaux articles : \\
-%
-%\begin{itemize}
-%\item A. Grorud, M. Pontier, Insider trading in a continuous time market model, International Journal of Theoretical and Applied Finance, Vol. 1, No. 3, p. 331-347, 1998.
-%\item A. Grorud, M. Pontier, Comment détecter le délit d'initiés ?, C. R. Acad. Sci. Paris, t. 324, Série 1, Probabilités/Probability, p. 1137-1142, 1997.
-%\item H. Föllmer, P. Imkeller, Anticipation cancelled by b Girsanov transformation: a paradox on Wiener space, Ann. Inst. H. Poincaré Probabilités et Statististiques, Vol. 29, No. 4, p. 569-586, 1993.
-%\item C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, Université Paul Sabatier, UFR MIG, Laboratoire de Statistique et Probabilités, 118 route de Narbonne, 31062 Toulouse cedex 4, France.
-%\item L. Denis, A. Grorud, M. Pontier, Formes de Dirichlet sur un espace de Wiener-Poisson. Application au grossissement de filtration, Séminaire de probabilités (Strasbourg), tome 34, p. 198-217, 2000.
-%\end{itemize}
-%
-
-
+\subfile{sections/introduction}
 
 
 \pagebreak
-\section{Modèles de marché}
-Pour notre projet, nous avons étudié deux types de modèles de marché différents. Le premier est le marché financier dont les prix sont dirigés par un mouvement brownien et le deuxième est celui dont les prix sont dirigés par un mouvement brownien et un processus ponctuel ou le processus de Poisson (les prix avec sauts).
-
-\subsection{Les prix sans sauts}
-Nous considérons un modèle de marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$, dont les prix des actions (ici $d$ actions) évoluent selon l'équation différentielle stochastique : 
-\begin{equation}
-\displaystyle S_t^i = S_0^i + \int_{0}^{t} S_s^i b_s^i ds +  \int_{0}^{t} S_s^i \sigma_s^i dW_s, 0\leq t \leq T, i = 1,...,d
-\end{equation}
-où : \\
-
-\begin{itemize}
-\item $W$ est un mouvement brownien de dimension $d$ sur $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$ et $\mathcal{F}$ est la filtration naturelle qu'il engendre,
-\item Les paramètres $b, \sigma$ et $r$ sont dans $\mathbb{R}^d, \mathbb{R}^{d\times d}, \mathbb{R}$ respectivement et sont supposés bornés sur $[0,T]$ et $\mathcal{F}$-adaptés.
-\item La matrice $\sigma_t$ est inversible,
-\item $S^0$ évolue selon l'équation $dS^0_t = S^0_t r_t dt$.
-\end{itemize}
-\
-
-L'information $\mathcal{F}_t$ est celle au temps $t$ que connaissent tous les investisseurs sur le marché. Pour l'initié, nous supposons qu'il a, dès le début de son investissement à $t=0$, des informations sur le futur (dont les autres ne disposent pas), une variable aléatoire $L \in L^1(\Omega, \mathcal{F}_T)$ sur l'espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$. Dans le cas que nous avons étudié, $L = lnS^1_T - lnS^2_T$, le rapport au temps $T$ des deux actifs de prix $S^1$ et $S^2$. Notons alors $\mathcal{Y}$ la filtration "naturelle" de l'initié obtenue par grossissement initial de $\mathcal{F}$, lui adjoignant la variable aléatoire $L : \mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$.\\
-
-Pour ce modèle de marché, nous commencerons par la méthode de grossissement de filtration pour construire un nouveau mouvement brownien (que l'on appellera $B$) sur le nouvel espace de probabilité filtré $(\Omega, \mathcal{Y}, \mathbb{P})$. Ensuite avec le nouveau mouvement brownien, nous effectuons un changement de probabilité pour nous ramener à une mesure neutre au risque (que l'on appellera $Q$). Sur ce nouvel espace de probabilité neutre au risque, nous combinons ensemble l'hypothèse d'autofinancement, la stratégie de consommation-placement $\mathcal{Y}$-admissible et une proposition qui nous donne une contrainte qui est une fonction de la richesse d'investisseur, nous pourrons comprendre et résoudre le problème d'optimisation de l'initié (car avec l'information $\mathcal{Y}_t$ l'initié cherche à optimiser sa stratégie de consommation et de placement sur le marché financier) et finalement mettre en place un test statistique à partir des solutions optimales du problème d'optimisation pour voir si un investisseur est un initié ou un non-initié. \\
-
-À l'instant $t=0$, l'initié dispose d'un capital $X_0$. Il consomme à une vitesse $c$, un processus positif $\mathcal{Y}$-adapté, vérifiant $\int_{0}^{T} c_s ds < \infty$, et place sur l'actif $i$ la quantité $\theta^i$. Notons $\pi_t^i = \theta^i_t S_t^i$ la somme investie sur la $i$-ième action pour $i =1, ..., d$. Sa richesse au temps $t$ s'exprime donc par : 
-\begin{center}
-$X_t = \displaystyle \sum_{i=0}^{d} \theta^i_t S_t^i - \int_{0}^{t} c_s ds$
-\end{center}
+\section{ModÃ¨le diffusif}
+%\subfile{sections/section_1}
+\subsection{Ã‰volution des prix et de la richesse}
+\subfile{sections/section_1_1}
+\subsection{Grossissement de filtration}
+\subsection{StratÃ©gies optimales}
+\subsection{Cas particulier : }
 
 
-Nous introduisons nos deux premières hypothèses. La première donne l'existence à la variable $\eta_t = \sigma_t^{-1}(b_t - r_t \textbf{1})$ : 
-\begin{center}
-\textbf{H1} : La matrice $\sigma$ est inversible, $dt \otimes d\mathbb{P}$-presque sûrement, \\
-$\eta_t$ vérifie $\exists C, \exists k > 0, \forall s \in [0, A], A < T, \mathbb{E}[\text{exp}k||\eta_s||^2] \leq C$.\\
-\end{center}
-
-et la deuxième est l'hypothèse d'autofinancement :
-\begin{center}
-\textbf{H2} : $dX_t = \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt$
-\end{center}
-
-D'après \textbf{H2},
-Avec ces deux hypothèses, en notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, en utilisation la formule d'Itô, 
-\mathleft
-\begin{flalign*}
-dX_t &= \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt \\
-& = \displaystyle \sum_{i=1}^{d} \theta^i_t dS_t^i + \theta^0_t dS_t^0 - c_t dt, \text{ avec } dS_t^0 = S^0_t r_t dt \\
-& = \displaystyle \sum_{i=1}^{d} \theta^i_t \big(S^i_t b^i_t dt +  S^i_t \sigma^i_t dW_t \big) + \theta^0_t S^0_t r_t dt - c_t dt\\
-& = \displaystyle \sum_{i=1}^{d} \pi^i_t S^i_t b^i_t dt +  \sum_{i=1}^{d} \pi^i_tS^i_t \sigma^i_t dW_t + (X_t - \sum_{i=1}^{d} \pi^i_t)r_t dt - c_t dt\\
-& = (X_t r_t - c_t)dt +  \sum_{i=1}^{d}\pi^i_t(b^i_t - r_t)dt + \sum_{i=1}^{d} \pi^i_tS^i_t \sigma^i_t dW_t \\
-&= (X_t r_t - c_t)dt + (\pi_t, b_t - r_t\textbf{1})dt + (\pi_t, \sigma_t dW_t) \\
-\end{flalign*}
-
-En notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, et en appliquant la forume d'Itô,
-\begin{flalign*}
-d(R_t) &= \displaystyle -\frac{dS^0_t}{(S^0_t)^2} + \frac{1}{2(S_t^0)^3} d<S^0>_t\\
-& = \displaystyle -\frac{r_t}{S^0_t}dt = -r_t R_t dt
-\end{flalign*}
-
-La formule d'Itô nous donne pour la fonction $f(x,r) = xr$ nous donne:
-\begin{flalign*}
-d(X_t R_t) &= X_t dR_t + R_t dX_t + d<X, R>_t \\
-&= -X_t r_t R_t dt + R_t (X_t r_t - c_t)dt + R_t(\pi_t, b_t - r_t\textbf{1})dt + R_t (\pi_t, \sigma_t dW_t)\\
-& = -R_t c_t dt + (R_t \pi_t,  b_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dW_t)
-\end{flalign*}
-Donc la richesse $X$ actualisée vérifie l'équation : 
-
-\begin{equation}
-\displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds + \int_{0}^{t} (R_s \pi_s,  b_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dW_s)
-\end{equation}
-
-\subsection{Les prix avec sauts}
-
-Pour la deuxième partie de notre projet, nous avons étudié un modèle de marché financier qui est différent du premier en raison de la présence d'un processus ponctuel, ou un processus de Poisson qui fait de sorte que les prix comportent des sauts.\\
-
-Nous considérons un marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0, T], \mathbb{P})$ dont les prix des actions sont dirigés par un mouvement brownien et un processus ponctuel et évoluent selon l'équation : 
-
-\begin{equation}
-S_t^i = S_0^i + \displaystyle \int_{0}^{t}S_s^i b_s^i ds + \int_{0}^{t}S_s^i \sum_{j = 1}^{d} d(W^*, N^*)^{*}_j(s), 0 \leq t \leq T, i = 1, ..., d
-\end{equation}
-
-où\\
-
-\begin{itemize} 
-\item $W$ est un mouvement brownien de dimension $m$ sur l'espace de probabilité filtré $(\Omega^W, \mathcal{F}^W_t; t \in [0, T], \mathbb{P}^W)$,
-\item $N$ est un processus de Poisson de dimension $n$ sur l'espace de probabilité filtré $(\Omega^N, \mathcal{F}^N_t; t \in [0, T], \mathbb{P}^N)$,
-\item $d = m+n$ et $X^*$ est le transposé de $X$,
-\item $b$ et $\phi$ sont déterministes et bornés sur $[0, T]$,
-\item $\sigma$ est une matrice déterministe $d \times d$,
-\item $S_0$ évolue selon l'équation $dS^0_t = S^0_t r_t dt$.
-\end{itemize}
-\
-
-Soit $(\Omega, \mathcal{F}_t; t\in [0, T], \mathbb{P}) := (\Omega^W \times \Omega^N, \mathcal{F}^W \otimes \mathcal{F}^N, \mathbb{P}^W \otimes \mathbb{P}^N)$. $W$ et $N$ sont indépendants. \\
-
-Les procédures sont pareilles. L'initié a des informations sur le futur, représentées par la variable $L$, qui ne sont pas accessibles aux autres investisseurs sur le marché et nous notons $\mathcal{Y}$ sa filtration dite naturelle qui est $\mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$. La méthode de grossissement de filtration, le changement de probabilité pour nous ramener à une mesure neutre au risque, et certaines hypothèses (que nous n'expliciterons pas en détaille mais se trouvent dans l'article de \itshape{C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, Université Paul Sabatier, UFR MIG, Laboratoire de Statistique et Probabilités, 118 route de Narbonne, 31062 Toulouse cedex 4, France.}) nous donneront en résultat la richesse et le portefeuille optimal de l'initié.
+\pagebreak
+\section{ModÃ¨le avec sauts}
+\subsection{Raisonnement}
+\subfile{sections/section_2_1}
+\subsection{Cas particulier : }
 
 
-
-
-
-
-
-
+% Bibliography.
+\pagebreak
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{projectbib}
 
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
