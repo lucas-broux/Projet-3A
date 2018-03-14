@@ -1,23 +1,43 @@
-Pour la deuxiÃ¨me partie de notre projet, nous avons Ã©tudiÃ© un modÃ¨le de marchÃ© financier qui est diffÃ©rent du premier en raison de la prÃ©sence d'un processus ponctuel, ou un processus de Poisson qui fait de sorte que les prix comportent des sauts.\\
+\documentclass[11pt,letterpaper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{makeidx}
+\makeatletter
+\newcommand{\mathleft}{\@fleqntrue\@mathmargin0pt}
+\newcommand{\mathcenter}{\@fleqnfalse}
+\makeatother
+\setlength\parindent{0pt}
+\makeindex
+\begin{document}
 
-Nous considÃ©rons un marchÃ© financier sur un espace de probabilitÃ© filtrÃ© $(\Omega, \mathcal{F}_t; t \in [0, T], \mathbb{P})$ dont les prix des actions sont dirigÃ©s par un mouvement brownien et un processus ponctuel et Ã©voluent selon l'Ã©quation : 
+Pour la deuxième partie de notre projet, nous avons étudié un modèle de marché financier qui est différent du premier en raison de la présence d'un processus ponctuel, ou un processus de Poisson qui fait de sorte que les prix comportent des sauts.\\
+
+Nous considérons un marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0, T], \mathbb{P})$ dont les prix des actions sont dirigés par un mouvement brownien et un processus ponctuel et évoluent selon l'équation : 
 
 \begin{equation}
 S_t^i = S_0^i + \displaystyle \int_{0}^{t}S_s^i b_s^i ds + \int_{0}^{t}S_s^i \sum_{j = 1}^{d} d(W^*, N^*)^{*}_j(s), 0 \leq t \leq T, i = 1, ..., d
 \end{equation}
 
-oÃ¹\\
+où\\
 
 \begin{itemize} 
-\item $W$ est un mouvement brownien de dimension $m$ sur l'espace de probabilitÃ© filtrÃ© $(\Omega^W, \mathcal{F}^W_t; t \in [0, T], \mathbb{P}^W)$,
-\item $N$ est un processus de Poisson de dimension $n$ sur l'espace de probabilitÃ© filtrÃ© $(\Omega^N, \mathcal{F}^N_t; t \in [0, T], \mathbb{P}^N)$,
-\item $d = m+n$ et $X^*$ est le transposÃ© de $X$,
-\item $b$ et $\phi$ sont dÃ©terministes et bornÃ©s sur $[0, T]$,
-\item $\sigma$ est une matrice dÃ©terministe $d \times d$,
-\item $S_0$ Ã©volue selon l'Ã©quation $dS^0_t = S^0_t r_t dt$.
+\item $W$ est un mouvement brownien de dimension $m$ sur l'espace de probabilité filtré $(\Omega^W, \mathcal{F}^W_t; t \in [0, T], \mathbb{P}^W)$,
+\item $N$ est un processus de Poisson de dimension $n$ sur l'espace de probabilité filtré $(\Omega^N, \mathcal{F}^N_t; t \in [0, T], \mathbb{P}^N)$,
+\item $d = m+n$ et $X^*$ est le transposé de $X$,
+\item $b$ et $\phi$ sont déterministes et bornés sur $[0, T]$,
+\item $\sigma$ est une matrice déterministe $d \times d$,
+\item $S_0$ évolue selon l'équation $dS^0_t = S^0_t r_t dt$.
 \end{itemize}
 \
 
-Soit $(\Omega, \mathcal{F}_t; t\in [0, T], \mathbb{P}) := (\Omega^W \times \Omega^N, \mathcal{F}^W \otimes \mathcal{F}^N, \mathbb{P}^W \otimes \mathbb{P}^N)$. $W$ et $N$ sont indÃ©pendants. \\
+Soit $(\Omega, \mathcal{F}_t; t\in [0, T], \mathbb{P}) := (\Omega^W \times \Omega^N, \mathcal{F}^W \otimes \mathcal{F}^N, \mathbb{P}^W \otimes \mathbb{P}^N)$. $W$ et $N$ sont indépendants. \\
 
-Les procÃ©dures sont pareilles. L'initiÃ© a des informations sur le futur, reprÃ©sentÃ©es par la variable $L$, qui ne sont pas accessibles aux autres investisseurs sur le marchÃ© et nous notons $\mathcal{Y}$ sa filtration dite naturelle qui est $\mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$. La mÃ©thode de grossissement de filtration, le changement de probabilitÃ© pour nous ramener Ã  une mesure neutre au risque, et certaines hypothÃ©ses (que nous n'expliciterons pas en dÃ©taille mais se trouvent dans l'article de \itshape{C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, UniversitÃ© Paul Sabatier, UFR MIG, Laboratoire de Statistique et ProbabilitÃ©s, 118 route de Narbonne, 31062 Toulouse cedex 4, France.}) nous donneront en rÃ©sultat la richesse et le portefeuille optimal de l'initiÃ©.
+Les procédures sont pareilles. L'initié a des informations sur le futur, représentées par la variable $L$, qui ne sont pas accessibles aux autres investisseurs sur le marché et nous notons $\mathcal{Y}$ sa filtration dite naturelle qui est $\mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$. La méthode de grossissement de filtration, le changement de probabilité pour nous ramener à une mesure neutre au risque, et certaines hypothéses (que nous n'expliciterons pas en détaille mais se trouvent dans l'article de \itshape{C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, Université Paul Sabatier, UFR MIG, Laboratoire de Statistique et Probabilités, 118 route de Narbonne, 31062 Toulouse cedex 4, France.}) nous donneront en résultat la richesse et le portefeuille optimal de l'initié.
+\end{document}
