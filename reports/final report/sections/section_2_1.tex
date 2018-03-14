@@ -22,7 +22,7 @@ Pour la deuxième partie de notre projet, nous avons étudié un modèle de marché f
 Nous considérons un marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0, T], \mathbb{P})$ dont les prix des actions sont dirigés par un mouvement brownien et un processus ponctuel et évoluent selon l'équation : 
 
 \begin{equation}
-S_t^i = S_0^i + \displaystyle \int_{0}^{t}S_s^i b_s^i ds + \int_{0}^{t}S_s^i \sum_{j = 1}^{d} d(W^*, N^*)^{*}_j(s), 0 \leq t \leq T, i = 1, ..., d
+S_t^i = S_0^i + \displaystyle \int_{0}^{t}S_s^i b_s^i ds + \int_{0}^{t}S_s^i \sigma^{ij}_t \sum_{j = 1}^{d} d(W^*, N^*)^{*}_j(s), 0 \leq t \leq T, i = 1, ..., d
 \end{equation}
 
 où\\

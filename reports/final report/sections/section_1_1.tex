@@ -14,7 +14,7 @@ où :
 \begin{itemize}
 \item $W$ est un mouvement brownien de dimension $d$ sur $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$ et $\mathcal{F}$ est la filtration naturelle qu'il engendre,
 \item Les paramètres $b, \sigma$ et $r$ sont dans $\mathbb{R}^d, \mathbb{R}^{d\times d}, \mathbb{R}$ respectivement et sont supposés bornés sur $[0,T]$ et $\mathcal{F}$-adaptés.
-\item La matrice $\sigma_t$ est inversible $dt \otimes d\mathbb{P}$-presque sûrement.
+\item La matrice $\sigma_t$ est inversible $dt \otimes d\mathbb{P}$-presque sûrement. On note $\eta_t = \sigma_t^{-1} \left( b_t - r_t \mathds{1} \right)$ 
 \end{itemize}
 \
 
@@ -30,7 +30,7 @@ $X_t = \displaystyle \sum_{i=0}^{d} \theta^i_t S_t^i - \int_{0}^{t} c_s ds$
 
 \par Exploitons cette première équation en introduisant l'hypothèse naturelle d'autofinancement :
 \begin{center}
-\textbf{H2} : $dX_t = \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt$
+$dX_t = \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt$
 \end{center}
 
 \par Notons $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, alors la formule d'Itô donne 
@@ -62,29 +62,5 @@ Ainsi, la richesse $X$ actualisée vérifie l'équation :
 \displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds + \int_{0}^{t} (R_s \pi_s,  b_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dW_s)
 \end{equation}
 \
-
-\par Étudions désormais la stratégie de l'initié. Nous supposons que celui-ci optimise sa stratégie au sens suivant : il optimise la fonction de perte :
-\begin{align*}
-      J \colon &\mathcal{A} \to \mathbb{R} \\
-       &\left( \pi, c \right) \xmapsto{\phantom{\mathcal{A}}} J \left( X_0, \pi, c \right) = \mathbb{E} \left[ \int_0^A U_1 \left( c_t \right) dt + U_2 \left( X_A^{\pi, c} \right) \left\vert\right. \mathcal{Y}_0 \right]
-\end{align*}
-
-où : 
-\begin{itemize}
-\item $\mathcal{A}$ est l'ensemble des stratégies \emph{admissibles} i.e. des stratégies $\left( \pi, c \right)$ telles que $\pi$ est $\mathcal{Y}$-prévisible, $c$ est $\mathcal{Y}$-adapté, $c >0, \int_0^T c_s ds < + \infty$ et $\sigma^* \pi \in L^2 \left[ 0; T \right] \enskip \mathbb{P}$-p.s., et telle que la richesse engendrée par cette stratégie satisfasse $X^{\pi, c} \geq 0 \enskip dt \otimes d \mathbb{P}$-p.s.
-\item $U_1$ et $U_2$ sont des \emph{fonctions d'utilité} i.e. positives, croissantes, concaves, $\mathcal{C}^1$ avec \\ $\lim_{x \to +\infty} U_i^{'} \left( x \right) = 0$. Par la suite, nous supposerons $U_1 = U_2 = \log$.
-\item $A$ est un temps strictement inférieur à T, qui correspondra au \emph{temps final} de notre analyse. En effet, des phénomènes d'explosion en temps fini lorsque $A \to 1$, décrits avec précision dans \cite{art3}, nous empêchent d'étudier l'évolution de l'initié sur $\left[ 0; T \right]$ tout entier. 
-\end{itemize}
-\
-
-\par L'interprétation est la suivante : l'initié choisit, parmi toutes les stratégies admissibles, celle qui optimise en moyenne son utilité (fonction de sa consommation et de sa richesse finale) sachant les informations connues sur le marché en $t = 0$ ainsi que l'information supplémentaire $L$.\\
-
-\par La difficulté ici est de caractériser $\mathcal{A}$. En effet, $W$ est un mouvement brownien sur $\left(\Omega, \mathcal{F}, \mathbb{P} \right) $ mais pas sur $\left(\Omega, \mathcal{Y}, \mathbb{P} \right)$, ce qui nous empêche de faire un simple changement de probabilité comme dans les cas usuels pour nous ramener à la probabilité risque-neutre. Le raisonnement est adapté suivant les étapes suivantes :
-
-\begin{enumerate}
-\item \textit{Changement de probabilité} : nous construisons une probabilité $\mathbb{Q}$ pour laquelle $W$ est un $\left(\Omega, \mathcal{Y}, \mathbb{Q} \right)$-mouvement brownien
-\item \textit{Grossissement de filtration} : nous construisons un nouveau mouvement brownien $B$ sur l'espace de probabilité filtré  $(\Omega, \mathcal{Y}, \mathbb{P})$.
-\item \textit{Changement de probabilité} : nous construisons un mouvement brownien $\tilde{B}$ sur $\left(\Omega, \mathcal{Y}, \mathbb{Q}_1 \right)$, avec $\mathbb{Q}_1$ probabilité risque-neutre sur $\mathcal{Y}$.
-\end{enumerate}
 
 \end{document}

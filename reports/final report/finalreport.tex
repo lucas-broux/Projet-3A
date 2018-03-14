@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{amsfonts}
+\usepackage{dsfont}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{amsthm}
@@ -23,6 +24,8 @@
 % Import subfiles package. 
 \usepackage{subfiles}
 
+% Define new theorem style.
+\newtheorem{prop}{Proposition}[section]
 
 \title{Rapport Intermédiaire}
 
@@ -48,20 +51,20 @@
 \pagebreak
 \section{Modèle diffusif}
 %\subfile{sections/section_1}
-\subsection{Évolution des prix et de la richesse}
+\subsection{Description du modèle, évolution des prix et de la richesse}
 \subfile{sections/section_1_1}
-\subsection{Grossissement de filtration}
+\subsection{Raisonnement}
 \subfile{sections/section_1_2}
-\subsection{Stratégies optimales}
+\subsection{Calcul des stratégies optimales}
 \subfile{sections/section_1_3}
-\subsection{Cas particulier : }
+\subsection{Cas particuliers}
 
 
 \pagebreak
 \section{Modèle avec sauts}
 \subsection{Raisonnement}
 \subfile{sections/section_2_1}
-\subsection{Cas particulier : }
+\subsection{Cas particuliers}
 
 
 % Bibliography.

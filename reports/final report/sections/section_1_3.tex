@@ -1,15 +1,32 @@
 \documentclass[../finalreport.tex]{subfiles}
 
 \begin{document}
+\par Revenons au problème d'optimisation, notre objectif étant de caractériser l'ensemble des stratégies admissibles.
 
-L'étape suivante consiste à employer le Théorème de Girsanov pour faire un changement de probabilité afin de nous ramener à une mesure neutre au risque. La forme du processus $l$ pose un problème pour ce changement de probabilité car il ne nous permet de faire le changement que sur l'intervalle $[0, A], A <T$ et pas sur $[0, T]$. Au delà de $[0, A]$, il n'est pas sûr que la martingale locale de changement de probabilité soit une vraie martingale jusqu'en $T$ et le processus explose aussi. Dans le sens économique, les informations dont ne dispose que l'initié sont celles qu'il a obtenues dès le début de son investissement, il n'y a pas d'interêt de voir en $T$ si il est initié ou pas car à la fin nous aurions pu voir déjà. \\
+\par Nous pouvons montrer que 
+\begin{displaymath}
+\mathcal{A} = \left\lbrace \left( \pi, c \right), \mathbb{E}_{\mathbb{Q}_1} \left[ X_A^{\pi, c} R_A + \int_0^A R_t c_t dt \left\vert\right. \mathcal{Y}_0 \right] \leq X_0 \right\rbrace
+\end{displaymath}
 
-Pour résoudre ce problème, nous introduisons un nouveau processus $\xi_t = -l_t - \eta_t$ et son existence est rassuré par hypothèse. \\
+\par Cette contrainte traduit le fait que l'initié n'investit et ne dépense que l'argent qu'il n'a déjà : à chaque instant, il ne peut pas avoir mis en jeu depuis le début plus d'argent qu'il n'en avait à l'instant $t = 0$.
+\\
 
-\textbf{Proposition} : Posons $M_t = exp( \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d), t \in [0,A] , A<T$. Alors $M$ est une $(\mathcal{Y}, \mathbb{P})$-martingale uniformément intégrable et, sous $\mathbb{Q} = M.\mathbb{P}$, le processus
-\begin{center}
- $\tilde{B}_t = B_t - \displaystyle \int_{0}^{t}\xi_s ds$
- \end{center}
- est un $(\mathcal{Y}, \mathbb{Q})$-mouvement brownien et les prix actualisés sont des $(\mathcal{Y}, \mathbb{Q})$-martingales locales.
- 
+\par Le problème d'optimisation se résout dans le cas général. Ici, nous avons supposé $U_1 = U_2 = \log$, et alors la stratégie optimale pour les agents est :
+\begin{displaymath}
+\begin{cases}
+R_A c_t^* &= \frac{X_0}{A + 1} \frac{1}{Y} \left( t \right) \\
+R_A X_A^* &= \frac{X_0 \left( A + 1 - t \right)}{A + 1} \frac{1}{Y} \left( t \right)
+\end{cases}
+\end{displaymath}
+
+\par où : 
+\begin{displaymath}
+Y \left( t \right) = 
+\begin{cases}
+e^{- \int_{0}^{t} \left( \eta_s, dW_{s} \right)-\frac{1}{2} \int_{0}^{t} {\| \eta_s \|}^{2} ds} & \text{pour le non initié} \\
+e^{- \int_{0}^{t} \left( l_{s} + \eta_s, dB_{s} \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta_s \|}^{2} ds} & \text{pour l'initié}
+\end{cases}
+\end{displaymath}
+
+
 \end{document}
