@@ -17,6 +17,7 @@
 \makeindex
 \begin{document}
 
+\subsection{Description du modèle, évolution des prix et de la richesse}
 Pour la deuxième partie de notre projet, nous avons étudié un modèle de marché financier qui est différent du premier en raison de la présence d'un processus ponctuel, ou un processus de Poisson qui fait de sorte que les prix comportent des sauts.\\
 
 Nous considérons un marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0, T], \mathbb{P})$ dont les prix des actions sont dirigés par un mouvement brownien et un processus ponctuel et évoluent selon l'équation : 
@@ -100,6 +101,7 @@ X_t R_t + \int_{0}^{t} R_s c_s ds &= X_0 + \int_{0}^{t} R_s\pi^*(b_s - r_s I_d)d
 \
 où $I_{1, m} = ( \underbrace{1,...,1}_{m}, \underbrace{0,...,0}_n)^*, I_{2, n} = (\underbrace{0,...,0}_m, \underbrace{1,...,1}_{n})^*$\\
 
+\subsection{Raisonnement}
 Comme dans la première partie, l'initié cherche à optimiser sa stratégie de manière suivante : 
 \begin{flalign*}
 J : &\mathcal{A} \rightarrow \mathbb{R}\\
@@ -115,7 +117,11 @@ Les problèmes auxquels nous faisons face ici viennent toujours du fait que sur l
 \end{itemize}
 \
 
-\textbf{Proposition :} Il existe une mesure de probabilité $\mathbb{Q}$ qui est équivalente à $\mathbb{P}$ sur $\mathcal{F}_T$ et sous cette probabilité, $\mathcal{F}_t$ et $\sigma(L)$ sont indépendants $\forall t \in [0, T[$. Introduisons la densité : 
+\subsubsection{Changement de probabilité}
+\textbf{Proposition 3.1.} \textit{Il existe une mesure de probabilité $\mathbb{Q}$ qui est équivalente à $\mathbb{P}$ sur $\mathcal{F}_T$ et sous cette probabilité, $\mathcal{F}_t$ et $\sigma(L)$ sont indépendants $\forall t \in [0, T[$}.\\
+
+\subsubsection{Grossissement de filtration}
+Introduisons la densité : 
 \mathcenter
 \begin{equation*}
 \displaystyle Z_t : = \mathbb{E}_{\mathbb{Q}}\Big[\frac{d\mathbb{P}}{d\mathbb{Q}}|Y_t\Big]
@@ -126,14 +132,15 @@ qui satisfait l'équation $\displaystyle dZ_t = Z_t\Big(\rho^*_1 (t) dW_t + (\rho
 En corollaire, les processus \\
 
 \begin{itemize}
-\item $\displaystyle \widetilde{W}_t := W_t - \rho_1(s) ds$\
+\item $\displaystyle \widetilde{W}_t := W_t - \int_{0}^{t}\ \rho_1(s) ds$\
 \item $\displaystyle \widetilde{M}_t := N_t - \int_{0}^{t}\kappa.\rho_2 (s) ds$
 \end{itemize}
 \ 
 
 sont un mouvement brownien et un processus de Poisson de l'intensité $(\kappa.\rho_2)$ respectivement sur $(\Omega, \mathcal{Y}, \mathbb{P})$.\\
 
-Notons ensuite
+\subsubsection{Probabilité risque-neutre}
+Notons
 \begin{equation*}
 Y_t := \varepsilon \Big(\displaystyle \int_{0}^{t} \big(-(\Theta + \rho_1(s))^* d\widetilde{W}_s + (\frac{q}{\rho_2(s)} - I_n )^* d\widetilde{M}_s\big)\Big), 
 \end{equation*}
@@ -143,6 +150,7 @@ Alors $Y$ est une $(\mathcal{Y}_T, \mathbb{P})$-martingale locale positive, et $
 
 Par calculs, nous avons $\displaystyle d(Y^{-1}_t) = Y^{-1}_t l^*_t d\widehat{S}_t$, avec $\displaystyle l^*_t := \big((\Theta + \rho_1)^*, (\frac{\rho_2}{q} - I_n)^*\big)$.\\
 
+\subsection{Calcul des stratégies optimales}
 Le problème d'optimisation $ \mathbb{E}_{\mathbb{P}} \Big[ \displaystyle \int_{0}^{A} U_1(c_t)dt + U_2(X_A^{\pi, c})\Big|\mathcal{Y}_0\Big]$ sur toutes les $\mathcal{Y}$-stratégies admissibles que nous cherchons depuis le début ont pour solutions : \\
  
 $A<T, \forall t \in [0, A], \quad \begin{cases}
