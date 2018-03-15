@@ -1,0 +1,95 @@
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+
+\par Étudions désormais la stratégie de l'initié. Nous supposons que celui-ci optimise sa stratégie au sens suivant : il optimise la fonction de perte :
+\begin{align*}
+      J \colon &\mathcal{A} \to \mathbb{R} \\
+       &\left( \pi, c \right) \xmapsto{\phantom{\mathcal{A}}} J \left( X_0, \pi, c \right) = \mathbb{E} \left[ \int_0^A U_1 \left( c_t \right) dt + U_2 \left( X_A^{\pi, c} \right) \left\vert\right. \mathcal{Y}_0 \right]
+\end{align*}
+
+où : 
+\begin{itemize}
+\item $\mathcal{A}$ est l'ensemble des stratégies \emph{admissibles} i.e. des stratégies $\left( \pi, c \right)$ telles que $\pi$ est $\mathcal{Y}$-prévisible, $c$ est $\mathcal{Y}$-adapté, $c >0, \int_0^T c_s ds < + \infty$ et $\sigma^* \pi \in L^2 \left[ 0; T \right] \enskip \mathbb{P}$-p.s., et telle que la richesse engendrée par cette stratégie satisfasse $X^{\pi, c} \geq 0 \enskip dt \otimes d \mathbb{P}$-p.s.
+\item $U_1$ et $U_2$ sont des \emph{fonctions d'utilité} i.e. positives, croissantes, concaves, $\mathcal{C}^1$ avec \\ $\lim_{x \to +\infty} U_i^{'} \left( x \right) = 0$. Par la suite, nous supposerons $U_1 = U_2 = \log$.
+\item $A$ est un temps strictement inférieur à T, qui correspondra au \emph{temps final} de notre analyse. En effet, des phénomènes d'explosion en temps fini lorsque $A \to 1$, décrits avec précision dans \cite{art3}, nous empêchent d'étudier l'évolution de l'initié sur $\left[ 0; T \right]$ tout entier. D'un point de vue économique, ces phénomènes traduisent le fait que plus le temps $t$ se rapproche de $T$, moins l'information obtenue par l'initié est pertinente.
+\end{itemize}
+\
+
+\par L'interprétation est la suivante : l'initié choisit, parmi toutes les stratégies admissibles, celle qui optimise en moyenne son utilité (fonction de sa consommation et de sa richesse finale) sachant les informations connues sur le marché en $t = 0$ ainsi que l'information supplémentaire $L$.\\
+
+\par La difficulté ici est de caractériser $\mathcal{A}$. En effet, $W$ est un mouvement brownien sur $\left(\Omega, \mathcal{F}, \mathbb{P} \right) $ mais pas sur $\left(\Omega, \mathcal{Y}, \mathbb{P} \right)$, ce qui nous empêche de faire un simple changement de probabilité comme dans les cas usuels pour nous ramener à la probabilité risque-neutre. Le raisonnement est adapté suivant les étapes suivantes :
+
+\begin{enumerate}
+\item \textit{Changement de probabilité} : nous construisons une probabilité $\mathbb{Q}$ pour laquelle $W$ est un $\left(\Omega, \mathcal{Y}, \mathbb{Q} \right)$-mouvement brownien.
+\item \textit{Grossissement de filtration} : nous construisons un nouveau mouvement brownien $B$ sur l'espace de probabilité filtré  $(\Omega, \mathcal{Y}, \mathbb{P})$.
+\item \textit{Changement de probabilité} : nous construisons un mouvement brownien $\tilde{B}$ sur $\left(\Omega, \mathcal{Y}, \mathbb{Q}_1 \right)$, avec $\mathbb{Q}_1$ probabilité risque-neutre sur $\mathcal{Y}$.
+\end{enumerate}
+
+\par Dans les trois sous-sections suivantes, nous présentons les résultats correspondant à ces étapes, mais nous en omettons volontairement les hypothèses et les preuves, très techniques, disponibles dans \cite{art2}
+
+
+\subsubsection{Étape 1 : Changement de probabilité}
+\begin{prop}[T.Jeulin]
+\par Sous hypothèses (techniques mais raisonnables), il existe une mesure de probabilité $\mathbb{Q}$ équivalente à $\mathbb{P}$ sur $\mathcal{Y}_A$, telle que pour $t \leq A$, $\mathcal{T}_t$ et $\sigma \left( L \right)$ sont $\mathbb{Q}$-indépendantes.
+\par En outre, $\left( W_t, t \leq A \right)$ est un $\left(\Omega, \mathcal{Y}, \mathbb{Q} \right)$-mouvement brownien.
+\end{prop}
+
+
+\subsubsection{Étape 2 : Grossissement de filtration}
+\begin{prop}
+\par Sous hypothèses (techniques mais raisonnables), la loi conditionnelle de $L$ sachant $\mathcal{F}_t$ est absolument continue et :
+\begin{itemize}
+\item il existe une version mesurable de la densité conditionnelle $(\omega, t, x) \mapsto p(\omega, t, x)$ qui est une $\mathcal{F}$-martingale et se représente par $ p(\omega, t, x) = p(0, x) + \int_{0}^{t}\alpha(\omega, s, x) dW_s$\
+\item si $M$ est une $\mathcal{F}$-martingale locale continue égale à $ M_0 + \int_{0}^{t} \beta_s dW_s$, alors le crochet $d<M,P>_t$ est égal à $d<\alpha, \beta>_t dt$ et le processus $\tilde{M}_t = M_t + \int_{0}^{t}\frac{<\alpha(.,x),\beta>_u |_{x=L}}{p(u, L)} du$ est une $\mathcal{Y}$-martingale locale continue.
+\end{itemize}
+\
+
+\par En corollaire, le processus vectoriel $\left(B_t = W_t - \displaystyle \int_{0}^{t} \underbrace{\frac{\alpha(u, L)}{p(u, L)} }_{=:l_u}du, t \in [0, T[ \right)$ est un mouvement brownien sur l'espace de probabilité filtré $(\Omega, \mathcal{Y}, \mathbb{P})$, qui est l'espace de probabilité de l'initié. \\
+\end{prop}
+
+\par Reformulons l'équation d'évolution de la richesse de l'initié sur $(\Omega, \mathcal{Y}, \mathbb{P})$ : en remplaçant $dW_t$ par $dB_t + l_t dt$, l'équation (1) des prix des actions sur le marché financier devient 
+\begin{equation}
+S_t^i = S_0^i + \displaystyle \int_{0}^{t} S_s^i (b_s^i + \sigma_s^i l_s^i)ds + \int_{0}^{t} S_s^i \sigma_s^i dB_s, 0 \leq t < T, i = 1,...,d.
+\end{equation}
+Avec cette nouvelle équation, 
+\begin{flalign*}
+dX_t &= \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt \\
+& = \displaystyle \sum_{i=1}^{d} \theta^i_t \big(S^i_t b^i_t dt + S^i_t \sigma_t^i l^i_t dt +  S^i_t \sigma^i_t dB_t \big) + \theta^0_t S^0_t r_t dt - c_t dt\\
+& = \displaystyle \sum_{i=1}^{d} \pi^i_t  (b^i_t + \sigma_t^i l^i_t)dt +  \sum_{i=1}^{d} \pi^i_t \sigma^i_t dB_t + (X_t - \sum_{i=1}^{d} \pi^i_t)r_t dt - c_t dt\\
+& = (X_t r_t - c_t)dt +  \sum_{i=1}^{d}\pi^i_t(b^i_t + \sigma_t^i l^i_t - r_t)dt + \sum_{i=1}^{d} \pi^i_t \sigma^i_t dB_t \\
+&= (X_t r_t - c_t)dt + (\pi_t, b_t + \sigma_t l_t - r_t\textbf{1})dt + (\pi_t, \sigma_t dB_t) \\
+\end{flalign*}
+
+\par D'où :
+
+\begin{flalign*}
+d(X_t R_t) &= X_t dR_t + R_t dX_t + d<X, R>_t \\
+&= -X_t r_t R_t dt + R_t (X_t r_t - c_t)dt + R_t(\pi_t, b_t + \sigma_t l_t - r_t\textbf{1})dt + R_t (\pi_t, \sigma_t dB_t)\\
+& = -R_t c_t dt + (R_t \pi_t,  b_t + \sigma_t l_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dB_t)
+\end{flalign*}
+\
+Ainsi, sur $(\Omega, \mathcal{Y}, \mathbb{P})$, la richesse $X$ actualisée de l'initié vérifie l'équation : 
+\begin{equation}
+\displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds = X_0 \int_{0}^{t} (R_s \pi_s,  b_s + \sigma_s l_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dB_s)
+\end{equation}
+Nous pouvons voir ici que le processus $l_s$ représente les informations dont dispose l'initié. Si $l_s = 0, 0\leq s \leq t \leq T$, nous retrouvons l'équation (2) de richesse du non initié.
+
+
+\subsubsection{Étape 3 : Changement de probabilité}
+
+\par L'idée est désormais de se ramener à une probabilité neutre au risque sur $\mathcal{Y}$. Pour cela, nous réalisons une transformation de type Girsanov.
+Notons que la forme du processus $l$ ne nous permet de faire le changement de probabilité que sur l'intervalle $[0, A]$ et non sur $[0, T]$. Il n'y a aucune raison que la martingale locale de changement de probabilité soit une vraie martingale jusqu'en $T$ d'où une "explosion" des processus évoqués ci-dessus.\\
+
+\par Pour résoudre ce problème, nous introduisons un nouveau processus $\xi_t = -l_t - \eta_t$ (qui existe sous hypothèses).
+
+\begin{prop}\label{proposition_l}
+\par Posons $M_t = e^{ \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d}$ pour $t \in [0,A] , A<T$. Alors $M$ est une $(
+\mathcal{Y}, \mathbb{P})$-martingale uniformément intégrable et, sous $\mathbb{Q}_1 = M.\mathbb{P}$, le processus
+\begin{center}
+ $\tilde{B}_t = B_t - \displaystyle \int_{0}^{t}\xi_s ds$
+ \end{center}
+ est un $(\mathcal{Y}, \mathbb{Q}_1)$-mouvement brownien et les prix actualisés sont des $(\mathcal{Y}, \mathbb{Q}_1)$-martingales locales.
+\end{prop}
+ 
+\end{document}
