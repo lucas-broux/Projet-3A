@@ -75,20 +75,31 @@ class JumpModel:
             self.A = 0.95                       # Time at which to compute wealth.
             self.x = 1                          # Initial wealth of the agent.
             self.n_discr = 500                  # Size of discretization.
-            self.time_steps = np.array([i / (self.n_discr - 1) for i in range(self.n_discr)])
+            self.time_steps = np.array([i * self.T / (self.n_discr - 1) for i in range(self.n_discr)])
 
             # Market parameters input.
-            self.r = 0.02                       # Interest rate of the bond.
+            self.r = 0.1                       # Interest rate of the bond.
             self.m = 2                          # Dimension of the Brownian motion.
-            self.n = 2                          # Dimension of the Poisson process.
+            self.n = 0                          # Dimension of the Poisson process.
             self.d = self.m + self.n            # Total dimension.
-            self.kappa = np.array([3, 2])       # Intensity of the Poisson process.
+            self.kappa = np.array([])       # Intensity of the Poisson process.
+            self.b = np.array([0.1, -0.05])    # Drift of assets.
+            self.sigma = np.array([[0.75, 0],
+                          [0, 1]
+                          ])                    # Volatility of assets.
+            """
+            self.r = 0.02                       # Interest rate of the bond.
+            self.m = 4                          # Dimension of the Brownian motion.
+            self.n = 0                          # Dimension of the Poisson process.
+            self.d = self.m + self.n            # Total dimension.
+            self.kappa = np.array([])       # Intensity of the Poisson process.
             self.b = np.array([0.15, 0.1, 0.084, 0.1])    # Drift of assets.
             self.sigma = np.array([[-0.4, -0.1, -0.15, 0.17],
                           [-0.09, -0.4, -0.03, 0.035],
                           [0.048, -0.12, 0.1, -0.12],
                           [0.075, 0.26, 0.31, -0.28],
                           ])                    # Volatility of assets.
+            """
             """
             self.n = 1                          # Dimension of the Poisson process.
             self.d = self.m + self.n            # Total dimension.
@@ -100,8 +111,8 @@ class JumpModel:
                           ])                    # Volatility of assets.
                           """
             # Insider knowledge input.
-            self.i_1 = 1
-            self.i_2 = 2
+            self.i_1 = 0
+            self.i_2 = 1
 
             # Other.
             self.nb_terms_sum = 1              # Number of terms computed in the sum defining Z.
@@ -222,10 +233,11 @@ class JumpModel:
 
     def _plot_Y_non_insider(self):
         """
-        Plots the evolution of the strategy of the non insider.
+        Plots the evolution of the strategy of the non insider on [0; A].
         """
         plt.figure(1)
-        plt.plot(self.time_steps, 1 / self.y_0, label = r"$\frac{1}{Y_0}$ (non insider)")
+        index_A = int(self.A * (self.n_discr - 1) / self.T)
+        plt.plot(self.time_steps[:index_A], 1 / self.y_0[:index_A], label = r"$\frac{1}{Y_0}$ (non insider)")
         plt.title(r"$\frac{1}{Y_0}$ (non insider)")
         plt.xlabel("Time")
         plt.ylabel(r"$\frac{1}{Y_0}$ (non insider)")
@@ -242,11 +254,28 @@ class JumpModel:
         # Initialize integrator.
         integrator = Integrate()
 
+        # We compute the value of Sigma_t as per the cited paper.
+        sum_t = self.T * (np.linalg.norm(self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) ** 2)
+        riemann_fun = (np.linalg.norm(self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) ** 2) * np.ones(self.n_discr)
+        sum_t = sum_t - integrator.riemann_integrate(fun = riemann_fun, low = 0, upp = self.T, T = self.T, return_all_values = True)
+
         # Z depends on whether there is an underlying jump process or not.
         if self.n == 0:
-            pass # TODO: Implement formulas in the case of purely diffusive market model.
+            # Purely diffusive market model.
+            p = []
+            for i, t in enumerate(self.time_steps):
+                sig = sum_t[i]
+                sig_0 = sum_t[0]
+                ito_fun = (self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) * np.ones((self.n_discr, self.m))
+                I_1 = integrator.integrate(ito_fun, self.W, t, self.T, self.T, return_all_values = False)
+                I_0 = integrator.integrate(ito_fun, self.W, 0, self.T, self.T, return_all_values = False)
+                p.append(np.sqrt(sig_0 / sig) * np.exp(-I_1 ** 2 / (2 * sig) + I_0 ** 2 / (2 * sig_0)) )
+            self.Z = np.array(p)
+
         else:
+            # Jump model.
             # We make the approximation that the first term in the sum over kj is dominant.
+
             # First : we compute m_t as per the cited paper.
             aux_int = self.T * (self.b[self.i_1] - self.b[self.i_2] - 0.5 * (np.linalg.norm(self.sigma[self.i_1][:self.m]) ** 2 - np.linalg.norm(self.sigma[self.i_2][:self.m]) ** 2))
             ito_fun = (self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) * np.ones((self.n_discr, self.m))
@@ -254,11 +283,6 @@ class JumpModel:
             ito_int = integrator.integrate(ito_fun, self.W, 0, self.T, self.T, return_all_values = True)
             jump_int = integrator.integrate(jump_fun, self.N, 0, self.T, self.T, return_all_values = True)
             m_t = aux_int + ito_int + jump_int
-
-            # Second : We compute the value of Sigma_t as per the cited paper.
-            sum_t = self.T * (np.linalg.norm(self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) ** 2)
-            riemann_fun = (np.linalg.norm(self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) ** 2) * np.ones(self.n_discr)
-            sum_t = sum_t - integrator.riemann_integrate(fun = riemann_fun, low = 0, upp = self.T, T = self.T, return_all_values = True)
 
             # Compute the numerator of the formula that computes Z.
             p_num = []
@@ -318,10 +342,11 @@ class JumpModel:
 
     def _plot_Z(self):
         """
-        Plots the evolution of Z.
+        Plots the evolution of Z on [0; A].
         """
         plt.figure(1)
-        plt.plot(self.time_steps, self.Z, label = r"$Z$")
+        index_A = int(self.A * (self.n_discr - 1) / self.T)
+        plt.plot(self.time_steps[:index_A], self.Z[:index_A], label = r"$Z$")
         plt.title(r"$Z$")
         plt.xlabel("Time")
         plt.ylabel(r"$Z$")
@@ -331,10 +356,11 @@ class JumpModel:
 
     def _plot_Y_insider(self):
         """
-        Plots the evolution of the strategy of the insider.
+        Plots the evolution of the strategy of the insider on [0; A].
         """
         plt.figure(1)
-        plt.plot(self.time_steps, 1 / self.y, label = r"$\frac{1}{Y}$ (insider)")
+        index_A = int(self.A * (self.n_discr - 1) / self.T)
+        plt.plot(self.time_steps[:index_A], 1 / self.y[:index_A], label = r"$\frac{1}{Y}$ (insider)")
         plt.title(r"$\frac{1}{Y}$ (insider)")
         plt.xlabel("Time")
         plt.ylabel(r"$\frac{1}{Y}$ (insider)")
@@ -344,11 +370,12 @@ class JumpModel:
 
     def _plot_both_agents(self):
         """
-        Plots the compared evolution of the strategy of both insider and non-insider.
+        Plots the compared evolution of the strategy of both insider and non-insider on [0; A].
         """
         plt.figure(1)
-        plt.plot(self.time_steps, 1 / self.y, label = r"$\frac{1}{Y}$ (insider)")
-        plt.plot(self.time_steps, 1 / self.y_0, label = r"$\frac{1}{Y_0}$ (non insider)")
+        index_A = int(self.A * (self.n_discr - 1) / self.T)
+        plt.plot(self.time_steps[:index_A], 1 / self.y[:index_A], label = r"$\frac{1}{Y}$ (insider)")
+        plt.plot(self.time_steps[:index_A], 1 / self.y_0[:index_A], label = r"$\frac{1}{Y_0}$ (non insider)")
         plt.title(r"$\frac{1}{Y}$ compared for insider and non_insider")
         plt.xlabel("Time")
         plt.ylabel(r"$\frac{1}{Y}$")
@@ -362,24 +389,24 @@ if __name__ == "__main__":
     """
     # Define the jump model, print parameters and check validity.
     jump_model = JumpModel()
-    # print(jump_model)
-    # print("Model validity: " + str(jump_model._check_model_validity()))
+    print(jump_model)
+    print("Model validity: " + str(jump_model._check_model_validity()))
 
     # Simulate market model and plot prices.
     jump_model._simulate_prices()
     # jump_model._plot_prices_evolution()
     jump_model._compute_L()
-    # print("Value of the variable known to the insider: L = " + str(jump_model.L))
+    print("Value of the variable known to the insider: L = " + str(jump_model.L))
 
     # Compute the optimal strategy for non insider.
     jump_model._compute_theta_Q()
     jump_model._compute_Y_non_insider()
-    # jump_model._plot_Y_non_insider()
+    jump_model._plot_Y_non_insider()
 
     # Compute the optimal strategy for the insider.
     jump_model._compute_Z()
-    # jump_model._compute_Y_insider()
+    jump_model._compute_Y_insider()
     jump_model._plot_Z()
     # print(jump_model.Z)
-    # jump_model._plot_Y_insider()
-    # jump_model._plot_both_agents()
+    jump_model._plot_Y_insider()
+    jump_model._plot_both_agents()

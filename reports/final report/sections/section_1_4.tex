@@ -1,0 +1,75 @@
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+
+\par Étudions l'évolution de la richesse des agents dans le cas particulier où la variable connue par l'initié est $L = \ln \left( S_T^{1} \right) - \ln \left( S_T^{2} \right)$ : l'initié connait la proportion qu'auront les prix de deux actifs risqués au temps $T$. Il est possible de vérifier que dans ce cas, toutes les hypothèses techniques nécessaires à l'établissement de la solution du problème d'optimisation sont vérifiées.
+
+\par Pour simplifier et rendre exploitable les calculs, nous nous plaçons en outre dans le cas où les paramètres $b, \sigma$, et $r$ du modèle sont constants.
+
+\par Dans ce cas, nous pouvons expliciter la variable $L$ : les prix du marchés sont donnés par 
+\begin{displaymath}
+\begin{cases}
+S_t^1 &= S_0^1 e^{ \left( b_1 - \frac{1}{2} ||\sigma_1||^2 \right) t + \left( \sigma_1, W \left( t \right) \right) }  \\
+S_t^2 &= S_0^2 e^{ \left( b_2 - \frac{1}{2} ||\sigma_2||^2 \right) t + \left( \sigma_2, W \left( t \right) \right) }
+\end{cases}
+\end{displaymath}
+
+\par Donc
+\begin{displaymath}
+L = \underbrace{\ln \left( \frac{S_0^1}{S_0^2} \right) + \left( \left( b_1 - b_2 \right) - \frac{1}{2} \left(||\sigma_1||^2 - ||\sigma_2|^2 \right) \right) T}_{=: \beta} + \left( \underbrace{\sigma_1 - \sigma_2}_{=: \gamma}, W \left( T \right) \right)
+\end{displaymath}
+
+\par Ainsi, $L$ est une variable gaussienne. La loi conditionnelle de $L$ sachant $\mathcal{F}_t$ s'exprime donc comme une loi gaussienne $\mathcal{N} \left( \beta + \left( \gamma, W \left( t \right) \right), ||\gamma||^2 \left( T - t \right) \right)$ qui est bien absolument continue comme annoncé dans la proposition~\ref{proposition_l}. Reprenons cette proposition dans ce cas particulier pour expliciter $l$. La densité conditionnelle de la loi de $L$ sachant $\mathcal{F}_t$ est donc celle d'une loi normale : 
+\begin{displaymath}
+p \left( t, x \right) = \frac{1}{ ||\gamma|| \sqrt{2 \pi} \sqrt{T - t}} \underbrace{e^{-\frac{1}{2} \frac{\left( x - \beta - \left( \gamma, W \left( t \right) \right) \right)^2}{||\gamma||^2 \left( T - t \right)}}}_{ =: f \left( t, W \left( t \right) \right)}
+\end{displaymath}
+
+\par Nous allons montrer que ce processus est bien une martingale. Pour cela, nous fixons $x$ et dérivons $p$ : par Itô, nous avons :
+
+\begin{displaymath}
+	\begin{split}
+	dp \left( t, x \right) &= d \left( \frac{1}{ ||\gamma|| \sqrt{2 \pi} \sqrt{T - t}} \right) f \left( t, W \left( t \right) \right) + \frac{1}{ ||\gamma|| \sqrt{2 \pi} \sqrt{T - t}} d f \left( t, W \left( t \right) \right) \\
+	&= \frac{1}{2  ||\gamma|| \sqrt{2 \pi} \left( T - t \right)^{\frac{3}{2}}} f \left( t, W \left( t \right) \right) + \frac{1}{ ||\gamma|| \sqrt{2 \pi} \sqrt{T - t}} d f \left( t, W \left( t \right) \right)
+	\end{split}
+\end{displaymath}
+
+\par La formule d'Itô nous permet aussi de dériver $f$ : 
+
+\begin{displaymath}
+	\begin{split}
+	df \left( t, W \left( t \right) \right) &= f_{x}^{'} \left( t, W \left( t \right) \right) d W \left( t \right) + \left[ f_{t}^{'} \left( t, W \left( t \right) \right) + \frac{1}{2} f_{xx}^{''} \left( t, W \left( t \right) \right) \right] dt \\
+	&=  \left[ \frac{\left( x - \beta - \left( \gamma, W \left( t \right) \right)\right)}{||\gamma||^2 \left( T - t \right)} \right] f \left( t, W \left( t \right) \right) \left( \gamma, d W \left( t \right) \right) + \left[ \frac{-1}{2 \left( T - t \right)} \right]f \left( t, W \left( t \right) \right) dt
+	\end{split}
+\end{displaymath}
+
+\par Ainsi, les termes temporels se simplifient et 
+
+\begin{displaymath}
+dp \left( t, x \right) = \frac{\left( x - \beta - \left( \gamma, W \left( t \right) \right) \right)}{||\gamma||^3 \sqrt{2 \pi} \left( T - t \right)^{\frac{3}{2}}} f \left( t, W \left( t \right) \right) \left( \gamma, d W \left( t \right) \right)
+\end{displaymath}
+
+\par Ainsi, $p$ est bien une martingale et on a, comme dans la proposition, la formule 
+
+\begin{displaymath}
+p \left( t, x \right) = p \left( t, x \right) + \int_0^t \left( \alpha \left(s, x \right), dW \left( s \right) \right)
+\end{displaymath}
+
+\par Où
+
+\begin{displaymath}
+\alpha \left( t, x \right) = \frac{\left( x - \beta - \left( \gamma, W \left( t \right) \right) \right)}{||\gamma||^3 \sqrt{2 \pi} \left( T - t \right)^{\frac{3}{2}}} f \left( t, W \left( t \right) \right) \gamma
+\end{displaymath}
+
+\par Ainsi, nous pouvons expliciter $l$ : 
+
+\begin{displaymath}
+	\begin{split}
+	l_t &= \frac{\alpha \left(t, L \right)}{p \left(t, L \right)} \\
+	&= \dfrac{\dfrac{\left( L - \beta - \left( \gamma, W \left( t \right) \right) \right)}{||\gamma||^3 \sqrt{2 \pi} \left( T - t \right)^{\frac{3}{2}}} f \left( t, W \left( t \right) \right) \gamma}{\dfrac{1}{ ||\gamma|| \sqrt{2 \pi} \sqrt{T - t}}f \left( t, W \left( t \right) \right)} \\
+	&= \frac{\left( \gamma, W \left( T \right) - W \left( t \right) \right) \gamma}{||\gamma||^2 \left( T - t \right)} \quad \text{car } L - \beta = \left( \gamma, W \left( T \right) \right)
+	\end{split}
+\end{displaymath}
+
+\par 
+
+\end{document}

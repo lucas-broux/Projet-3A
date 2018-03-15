@@ -80,7 +80,11 @@ class ProcessesGenerator:
                     current_value += 1
                 N_aux[i] = current_value
             N.append(N_aux)
-        return np.swapaxes(np.array(N), 0, 1)
+        if N != []:
+            N = np.swapaxes(np.array(N), 0, 1)
+        else:
+            N = np.array([])
+        return N
 
 
 
