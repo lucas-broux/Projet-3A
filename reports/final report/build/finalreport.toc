@@ -8,6 +8,6 @@
 \contentsline {subsubsection}{\numberline {2.2.3}\IeC {\'E}tape 3 : Changement de probabilit\IeC {\'e}}{7}
 \contentsline {subsection}{\numberline {2.3}Calcul des strat\IeC {\'e}gies optimales}{7}
 \contentsline {subsection}{\numberline {2.4}Cas particuliers}{7}
-\contentsline {section}{\numberline {3}Mod\IeC {\`e}le avec sauts}{8}
-\contentsline {subsection}{\numberline {3.1}Raisonnement}{8}
-\contentsline {subsection}{\numberline {3.2}Cas particuliers}{8}
+\contentsline {section}{\numberline {3}Mod\IeC {\`e}le avec sauts}{10}
+\contentsline {subsection}{\numberline {3.1}Raisonnement}{10}
+\contentsline {subsection}{\numberline {3.2}Cas particuliers}{10}

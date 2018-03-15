@@ -93,8 +93,9 @@ class Integrate:
         """
         # First, we check the validity of the arguements.
         bool_1 = (np.shape(riemann_fun)[0] == np.shape(ito_fun)[0]) and (np.shape(riemann_fun)[0] == np.shape(jump_fun)[0])
-        bool_2 = (np.shape(ito_fun)[0] == np.shape(ito_ker)[0]) and (np.shape(jump_fun)[0] == np.shape(jump_ker)[0])
-        assert(bool_1 and bool_2)
+        bool_2 = (np.shape(ito_fun)[0] == np.shape(ito_ker)[0]) and ((np.shape(jump_fun)[0] == np.shape(jump_ker)[0]) or np.shape(jump_ker) == (0, ))
+        assert(bool_1)
+        assert(bool_2)
 
         # Compute the riemann part of the exponential.
         length = np.shape(riemann_fun)[0]
@@ -104,13 +105,16 @@ class Integrate:
         # Compute ito part of exponential.
         ito = self.integrate(fun = ito_fun, ker = ito_ker, low = 0, upp = T, T = T, return_all_values = True)
 
-        # Compute poisson part of the exponential (product computation).
-        poi = [1]
-        current_value = 1
-        for i in range(length - 1):
-            current_value = current_value * (1 + np.dot(jump_fun[i], jump_ker[i + 1] - jump_ker[i]))
-            poi.append(current_value)
-        poi = np.array(poi)
+        # Compute poisson part of the exponential (product computation) if needed.
+        if np.shape(jump_ker) == (0, ):
+            poi = 1
+        else:
+            poi = [1]
+            current_value = 1
+            for i in range(length - 1):
+                current_value = current_value * (1 + np.dot(jump_fun[i], jump_ker[i + 1] - jump_ker[i]))
+                poi.append(current_value)
+            poi = np.array(poi)
 
         # Return result.
         return np.exp(rie + ito) * poi
