@@ -1,0 +1,26 @@
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+
+\subsubsection{Formule explicite, faisabilité numérique}
+
+\par Comme en section \ref{section_1_4}, plaçons-nous dans le cas particulier où la variable connue par l'initié est $L = \ln \left( S_T^{1} \right) - \ln \left( S_T^{2} \right)$ (toutes les hypothèses techniques nécessaires à l'établissement de la solution du problème d'optimisation sont alors vérifiées), et où les paramètres $b, \sigma$, et $r$ du modèle sont constants.
+
+\par Alors (\cite{art5}), 
+
+\begin{displaymath}
+Z \left( t \right) = \dfrac{\prod\limits_{j = 1}^{n} \sum\limits_{k_j = 0}^{+ \infty} \dfrac{e^{- {\kappa}_j \left( T - t\right)}}{\sqrt{2 \pi {\Sigma}_t}} {\displaystyle \int_{{\left( F_{t, T, k_j}\right)}^n}} e^{\left( \frac{- \left( L - m_t - \sum\limits_{j = 1}^{n} \sum\limits_{l_j = 1}^{k_j} \ln \left( \frac{1 + {\sigma}_{i_1, j}}{1 + {\sigma}_{i_2, j}} \right) \left( t_{j, l_j} \right) \right)^2}{2 {\Sigma}_t} \right)} \prod d t_{j, l_j}}{\prod\limits_{j = 1}^{n} \sum\limits_{k_j = 0}^{+ \infty} \dfrac{e^{- {\kappa}_j T}}{\sqrt{2 \pi {\Sigma}_0}} {\displaystyle \int_{{\left( F_{0, T, k_j}\right)}^n}} e^{\left( \frac{- \left( L - m_0 - \sum\limits_{j = 1}^{n} \sum\limits_{l_j = 1}^{k_j} \ln \left( \frac{1 + {\sigma}_{i_1, j}}{1 + {\sigma}_{i_2, j}} \right) \left( t_{j, l_j} \right) \right)^2}{2 {\Sigma}_t} \right)} \prod d t_{j, l_j}}
+\end{displaymath}
+
+où
+
+\begin{displaymath}
+\begin{cases}
+L - m_t &= \displaystyle \int_{s = t}^{T} \left( \underbrace{\sigma_{1, W}}_{\substack{\text{partie "brownienne"} \\ \text{(m premières composantes)} \\ \text{de } \sigma_1}} - \sigma_{2, W} \right) dW(s) + \int_{s = t}^{T} \ln \left( \frac{1 + \sigma_{1, N}}{1 + \sigma_{2, N}} \right) dN(s) \\
+{\left( F_{t, T, k_j}\right)}^n &= \left\lbrace \left( t_{j, l_j} \right)_{\substack{1\leq j\leq n \\ 1\leq l_j\leq k_j}} \in \mathbb{R}^{k_1 + ... + k_n}, t \leq t_{j, l_1} \leq ... \leq t_{j, l_{k_j}} \leq T \text{ pour } 1 \leq j \leq n \right\rbrace
+\end{cases}
+\end{displaymath}
+
+\par Ainsi, nous avons une expression "close" pour exprimer la richesse de l'initié et du non-initié : nous pouvons calculer $Y_0$ en explicitant la solution de l'exponentielle de Doléans-Dade selon la formule (\ref{doleans_explicite}), puis $Y$ via la formule $Y = \frac{Y_0}{Z}$ avec $Z$ exprimé ci-dessus. Cependant, la complexité de l'expression de $Z$ le rend difficile à exploiter. En particulier, 
+
+\end{document}

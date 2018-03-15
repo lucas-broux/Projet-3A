@@ -1,0 +1,43 @@
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+
+\par Nous cherchons à étudier, comme dans la partie précédente, la stratégie optimale de l'initié, qui s'exprime toujours comme le problème d'optimisation de la fonction d'utilité suivante :
+\begin{flalign*}
+J : &\mathcal{A} \rightarrow \mathbb{R}\\
+&(\pi, c) \mapsto J(X_0, \pi, c) = \mathbb{E}_{\mathbb{P}} \Big[ \displaystyle \int_{0}^{A} \log (c_t)dt + \log(X_A^{\pi, c})\Big |\mathcal{Y}_0\Big]
+\end{flalign*}
+
+\par Et, comme dans cette première partie, on peut montrer - sous hypothèses techniques - avec les mêmes idées de changement de probabilité et de grossissement de filtration, que ce problème d'optimisation se résout et sa solution s'exprime de la manière suivante (les détails techniques et les preuves sont à trouver dans \cite{art4} et \cite{art5}):
+\begin{displaymath}
+\text{pour } t \in [0, A], \quad \begin{cases}
+ R_t {c}_t^* &= \frac{X_0}{A+1} \frac{1}{Y}(t)\\
+ R_t {X}_t^* &= \frac{X_0(A+1-t)}{A+1}\frac{1}{Y}(t)\\
+ {\pi}_t^* &= (\sigma^*_t)^{-1}\frac{Y(t)}{Y(t^{-1})}\widehat{X}_t l_t
+\end{cases}
+\end{displaymath}
+
+\par Avec la relation suivante liant les processus $Y$ pour l'initié et le non initié :
+\begin{displaymath}
+Y \left( t \right) = \frac{Y_0 \left( t \right) }{Z \left( t \right) }
+\end{displaymath}
+où $Z$ est (normalisée à une constante près de sorte que $Z \left( 0 \right) = 0$) la densité conditionnelle de $L$ sachant $\mathcal{F}_t$, prise en $x = L$. Ce résultat fait ainsi écho au résultat trouvé dans le cas particulier étudié dans la section précédente.
+
+\par On peut en outre expliciter la valeur de $Y_0$ pour le non-initié :
+\begin{displaymath}
+Y_0 = \varepsilon \left(\displaystyle \int_{0}^{\cdot} \left(- \left( \eta_W \left( s \right), dW_s \right) + \left( - \eta_M \left(  s \right) - I_n, dM_s \right) \right)\right), 
+\end{displaymath}
+où $\varepsilon$ est l'exponentielle de Doléans-Dade, et 
+\begin{itemize}
+\item[•] $\eta_W \left( t \right) := m$ premières lignes de $(\sigma_t)^{-1}(b_t - r_t I_d)$.\
+\item[•] $ \eta_M \left( t \right)$ est un processus de dimension $n$, dont les composants sont supposés positifs, tel que $q_t. \kappa_t := n$ dernières lignes de $(\sigma_t)^{-1}(b_t - r_t I_d)$,
+\end{itemize}
+
+\par En réalité, cette exponentielle de Doléans s'explicite sous la forme (voir \cite[p.~491]{book1}):
+\begin{equation} \label{doleans_explicite}
+Y_0 \left( t \right) =  e^{\int_{0}^{t} - \left( \eta_W \left( s \right), d W \left( s \right) \right) +  \int_{0}^{t} \left[\left( \eta_M \left( s \right), \kappa \left( s \right) \right) - \frac{1}{2} \| \eta_W \left( s \right)\|^2 \right] ds} \sum\limits_{0 < s \leq t} \left( 1 - \left( \eta_M \left( s \right), \Delta N \left( s \right) \right) \right)
+\end{equation}
+\par Et nous voyons que la formule coïncide bien avec celle obtenue dans le cas diffusif.
+
+
+\end{document}

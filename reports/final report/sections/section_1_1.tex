@@ -5,8 +5,8 @@
 \par Dans cette première partie, nous considérons un modèle de marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$, dont les prix des actions (un actif sans risque et $d$ actifs risqués) sont régis selon l'équation : 
 \begin{equation}
 \begin{cases}
-S^0_t &= S_0^0 + \int_{0}^{t} S^0_s r_s ds \\
-\displaystyle S_t^i &= S_0^i + \int_{0}^{t} S_s^i b_s^i ds +  \int_{0}^{t} S_s^i \sigma_s^i dW_s, 0\leq t \leq T, i = 1,...,d
+S^0_t &= S_0^0 + \displaystyle \int_{0}^{t} S^0_s r_s ds \\
+S_t^i &= S_0^i + \displaystyle \int_{0}^{t} S_s^i b_s^i ds +  \int_{0}^{t} S_s^i \sigma_s^i dW_s, 0\leq t \leq T, i = 1,...,d
 \end{cases}
 \end{equation}
 où :
