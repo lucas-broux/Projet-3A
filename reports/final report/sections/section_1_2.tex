@@ -50,28 +50,28 @@ où :
 
 \par Reformulons l'équation d'évolution de la richesse de l'initié sur $(\Omega, \mathcal{Y}, \mathbb{P})$ : en remplaçant $dW_t$ par $dB_t + l_t dt$, l'équation (1) des prix des actions sur le marché financier devient 
 \begin{equation}
-S_t^i = S_0^i + \displaystyle \int_{0}^{t} S_s^i (b_s^i + l_s^i)ds + \int_{0}^{t} S_s^i \sigma_s^i dB_s, 0 \leq t < T, i = 1,...,d.
+S_t^i = S_0^i + \displaystyle \int_{0}^{t} S_s^i (b_s^i + \sigma_s^i l_s^i)ds + \int_{0}^{t} S_s^i \sigma_s^i dB_s, 0 \leq t < T, i = 1,...,d.
 \end{equation}
 Avec cette nouvelle équation, 
 \begin{flalign*}
 dX_t &= \displaystyle \sum_{i=0}^{d} \theta^i_t dS_t^i - c_t dt \\
-& = \displaystyle \sum_{i=1}^{d} \theta^i_t \big(S^i_t b^i_t dt + S^i_t l^i_t dt +  S^i_t \sigma^i_t dB_t \big) + \theta^0_t S^0_t r_t dt - c_t dt\\
-& = \displaystyle \sum_{i=1}^{d} \pi^i_t  (b^i_t + l^i_t)dt +  \sum_{i=1}^{d} \pi^i_t \sigma^i_t dB_t + (X_t - \sum_{i=1}^{d} \pi^i_t)r_t dt - c_t dt\\
-& = (X_t r_t - c_t)dt +  \sum_{i=1}^{d}\pi^i_t(b^i_t + l^i_t - r_t)dt + \sum_{i=1}^{d} \pi^i_t \sigma^i_t dB_t \\
-&= (X_t r_t - c_t)dt + (\pi_t, b_t + l_t - r_t\textbf{1})dt + (\pi_t, \sigma_t dB_t) \\
+& = \displaystyle \sum_{i=1}^{d} \theta^i_t \big(S^i_t b^i_t dt + S^i_t \sigma_t^i l^i_t dt +  S^i_t \sigma^i_t dB_t \big) + \theta^0_t S^0_t r_t dt - c_t dt\\
+& = \displaystyle \sum_{i=1}^{d} \pi^i_t  (b^i_t + \sigma_t^i l^i_t)dt +  \sum_{i=1}^{d} \pi^i_t \sigma^i_t dB_t + (X_t - \sum_{i=1}^{d} \pi^i_t)r_t dt - c_t dt\\
+& = (X_t r_t - c_t)dt +  \sum_{i=1}^{d}\pi^i_t(b^i_t + \sigma_t^i l^i_t - r_t)dt + \sum_{i=1}^{d} \pi^i_t \sigma^i_t dB_t \\
+&= (X_t r_t - c_t)dt + (\pi_t, b_t + \sigma_t l_t - r_t\textbf{1})dt + (\pi_t, \sigma_t dB_t) \\
 \end{flalign*}
 
 \par D'où :
 
 \begin{flalign*}
 d(X_t R_t) &= X_t dR_t + R_t dX_t + d<X, R>_t \\
-&= -X_t r_t R_t dt + R_t (X_t r_t - c_t)dt + R_t(\pi_t, b_t + l_t - r_t\textbf{1})dt + R_t (\pi_t, \sigma_t dB_t)\\
-& = -R_t c_t dt + (R_t \pi_t,  b_t + l_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dB_t)
+&= -X_t r_t R_t dt + R_t (X_t r_t - c_t)dt + R_t(\pi_t, b_t + \sigma_t l_t - r_t\textbf{1})dt + R_t (\pi_t, \sigma_t dB_t)\\
+& = -R_t c_t dt + (R_t \pi_t,  b_t + \sigma_t l_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dB_t)
 \end{flalign*}
 \
 Ainsi, sur $(\Omega, \mathcal{Y}, \mathbb{P})$, la richesse $X$ actualisée de l'initié vérifie l'équation : 
 \begin{equation}
-\displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds = X_0 \int_{0}^{t} (R_s \pi_s,  b_s + l_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dB_s)
+\displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds = X_0 \int_{0}^{t} (R_s \pi_s,  b_s + \sigma_s l_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dB_s)
 \end{equation}
 Nous pouvons voir ici que le processus $l_s$ représente les informations dont dispose l'initié. Si $l_s = 0, 0\leq s \leq t \leq T$, nous retrouvons l'équation (2) de richesse du non initié.
 
