@@ -1,4 +1,24 @@
+<<<<<<< HEAD
 \documentclass[../finalreport.tex]{subfiles}
+=======
+\documentclass[11pt,letterpaper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{makeidx}
+\makeatletter
+\newcommand{\mathleft}{\@fleqntrue\@mathmargin0pt}
+\newcommand{\mathcenter}{\@fleqnfalse}
+\makeatother
+\setlength\parindent{0pt}
+\makeindex
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 
 \begin{document}
 
@@ -8,7 +28,8 @@ Pour la deuxième partie de notre projet, nous avons étudié un modèle de marc
 Nous considérons un marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0, T], \mathbb{P})$ dont les prix des actions sont dirigés par un mouvement brownien et un processus ponctuel et évoluent selon l'équation : 
 
 \begin{equation}
-S_t^i = S_0^i + \displaystyle \int_{0}^{t}S_s^i b_s^i ds + \int_{0}^{t}S_s^i \sigma^{ij}_t \sum_{j = 1}^{d} d(W^*, N^*)^{*}_j(s), 0 \leq t \leq T, i = 1, ..., d
+\begin{cases}S_t^i = S_0^i + \int_{0}^{t}S_s^i b_s^i ds + \int_{0}^{t}S_s^i \sigma^{ij}_t \sum_{j = 1}^{d} d(W^*, N^*)^{*}_j(s), 0 \leq t \leq T, i = 1, ..., d \\
+S^0_t = \int_{0}^{t} S^0_s r_s ds \end{cases}
 \end{equation}
 
 où\\
@@ -18,14 +39,22 @@ où\\
 \item $N$ est un processus de Poisson de dimension $n$ sur l'espace de probabilité filtré $(\Omega^N, \mathcal{F}^N_t; t \in [0, T], \mathbb{P}^N)$,
 \item $d = m+n$ et $X^*$ est le transposé de $X$,
 \item $b$ et $\phi$ sont déterministes et bornés sur $[0, T]$,
+<<<<<<< HEAD
 \item $\sigma$ est une matrice déterministe $d \times d$,
 \item $S_0$ évolue selon l'équation $dS^0_t = S^0_t r_t dt$.
+=======
+\item $\sigma$ est une matrice déterministe $d \times d$.
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 \end{itemize}
 \
 
 Soit $(\Omega, \mathcal{F}_t; t\in [0, T], \mathbb{P}) := (\Omega^W \times \Omega^N, \mathcal{F}^W \otimes \mathcal{F}^N, \mathbb{P}^W \otimes \mathbb{P}^N)$. $W$ et $N$ sont indépendants. \\
 
+<<<<<<< HEAD
 Les procédures sont pareilles. L'initié a des informations sur le futur, représentées par la variable $L$, qui ne sont pas accessibles aux autres investisseurs sur le marché et nous notons $\mathcal{Y}$ sa filtration dite naturelle qui est $\mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$. La méthode de grossissement de filtration, le changement de probabilité pour nous ramener à une mesure neutre au risque, et certaines hypothèses (que nous n'expliciterons pas en détaille mais se trouvent dans l'article de \textit{C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information}) nous donneront en résultat la richesse et le portefeuille optimal de l'initié.\\
+=======
+Les procédures sont pareilles. L'initié a des informations sur le futur, représentées par la variable $L$, qui ne sont pas accessibles aux autres investisseurs sur le marché et nous notons $\mathcal{Y}$ sa filtration dite naturelle qui est $\mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$. La méthode de grossissement de filtration, le changement de probabilité pour nous ramener à une mesure neutre au risque, et certaines hypothèses (que nous n'expliciterons pas en détaille mais se trouvent dans l'article de \textit{C. Hillairet, Comparison of insiders' optimal strategies depending on the type of side-information, Université Paul Sabatier, UFR MIG, Laboratoire de Statistique et Probabilités, 118 route de Narbonne, 31062 Toulouse cedex 4, France.}) nous donneront en résultat la richesse et le portefeuille optimal de l'initié.\\
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 
 A l'instant $t = 0$, l'initié dispose d'un capital $X_0$ et consomme toujours à une vitesse $c$ qui est un processus positif $\mathcal{Y}$-adapté, vérifiant $\int_{0}^{T} c_s ds < \infty$. En notant toujours $\pi^i_t = \theta^i_t S^i_t$ la somme investie sur la i-ème action pour $i = 1,..., d$, la richesse au temps $t$ de l'initié est : \begin{equation*}
 X_t = \displaystyle \sum_{i = 0}^{d} \theta^i_t S^i_t - \int_{0}^{t} c_s ds
@@ -47,7 +76,11 @@ Avec le facteur d'actualisation $R_t = (S^0_t)^{-1}$, sa richesse actualisée v�
 &= \displaystyle (X_t r_t - c_t) dt + \sum_{i=1}^{d} \pi^i_t (b^i_t - r_t) dt + \sum_{i=1}^{d} \pi^i_t \sum_{j=1}^{d}\sigma^{ij}_td(W^*, N^*)^*_j (t) \\
 &= (X_t r_t - c_t) dt + \pi^*(b_t - r_t I_d)dt + \pi^*\sigma_t d(W^*, N^*)^*(t) ,
 \end{flalign*}
+<<<<<<< HEAD
 avec $\pi = (\pi^1_t, ..., \pi^d_t)^{*}$ et $ I_d = (1, ..., 1)^{*} \in \mathbb{R}^d $.\\
+=======
+où $\pi = (\pi^1_t, ..., \pi^d_t)^*$ et $ I_d = (1, ..., 1)^* \in \mathbb{R}^d$.\\
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 
 Avec $d(R_t) = d\big((S^0_t)^{-1}\big) = -r_t R_t dt$, la formule d'Itô nous donne encore 
 \begin{flalign*}
@@ -65,7 +98,11 @@ En notant : \\
 \end{itemize}
 \
 
+<<<<<<< HEAD
 avec $q_t. \kappa_t$ définit le vecteur dont les composants sont $(q_t.\kappa_t)_i = q^i_t\kappa^i_t, i = 1,...,n$, nous définissons : 
+=======
+où $q_t. \kappa_t$ définit le vecteur dont les composants sont $(q_t.\kappa_t)_i = q^i_t\kappa^i_t, i = 1,...,n$, nous définissons : 
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 \begin{itemize}
 \item $\displaystyle \widehat{W}_t : = W_t + \int_{0}^{t}\Theta_s ds$\
 \item $\displaystyle \widehat{M}_t : = N_t - \int_{0}^{t} q_s. \kappa_s ds$\
@@ -81,10 +118,15 @@ X_t R_t + \int_{0}^{t} R_s c_s ds &= X_0 + \int_{0}^{t} R_s\pi^*(b_s - r_s I_d)d
 & = X_0 + \int_{0}^{t} R_s\pi^*(b_s - r_s I_d)ds + \int_{0}^{t} R_s\pi^* \sigma_s d(\widehat{W}^*, \widehat{N}^*)^*(s)\\
 & -  \int_{0}^{t} R_s\pi^* \sigma_s (\sigma_s)^{-1}  \big(\Theta_s I_{1,m} - q_s. k_s I_{2,n}) \\
 & = X_0 + \int_{0}^{t} R_s\pi^*(b_s - r_s I_d)ds + \int_{0}^{t} R_s\pi^* \sigma_s d(\widehat{W}^*, \widehat{N}^*)^*(s) - \int_{0}^{t} R_s\pi^*(b_s - r_s I_d)ds\\
-& = X_0 + \int_{0}^{t} R_s\pi^* \sigma_s d(\widehat{W}^*, \widehat{N}^*)^*(s)
+& = X_0 + \int_{0}^{t} R_s\pi^* \sigma_s d(\widehat{W}^*, \widehat{N}^*)^*(s)\\
+&= X_0 + \int_{0}^{t} R_s\pi^* \sigma_s d\widehat{S} (s)
 \end{flalign*}
 \
+<<<<<<< HEAD
 ou $I_{1, m} = ( \underbrace{1,...,1}_{m}, \underbrace{0,...,0}_n)^*, I_{2, n} = (\underbrace{0,...,0}_m, \underbrace{1,...,1}_{n})^*$\\
+=======
+où $I_{1, m} = ( \underbrace{1,...,1}_{m}, \underbrace{0,...,0}_n)^*, I_{2, n} = (\underbrace{0,...,0}_m, \underbrace{1,...,1}_{n})^*$\\
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 
 \subsection{Raisonnement}
 Comme dans la première partie, l'initié cherche à optimiser sa stratégie de manière suivante : 
@@ -92,7 +134,11 @@ Comme dans la première partie, l'initié cherche à optimiser sa stratégie de 
 J : &\mathcal{A} \rightarrow \mathbb{R}\\
 &(\pi, c) \mapsto J(X_0, \pi, c) = \mathbb{E}_{\mathbb{P}} \Big[ \displaystyle \int_{0}^{A} U_1(c_t)dt + U_2(X_A^{\pi, c})\Big |\mathcal{Y}_0\Big]
 \end{flalign*}
+<<<<<<< HEAD
 ou $\mathcal{A}, (U_1, U_2)$ et $A$ sont les mêmes notations que celles dans le marché diffusif.\\
+=======
+où $\mathcal{A}, (U_1, U_2)$ et $A$ sont les mêmes notations que celles dans le marché diffusif.\\
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 
 Les problèmes auxquels nous faisons face ici viennent toujours du fait que sur l'espace $(\Omega, \mathcal{Y}, \mathbb{P})$, les processus $W^*$ et $N^*$ ne sont plus des semi-martingales. Pour cela, nous allons : \\
 \begin{itemize}
@@ -103,7 +149,11 @@ Les problèmes auxquels nous faisons face ici viennent toujours du fait que sur 
 \
 
 \subsubsection{Changement de probabilité}
+<<<<<<< HEAD
 \textbf{Proposition 3.1.} \textit{Il existe une mesure de probabilité $\mathbb{Q}$ qui est équivalente à $\mathbb{P}$ sur $\mathcal{F}_T$ et sous cette probabilité, $\mathcal{F}_t$ et $\sigma(L)$ sont indépendants $\forall t \in [0, T[$}.\\
+=======
+\textbf{Proposition 3.1.} \textit{Il existe une mesure de probabilit� $\mathbb{Q}$ qui est �quivalente � $\mathbb{P}$ sur $\mathcal{F}_T$ et sous cette probabilit�, $\mathcal{F}_t$ et $\sigma(L)$ sont ind�pendants $\forall t \in [0, T[$}.\\
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 
 \subsubsection{Grossissement de filtration}
 Introduisons la densité : 
@@ -112,7 +162,11 @@ Introduisons la densité :
 \displaystyle Z_t : = \mathbb{E}_{\mathbb{Q}}\Big[\frac{d\mathbb{P}}{d\mathbb{Q}}|Y_t\Big]
 \end{equation*}
 \
+<<<<<<< HEAD
 qui satisfait l'équation $\displaystyle dZ_t = Z_t\Big(\rho^*_1 (t) dW_t + (\rho^*_2 (t) - I_n)^* dM_t\Big)$, ou $\rho_1$ et $\rho_2$ sont des processus $\mathcal{Y}_T$-prévisibles.\\
+=======
+qui satisfait l'équation $\displaystyle dZ_t = Z_t\Big(\rho^*_1 (t) dW_t + (\rho^*_2 (t) - I_n)^* dM_t\Big)$, où $\rho_1$ et $\rho_2$ sont des processus $\mathcal{Y}_T$-prévisibles.\\
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 
 En corollaire, les processus \\
 
@@ -129,7 +183,11 @@ Notons
 \begin{equation*}
 Y_t := \varepsilon \Big(\displaystyle \int_{0}^{t} \big(-(\Theta + \rho_1(s))^* d\widetilde{W}_s + (\frac{q}{\rho_2(s)} - I_n )^* d\widetilde{M}_s\big)\Big), 
 \end{equation*}
+<<<<<<< HEAD
 ou $\varepsilon$ est l'exponentielle de Doléans-Dade. \\
+=======
+où $\varepsilon$ est l'exponentielle de Doléans-Dade. \\
+>>>>>>> 27e2910a4b796ea8edaaf738094aebe2dc25a7b6
 
 Alors $Y$ est une $(\mathcal{Y}_T, \mathbb{P})$-martingale locale positive, et $\mathbb{Q}_1:= Y \mathbb{P}$ définit la probabilité risque-neutre pour l'initié. Les processus $\widetilde{W}$ et $\widetilde{M}$ sont respectivement un mouvement brownien et un processus de Poisson de l'intensité $(q.\kappa)$ sur $(\Omega, \mathcal{Y}, \mathbb{Q}_1)$.\\
 
