@@ -85,11 +85,3 @@ class ProcessesGenerator:
         else:
             N = np.array([])
         return N
-
-
-
-
-if __name__ == "__main__":
-    process_generator = ProcessesGenerator()
-    print(np.shape(process_generator.generate_poisson_process(n_discr = 50, T = 1, n = 2, kappa = np.array([3, 2]) )))
-    print(np.shape(process_generator.generate_brownian_motion(n_discr = 50, T = 1, m = 3)))

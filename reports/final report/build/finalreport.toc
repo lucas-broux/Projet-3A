@@ -1,13 +1,22 @@
 \babel@toc {french}{}
-\contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {2}Mod\IeC {\`e}le diffusif}{3}
-\contentsline {subsection}{\numberline {2.1}Description du mod\IeC {\`e}le, \IeC {\'e}volution des prix et de la richesse}{3}
-\contentsline {subsection}{\numberline {2.2}Raisonnement}{4}
-\contentsline {subsubsection}{\numberline {2.2.1}\IeC {\'E}tape 1 : Changement de probabilit\IeC {\'e}}{5}
-\contentsline {subsubsection}{\numberline {2.2.2}\IeC {\'E}tape 2 : Grossissement de filtration}{5}
-\contentsline {subsubsection}{\numberline {2.2.3}\IeC {\'E}tape 3 : Changement de probabilit\IeC {\'e}}{7}
-\contentsline {subsection}{\numberline {2.3}Calcul des strat\IeC {\'e}gies optimales}{7}
-\contentsline {subsection}{\numberline {2.4}Cas particuliers}{7}
-\contentsline {section}{\numberline {3}Mod\IeC {\`e}le avec sauts}{10}
-\contentsline {subsection}{\numberline {3.1}Raisonnement}{10}
-\contentsline {subsection}{\numberline {3.2}Cas particuliers}{10}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Mod\IeC {\`e}le diffusif}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Description du mod\IeC {\`e}le, \IeC {\'e}volution des prix et de la richesse}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Raisonnement}{4}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}\IeC {\'E}tape 1 : Changement de probabilit\IeC {\'e}}{5}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}\IeC {\'E}tape 2 : Grossissement de filtration}{5}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}\IeC {\'E}tape 3 : Changement de probabilit\IeC {\'e}}{7}{subsubsection.2.2.3}
+\contentsline {subsection}{\numberline {2.3}Calcul des strat\IeC {\'e}gies optimales}{7}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Cas particulier : $L = \qopname \relax o{ln}\left ( S_T^{1} \right ) - \qopname \relax o{ln}\left ( S_T^{2} \right )$}{7}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}Calcul explicite des richesses}{8}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}Analyse asymptotique de $Z$}{10}{subsubsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.3}Simulations num\IeC {\'e}riques}{10}{subsubsection.2.4.3}
+\contentsline {section}{\numberline {3}Mod\IeC {\`e}le avec sauts}{14}{section.3}
+\contentsline {subsection}{\numberline {3.1}Raisonnement}{14}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Description du mod\IeC {\`e}le, \IeC {\'e}volution des prix et de la richesse}{14}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Raisonnement}{16}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Changement de probabilit\IeC {\'e}}{16}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Grossissement de filtration}{17}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Probabilit\IeC {\'e} risque-neutre}{17}{subsubsection.3.3.3}
+\contentsline {subsection}{\numberline {3.4}Calcul des strat\IeC {\'e}gies optimales}{17}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Cas particulier}{18}{subsection.3.5}

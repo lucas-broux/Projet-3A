@@ -3,9 +3,11 @@
 
 """
 The purpose of this script is to make simulations of insider trading.
-Contents are based on the article :
+Contents are based on the articles :
     "Hillairet, Caroline. (2005). Comparison of insiders' optimal strategies
     depending on the type of side-information."
+    "Grorud, Axel & Pontier, Monique. (2011). Insider Trading in a Continuous
+    Time Market Model. International Journal of Theoretical and Applied Finance"
 
 Python version : 3.*
 Authors :  Heang Kitiyavirayuth, Lucas Broux
@@ -82,7 +84,7 @@ class JumpModel:
             self.m = 2                          # Dimension of the Brownian motion.
             self.n = 0                          # Dimension of the Poisson process.
             self.d = self.m + self.n            # Total dimension.
-            self.kappa = np.array([])       # Intensity of the Poisson process.
+            self.kappa = np.array([3])       # Intensity of the Poisson process.
             self.b = np.array([0.1, -0.05])    # Drift of assets.
             self.sigma = np.array([[0.75, 0],
                           [0, 1]
@@ -111,8 +113,8 @@ class JumpModel:
                           ])                    # Volatility of assets.
                           """
             # Insider knowledge input.
-            self.i_1 = 0
-            self.i_2 = 1
+            self.i_1 = 1
+            self.i_2 = 2
 
             # Other.
             self.nb_terms_sum = 1              # Number of terms computed in the sum defining Z.
@@ -255,8 +257,8 @@ class JumpModel:
         integrator = Integrate()
 
         # We compute the value of Sigma_t as per the cited paper.
-        sum_t = self.T * (np.linalg.norm(self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) ** 2)
-        riemann_fun = (np.linalg.norm(self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) ** 2) * np.ones(self.n_discr)
+        sum_t = self.T * (np.linalg.norm(self.sigma[self.i_1 - 1][:self.m] - self.sigma[self.i_2 - 1][:self.m]) ** 2)
+        riemann_fun = (np.linalg.norm(self.sigma[self.i_1 - 1][:self.m] - self.sigma[self.i_2 - 1][:self.m]) ** 2) * np.ones(self.n_discr)
         sum_t = sum_t - integrator.riemann_integrate(fun = riemann_fun, low = 0, upp = self.T, T = self.T, return_all_values = True)
 
         # Z depends on whether there is an underlying jump process or not.
@@ -266,7 +268,7 @@ class JumpModel:
             for i, t in enumerate(self.time_steps):
                 sig = sum_t[i]
                 sig_0 = sum_t[0]
-                ito_fun = (self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) * np.ones((self.n_discr, self.m))
+                ito_fun = (self.sigma[self.i_1 - 1][:self.m] - self.sigma[self.i_2 - 1][:self.m]) * np.ones((self.n_discr, self.m))
                 I_1 = integrator.integrate(ito_fun, self.W, t, self.T, self.T, return_all_values = False)
                 I_0 = integrator.integrate(ito_fun, self.W, 0, self.T, self.T, return_all_values = False)
                 p.append(np.sqrt(sig_0 / sig) * np.exp(-I_1 ** 2 / (2 * sig) + I_0 ** 2 / (2 * sig_0)) )
@@ -277,9 +279,9 @@ class JumpModel:
             # We make the approximation that the first term in the sum over kj is dominant.
 
             # First : we compute m_t as per the cited paper.
-            aux_int = self.T * (self.b[self.i_1] - self.b[self.i_2] - 0.5 * (np.linalg.norm(self.sigma[self.i_1][:self.m]) ** 2 - np.linalg.norm(self.sigma[self.i_2][:self.m]) ** 2))
-            ito_fun = (self.sigma[self.i_1][:self.m] - self.sigma[self.i_2][:self.m]) * np.ones((self.n_discr, self.m))
-            jump_fun = np.log((1 + self.sigma[self.i_1][self.m:]) / (1 + self.sigma[self.i_2][self.m:])) * np.ones((self.n_discr, self.n))
+            aux_int = self.T * (self.b[self.i_1 - 1] - self.b[self.i_2 - 1] - 0.5 * (np.linalg.norm(self.sigma[self.i_1 - 1][:self.m]) ** 2 - np.linalg.norm(self.sigma[self.i_2 - 1][:self.m]) ** 2))
+            ito_fun = (self.sigma[self.i_1 - 1][:self.m] - self.sigma[self.i_2 - 1][:self.m]) * np.ones((self.n_discr, self.m))
+            jump_fun = np.log((1 + self.sigma[self.i_1 - 1][self.m:]) / (1 + self.sigma[self.i_2 - 1][self.m:])) * np.ones((self.n_discr, self.n))
             ito_int = integrator.integrate(ito_fun, self.W, 0, self.T, self.T, return_all_values = True)
             jump_int = integrator.integrate(jump_fun, self.N, 0, self.T, self.T, return_all_values = True)
             m_t = aux_int + ito_int + jump_int
@@ -301,7 +303,7 @@ class JumpModel:
                         factor = np.exp(- self.kappa[j] * (self.T - t)) * (self.kappa[j] ** k_j) / np.sqrt(2 * np.pi * sig)
                         # Now, we compute the integral. Define the constants involved.
                         alpha_x_t = (x - m)
-                        beta = np.log((1 + self.sigma[self.i_1][self.m:]) / (1 + self.sigma[self.i_2][self.m:]))
+                        beta = np.log((1 + self.sigma[self.i_1 - 1][self.m:]) / (1 + self.sigma[self.i_2 - 1][self.m:]))
                         # print(x, m, alpha_x_t, beta)
                         # Define the integration function.
                         def f(*v):
@@ -353,6 +355,20 @@ class JumpModel:
         plt.legend(loc = 'best')
         plt.show()
 
+    def _plot_Z_with_approximation(self):
+        """
+        Plots the evolution of Z and its approximation on [0; A] (but only in a diffusive case).
+        """
+        if (self.n == 0):
+            plt.figure(1)
+            index_A = int(self.A * (self.n_discr - 1) / self.T)
+            plt.plot(self.time_steps[:index_A], self.Z[:index_A], label = r"$Z$")
+            plt.plot(self.time_steps[:index_A], [np.sqrt(self.T) / np.sqrt(self.T - t) for t in self.time_steps[:index_A]], label = r"$Z_{\simeq} $")
+            plt.title(r"$Z$")
+            plt.xlabel("Time")
+            plt.ylabel(r"$Z$")
+            plt.legend(loc = 'best')
+            plt.show()
 
     def _plot_Y_insider(self):
         """
@@ -407,6 +423,7 @@ if __name__ == "__main__":
     jump_model._compute_Z()
     jump_model._compute_Y_insider()
     jump_model._plot_Z()
+    jump_model._plot_Z_with_approximation()
     # print(jump_model.Z)
     jump_model._plot_Y_insider()
     jump_model._plot_both_agents()

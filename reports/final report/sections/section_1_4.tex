@@ -6,6 +6,8 @@
 
 \par Pour simplifier et rendre exploitable les calculs, nous nous plaçons en outre dans le cas où les paramètres $b, \sigma$, et $r$ du modèle sont constants.
 
+\subsubsection{Calcul explicite des richesses}
+
 \par Dans ce cas, nous pouvons expliciter la variable $L$ : les prix du marchés sont donnés par 
 \begin{displaymath}
 \begin{cases}
@@ -65,11 +67,145 @@ p \left( t, x \right) = p \left( t, x \right) + \int_0^t \left( \alpha \left(s, 
 \begin{displaymath}
 	\begin{split}
 	l_t &= \frac{\alpha \left(t, L \right)}{p \left(t, L \right)} \\
-	&= \dfrac{\dfrac{\left( L - \beta - \left( \gamma, W \left( t \right) \right) \right)}{||\gamma||^3 \sqrt{2 \pi} \left( T - t \right)^{\frac{3}{2}}} f \left( t, W \left( t \right) \right) \gamma}{\dfrac{1}{ ||\gamma|| \sqrt{2 \pi} \sqrt{T - t}}f \left( t, W \left( t \right) \right)} \\
+	&= \dfrac{ \left( \dfrac{\left( L - \beta - \left( \gamma, W \left( t \right) \right) \right)}{||\gamma||^3 \sqrt{2 \pi} \left( T - t \right)^{\frac{3}{2}}} \right) f \left( t, W \left( t \right) \right) \gamma}{ \left( \dfrac{1}{ ||\gamma|| \sqrt{2 \pi} \sqrt{T - t}} \right) f \left( t, W \left( t \right) \right)} \\
 	&= \frac{\left( \gamma, W \left( T \right) - W \left( t \right) \right) \gamma}{||\gamma||^2 \left( T - t \right)} \quad \text{car } L - \beta = \left( \gamma, W \left( T \right) \right)
 	\end{split}
 \end{displaymath}
 
-\par 
+\par Or nous savons que le processus $Y$, inversement proportionnel à la richesse des agents, est, en vertu des formules présentées dans la section précédente :
+\begin{displaymath}
+Y \left( t \right) = 
+\begin{cases}
+e^{- \left( \eta, W_{t} \right)-\frac{1}{2} t {\| \eta \|}^{2}} =: Y_0 \left( t \right) & \text{pour le non initié} \\
+e^{- \int_{0}^{t} \left( l_{s} + \eta, dW_{s} - l_s ds \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta \|}^{2} ds} & \text{pour l'initié}
+\end{cases}
+\end{displaymath}
+
+\par Donc le coefficient de proportionnalité de richesse entre les deux agents est : 
+
+\begin{displaymath}
+	\begin{split}
+	\frac{1}{Z \left( t \right)} &:= \frac{Y \left( t \right)}{Y_0 \left( t \right)} \\
+	 &= \frac{e^{- \int_{0}^{t} \left( l_{s} + \eta, dW_{s} - l_s ds \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta \|}^{2} ds}}{e^{- \left( \eta, W_{t} \right)-\frac{1}{2} t {\| \eta \|}^{2}}} \\
+	&= \frac{e^{- \int_{0}^{t} \left[ \left( l_s, dW_{s} \right) + \left( \eta, dW_{s} \right) - {\| l_{s} \|}^{2} ds - \left( \eta, l_s\right) ds \right]  - \frac{1}{2} \int_{0}^{t} \left[ {\| l_{s} \|}^{2} + {\| \eta \|}^{2} + 2 \left(l_s, \eta \right) \right] ds}}{e^{- \left( \eta, W_{t} \right)-\frac{1}{2} t {\| \eta \|}^{2}}} \\
+	&= e^{- \int_{0}^{t} \left[ \left( l_s, dW_{s} \right) ds \right] + \frac{1}{2} \int_{0}^{t} {\| l_{s} \|}^{2} ds}
+	\end{split}
+\end{displaymath}
+
+\par Ainsi, 
+
+\begin{displaymath}
+d \log \left( Z \left( t \right) \right) = \left(l_s, d W_s \right) - \frac{1}{2} {\| l_{s} \|}^{2} ds
+\end{displaymath}
+
+\par Mais remarquons qu'aussi par définition de $l$, 
+
+\begin{displaymath}
+d p \left( t, L \right) =  p \left( t, L \right) \left( l_s, d W_t \right)
+\end{displaymath}
+
+\par Donc par Itô :
+
+\begin{displaymath}
+d \log \left( p \left( t, L \right) \right) = \left(l_s, d W_s \right) - \frac{1}{2} {\| l_{s} \|}^{2} ds = d \log \left( Z \left( t \right) \right)
+\end{displaymath}
+
+\par De là, $\frac{Z \left( t \right)}{ p \left( t, L \right) }$ est constant, égale à sa valeur initiale :
+
+\begin{displaymath}
+	\begin{split}
+	Z \left( t \right) &= \frac{Z \left( 0 \right)}{ p \left( 0, L \right) } p \left( t, L \right) \\
+	&= \frac{\sqrt{T}}{\sqrt{T - t}} e^{\frac{- \left( \gamma, W \left( T \right) - W \left( t \right) \right)^2}{2 ||\gamma||^2 \left( T - t \right)} + \frac{\left( \gamma, W \left( T \right) \right)^2}{2 ||\gamma||^2 T }}
+	\end{split}
+\end{displaymath}
+
+\par L'interprétation est intéressante : pour tout $t$, la valeur de proportionnalité entre la richesse de l'initié et celle du non-initié correspond - à une constante initiale près -  à la densité conditionnelle de la variable $L$ sachant $\mathcal{F}_t$, prise en $x = L$. Ce résultat est en réalité général, et correspond à l'approche employée dans \cite{art5}.
+
+\subsubsection{Analyse asymptotique de $Z$}
+
+\par Analysons le comportement de ce processus $Z$ afin d'étudier l'enrichissement de l'initié par rapport au non-initié. Remplaçons les termes browniens par leur espérance dans l'expression précédente de $Z$:
+
+\begin{displaymath}
+	\begin{split}
+	Z \left( t \right) &\simeq \frac{\sqrt{T}}{\sqrt{T - t}} e^{\left( \frac{- \| \gamma \|^2 \left( T  - t \right) }{2 \| \gamma \|^2 \left( T - t \right)} + \frac{\| \gamma \|^2 T }{2 \| \gamma \|^2 T } \right) } \\
+	&= \frac{\sqrt{T}}{\sqrt{T - t}}
+	\end{split}
+\end{displaymath}
+
+\par Nous voyons qu'au temps final considéré,
+
+\begin{displaymath}
+	\begin{split}
+	Z \left( A \right) &\simeq \frac{\sqrt{T}}{\sqrt{T - A}} \\
+	&\xrightarrow[A \to T]{} + \infty
+	\end{split}
+\end{displaymath}
+
+\par Nous retrouvons ainsi le phénomène d'explosion en temps fini mentionné précédemment : plus $A$ se rapproche de $T$, plus la richesse finale de l'initié est grande par rapport à celle du non-initié.
+
+\subsubsection{Simulations numériques}
+
+\par Afin d'étudier numériquement les comportements des agents, nous avons implémenté ces formules en \emph{Python}. Par souci de généralité, nous avons choisi d'écrire notre code de la manière la plus générale et modulaire possible, c'est pourquoi nous décidons de ne pas le copier en annexe. Toutefois, il est disponible sur le \emph{repository Github} du projet (\url{https://github.com/lucas-broux/Projet-3A}).
+
+\par Notre approche est la suivante : 
+\begin{enumerate}
+\item Calcul des prix (la formule est explicite).
+\item Calcul de la richesse du non initié (ou plutôt du processus $\frac{1}{Y_0}$ ): selon la formule $ Y_0 \left( t \right) := e^{- \left( \eta, W_{t} \right)-\frac{1}{2} t {\| \eta \|}^{2}} $.
+\item Calcul du processus $Z$ via la formule précédente $Z \left( t \right) = \frac{\sqrt{T}}{\sqrt{T - t}} e^{\frac{- \left( \gamma, W \left( T \right) - W \left( t \right) \right)^2}{2 ||\gamma||^2 \left( T - t \right)} + \frac{\left( \gamma, W \left( T \right) \right)^2}{2 ||\gamma||^2 T }}$
+\item Calcul de la richesse de l'initié (ou plutôt du processus $\frac{1}{Y}$ ) par la formule $\frac{1}{Y} = \frac{Z}{Y_0}$ 
+\end{enumerate}
+
+\par Dans notre simulation (\emph{simulations\_diffusive\_model.py}), 
+\begin{displaymath}
+\begin{cases}
+T &= 1 \\
+A &= 0.95 \\
+d &= 2 \\
+b &= \begin{bmatrix}
+		0.1 & -0.05
+	\end{bmatrix} \\
+\sigma &= \begin{bmatrix}
+			0.75 & 0 \\
+			0 & 1
+		  \end{bmatrix}
+\end{cases}
+\end{displaymath}
+
+\par Les prix évoluent de la manière suivante :
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/price_0.png}
+  \caption{prix de l'actif sans risque}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/price_1.png}
+  \caption{prix de l'actif risqué 1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/price_2.png}
+  \caption{prix de l'actif risqué 2}
+\end{figure}
+
+\par La valeur de la variable connue par l'initié est $L = -0.12$. Le processus $Z$ est ensuite calculé et comparé avec l'estimation produite dans la sous-partie précédente :
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/compared_Z.png}
+  \caption{$Z$ sur $\left[0; A \right]$}
+\end{figure}
+
+\par Nous constatons que, comme estimé, le processus $Z$ tend bien à diverger lorsque $t$ se rapproche de $T$. Nous pouvons enfin représenter l'évolution comparé de la richesse des deux agents :
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/compared_wealths.png}
+  \caption{$\frac{1}{Y_0}$ et $\frac{1}{Y}$ sur $\left[0; A \right]$}
+\end{figure}
+
+\par Ainsi, l'initié tend à s'enrichir lorsque $t$ tend vers $A$ pour $A$ proche de $T$ : la connaissance de l'information $L$ permet à l'initié d'établir une meilleure stratégie que le non-initié.
 
 \end{document}

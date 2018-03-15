@@ -1,0 +1,21 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Mod\350le diffusif}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Description du mod\350le, \351volution des prix et de la richesse}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Raisonnement}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{\311tape 1 : Changement de probabilit\351}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{\311tape 2 : Grossissement de filtration}{subsection.2.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.2.3}{\311tape 3 : Changement de probabilit\351}{subsection.2.2}% 7
+\BOOKMARK [2][-]{subsection.2.3}{Calcul des strat\351gies optimales}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.4}{Cas particulier : L = ln\( ST1 \) - ln\( ST2 \)}{section.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.4.1}{Calcul explicite des richesses}{subsection.2.4}% 10
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Analyse asymptotique de Z}{subsection.2.4}% 11
+\BOOKMARK [3][-]{subsubsection.2.4.3}{Simulations num\351riques}{subsection.2.4}% 12
+\BOOKMARK [1][-]{section.3}{Mod\350le avec sauts}{}% 13
+\BOOKMARK [2][-]{subsection.3.1}{Raisonnement}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.2}{Description du mod\350le, \351volution des prix et de la richesse}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.3}{Raisonnement}{section.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Changement de probabilit\351}{subsection.3.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Grossissement de filtration}{subsection.3.3}% 18
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Probabilit\351 risque-neutre}{subsection.3.3}% 19
+\BOOKMARK [2][-]{subsection.3.4}{Calcul des strat\351gies optimales}{section.3}% 20
+\BOOKMARK [2][-]{subsection.3.5}{Cas particulier}{section.3}% 21
