@@ -21,7 +21,7 @@ où :
 \par La difficulté ici est de caractériser $\mathcal{A}$. En effet, $W$ est un mouvement brownien sur $\left(\Omega, \mathcal{F}, \mathbb{P} \right) $ mais pas sur $\left(\Omega, \mathcal{Y}, \mathbb{P} \right)$, ce qui nous empêche de faire un simple changement de probabilité comme dans les cas usuels pour nous ramener à la probabilité risque-neutre. Le raisonnement est alors adapté selon les étapes suivantes :
 
 \begin{enumerate}
-\item \textit{Changement de probabilité} : nous construisons une probabilité $\mathbb{Q}$ pour laquelle $W$ est un $\left(\Omega, \mathcal{Y}, \mathbb{Q} \right)$-mouvement brownien.
+\item \textit{Changement de probabilité} : nous construisons une probabilité $\mathbb{Q}$ pour laquelle $W$ est un $\left(\Omega, \mathcal{F}, \mathbb{Q} \right)$-mouvement brownien.
 \item \textit{Grossissement de filtration} : nous construisons un nouveau mouvement brownien $B$ sur l'espace de probabilité filtré  $(\Omega, \mathcal{Y}, \mathbb{P})$.
 \item \textit{Changement de probabilité} : nous construisons un mouvement brownien $\tilde{B}$ sur $\left(\Omega, \mathcal{Y}, \mathbb{Q}_1 \right)$, avec $\mathbb{Q}_1$ probabilité risque-neutre sur $\mathcal{Y}$.
 \end{enumerate}
@@ -31,8 +31,8 @@ où :
 
 \subsubsection{Étape 1 : Changement de probabilité}
 \begin{prop}[T.Jeulin]
-\par Sous hypothèses (techniques mais raisonnables), il existe une mesure de probabilité $\mathbb{Q}$ équivalente à $\mathbb{P}$ sur $\mathcal{Y}_A$, telle que pour $t \leq A$, $\mathcal{T}_t$ et $\sigma \left( L \right)$ sont $\mathbb{Q}$-indépendantes.
-\par En outre, $\left( W_t, t \leq A \right)$ est un $\left(\Omega, \mathcal{Y}, \mathbb{Q} \right)$-mouvement brownien.
+\par Sous hypothèses (techniques mais raisonnables), il existe une mesure de probabilité $\mathbb{Q}$ équivalente à $\mathbb{P}$ sur $\mathcal{Y}_A$, telle que pour $t \leq A$, $\mathcal{F}_t$ et $\sigma \left( L \right)$ sont $\mathbb{Q}$-indépendantes.
+\par En outre, $\left( W_t, t \leq A \right)$ est un $\left(\Omega, \mathcal{F}, \mathbb{Q} \right)$-mouvement brownien.
 \end{prop}
 
 
