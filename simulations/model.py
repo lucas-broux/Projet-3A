@@ -3,7 +3,9 @@
 
 """
 The purpose of this script is to make simulations of insider trading.
-Contents are based on the article :
+Contents are based on the articles :
+    "Hillairet, Caroline. (2005). Comparison of insiders' optimal strategies
+    depending on the type of side-information."
     "Grorud, Axel & Pontier, Monique. (2011). Insider Trading in a Continuous
     Time Market Model. International Journal of Theoretical and Applied Finance"
 
@@ -18,13 +20,15 @@ import matplotlib.pyplot as plt
 import scipy.stats as st
 from tqdm import tqdm
 
+from process_simulation import ProcessesGenerator
+from integrate import Integrate
+from scipy import integrate
 
-class SimpleModel:
+class Model:
     """
     This class proposes a simple model for simulation of insider trading.
 
     We suppose :
-      - The market consists in one bond(r) and 2 assets (bi, sigma_i).
       - The insider knows the variable L = ln(S1(T)) - ln(S2(T)).
       - The utility function to optimize is logarithmic (U1 = U2 = ln).
     Then, according to the article, we can compute the wealth and consumption at time A < T by the following steps.
@@ -34,206 +38,342 @@ class SimpleModel:
         """
         Constructor for the class. Initialize variables of the class by setting them to false.
         """
-        # Set seed for reproductibility.
-        np.random.seed(42)
-
         # Parameters of the model.
         self.T = False                          # Total time (arbitrary unit).
-        self.A = False                          # Time at which to compute health.
-        self.n = False                          # Size of discretization.
-        self.r = False                          # Interest rate of the bond.
-        self.b1 = False                         # Drift of first asset.
-        self.sigma_1 = False                    # Volatility of first asset
-        self.b2 = False                         # Drift of second asset.
-        self.sigma_2 = False                    # Volatility of second asset.
+        self.A = False                          # Time at which to compute wealth.
         self.x = False                          # Initial wealth.
+        self.n_discr = False                    # Size of discretization.
+        self.time_steps = False                 # Discretisation.
 
-        # Market evolution.
-        self.market_evolution = False           # Evolution of the market as [[S0, S1, S2], [W1, W2]], each Si being Si = [Si(0), ... Si(T)] and Wi being brownian motion (time is discretized in n equal values between 0 and T).
+        self.m = False                          # Dimension of the Brownian motion.
+        self.n = False                          # Dimension of the Poisson process.
+        self.d = False                          # Total dimension.
+        self.r = False                          # Interest rate of the bond.
+        self.kappa = False                      # Intensity of the poisson process.
+        self.b = False                          # Drift of assets.
+        self.sigma = False                      # Volatility of assets.
 
-        # Values that are computed during simulation.
-        self.eta = False                        # Eta (constant vector).
-        self.eta_square = False                 # The sqared norm of eta.
-        self.gamma = False                      # Gamma (constant vector).
-        self.l = False                          # l (2-D vector).
-        self.B = False                          # New Brownian motion.
-        self.M = False                          # Helper value (outsider agent).
-        self.M_tilda = False                    # Helper value (insider agent).
+        self.i_1 = False                        # The insider knows L = ln(P_{i_1}(T)) - ln(P_{i_2}(T)).
+        self.i_2 = False                        # The insider knows L = ln(P_{i_1}(T)) - ln(P_{i_2}(T)).
 
-        # Wealth and consumption of the insider.
-        self.XA_insider = False                 # Wealth of the insider at time A, as [(A, wealth(A)), ...].
-        self.c_insider = False                  # Consumption of the insider at time A, as [(A, consumption(A)), ...].
-        self.critical_regions_insider = False   # Array of booleans whether the insider consumption is within the critical region or not.
+        self.nb_terms_sum = False               # Number of terms computed in the sum defining Z.
 
-        # Wealth and consumption of the outsider.
-        self.XA_outsider = False                # Wealth of the outsider at time A, as [(A, wealth(A)), ...].
-        self.c_outsider = False                 # Consumption of the outsider at time A, as [(A, consumption(A)), ...].
-        self.critical_regions_outsider = False  # Array of booleans whether the outsider consumption is within the critical region or not.
+        # Other useful variables.
+
+        self.theta = False                      # Theta.
+        self.q = False                          # q.
+        self.W = False                          # Brownian motion.
+        self.N = False                          # Poisson process.
+        self.prices = False                     # Prices of the process.
+        self.L = False                          # Value of the variable L = ln(P_{i_1}(T)) - ln(P_{i_2}(T)) known by the insider.
+        self.y_0 = False                        # Strategy of non_insider.
+        self.Z = False                          # Optimal factor of insider.
+        self.y = False                          # Optimal strategy of insider.
 
         # Actually initialize parameters of the model if parameters == 'default'.
         if (parameters == 'default'):
             # Time input.
             self.T = 1                          # Total time (arbitrary unit).
-            self.A = 0.9                        # Time at which to compute wealth.
-            self.n = 500                        # Size of discretization.
+            self.A = 0.95                       # Time at which to compute wealth.
+            self.x = 1                          # Initial wealth of the agent.
+            self.n_discr = 500                  # Size of discretization.
+            self.time_steps = np.array([i * self.T / (self.n_discr - 1) for i in range(self.n_discr)])
 
             # Market parameters input.
-            self.r = 0.1                        # Interest rate of the bond.
-            self.b1 = 0.1                       # Drift of first asset.
-            self.sigma_1 = 0.75                 # Volatility of first asset
-            self.b2 = -0.05                     # Drift of second asset.
-            self.sigma_2 = 1                    # Volatility of second asset.
+            self.r = 0.02                       # Interest rate of the bond.
+            self.m = 4                          # Dimension of the Brownian motion.
+            self.n = 0                          # Dimension of the Poisson process.
+            self.d = self.m + self.n            # Total dimension.
+            self.kappa = np.array([])       # Intensity of the Poisson process.
+            self.b = np.array([0.15, 0.1, 0.084, 0.1])    # Drift of assets.
+            self.sigma = np.array([[-0.4, -0.1, -0.15, 0.17],
+                          [-0.09, -0.4, -0.03, 0.035],
+                          [0.048, -0.12, 0.1, -0.12],
+                          [0.075, 0.26, 0.31, -0.28],
+                          ])                    # Volatility of assets.
 
-            # Initial wealth of the agent.
-            self.x = 1                          # Initial wealth.
+            # Insider knowledge input.
+            self.i_1 = 1
+            self.i_2 = 2
+
+            # Other.
+            self.nb_terms_sum = 1              # Number of terms computed in the sum defining Z.
 
 
-    # Simulation of the brownian motion.
-    def __W(self, t):
+    def __str__(self):
         """
-        Simulation of the brownian motion W_tn.
-
-        :param t: The array [t1, ... tn], tn being the highest value.
-        :return: The array [W(t1n)m, ..., W(tn)m].
+        Redefines underlying string of class.
         """
-        W = [0]
-        for i in range(1, len(t)):
-            W.append(W[-1] + np.random.normal(0, np.sqrt(t[i] - t[i-1])))
-        return W
+        s = "Jump model with following parameters :"
+        s += "\n\t-Total time: " + str(self.T)
+        s += "\n\t-Terminal time: " + str(self.A)
+        s += "\n\t-Initial wealth: " + str(self.x)
+        s += "\n\t-Size of discretization: " + str(self.n_discr)
+        s += "\n\t-Dimension of the Brownian motion: " + str(self.m)
+        s += "\n\t-Dimension of the Poisson process: " + str(self.n)
+        s += "\n\t-Interest rate of bond: " + str(self.r)
+        s += "\n\t-Intensity of Poisson process: " + str(self.kappa)
+        s += "\n\t-Drift of assets: " + str(self.b)
+        s += "\n\t-Volatility of assets: " + str(self.sigma)
+        return s
 
 
-    # Simulation of market.
-    def __market_2_assets(self, show = False):
-            """
-            Simulation of a market with 2 risky assets S1 and S2, and a bond S0.
-
-            We create a regular discretization of the time in n equal values between 0 and T.
-
-            :param show: Whether to show the plotted view.
-            :return: The market as [[S0, S1, S2], [W1, W2]], each Si being Si = [Si(0), ... Si(T)] and Wi being brownian motion.
-            """
-            # Discretisation of time.
-            time_steps = [i * self.T / self.n for i in range(self.n + 1)]
-
-            # Compute 2 brownian motions.
-            W1 = self.__W(time_steps)
-            W2 = self.__W(time_steps)
-
-            # Compute S0 (bond) and S1/S2 (risky assets) in the Black-Scholes model.
-            S0 = np.exp(self.r * np.array(time_steps))
-            S1 = np.exp( (self.b1 - self.sigma_1 * self.sigma_1 / 2) * np.array(time_steps) + self.sigma_1 * np.array(W1) )
-            S2 = np.exp( (self.b2 - self.sigma_2 * self.sigma_2 / 2) * np.array(time_steps) + self.sigma_2 * np.array(W2) )
-
-            # Plot evolution of assets if asked.
-            if show:
-                plt.figure(1)
-                plt.plot(time_steps, S0, label = "Bond")
-                plt.plot(time_steps, S1, label = "Risky asset S1")
-                plt.plot(time_steps, S2, label = "Risky asset S2")
-                plt.title("Representation of asset prices")
-                plt.xlabel("Time")
-                plt.ylabel("Asset prices")
-                plt.legend(loc = 'best')
-                plt.show()
-
-            # Return result.
-            return [[S0, S1, S2], [W1, W2]]
-
-
-    # Simulation of the model as per the cited paper.
-    def simulate(self):
+    def _check_model_validity(self):
         """
-        Compute the optimal wealth of an insider and of a non-insider in a simplified case.
-
-        We create a regular discretization of the time in n equal values between 0 and T.
-        We suppose :
-          - The market consists in one bond(r) and 2 assets (bi, sigma_i).
-          - The insider knows the variable L = ln(S1(T)) - ln(S2(T)).
-          - The utility function to optimize is logarithmic (U1 = U2 = ln).
-        Then, according to the article, we can compute the wealth at time A < T by the following steps.
-        We actualize the values that were set to False in the __init__ function.
+        Checks that the dimensions provided in parameter agree with the dimensions
+        of drifts, volatilities, ...
         """
-        ################################################
-        # Step 1 : Compute eta, eta_square, and gamma. #
-        ################################################
-        self.eta = np.array([(self.b1 - self.r) / self.sigma_1, (self.b2 - self.r) / self.sigma_2])
-        self.eta_square = np.dot(self.eta, self.eta)
-        self.gamma = np.array([self.sigma_1, - self.sigma_2])
-
-        #################################################
-        # Step 2 : Simulate Brownian Motion and Market. #
-        #################################################
-        # Get market values over time.
-        self.market_evolution = self.__market_2_assets()
-        [[S0, S1, S2], [W1, W2]] = self.market_evolution
-
-        ##########################################################
-        # Step 3 : Compute 2-d vector l.                         #
-        # We compute l on [0, ..., A] with the formula:          #
-        # l(r) = 1 / (T - r) * int(gamma . dWs, [r, T]) * gamma. #
-        ##########################################################
-        considered_length = self.n
-        self.l = [ ((self.gamma[0] * (W1[-1] - W1[i]) + self.gamma[1] * (W2[-1] - W2[i])) / (self.T * (1 - i / self.n))) * self.gamma for i in range(considered_length) ]
-
-        #################################################
-        # Step 4 : Compute B.                           #
-        # We compute B on [0, ..., A] with the formula: #
-        # B(t) = W(t) - int(l(u) . du, [0, t])          #
-        #################################################
-        self.B = [np.array([W1[i], W2[i]]) - sum(self.l[:(i)]) * (self.T / self.n) for i in tqdm(range(considered_length), desc = 'Computing Bt', leave = False)]
-
-        ###################################
-        # Step 5 : Compute M and M_tilda. #
-        ###################################
-        # Computation of M.
-        self.M = [np.exp( - np.dot( self.eta, np.array([W1[i], W2[i]]) ) - .5 * (i * self.T / self.n) * self.eta_square ) for i in range(considered_length) ]
-
-        # Computation of M_tilda.
-        f = [v + self.eta for v in self.l]
-        int_1 = np.array( [sum([np.dot(f[i_1], self.B[i_1 + 1] - self.B[i_1]) for i_1 in range(i_2)]) for i_2 in tqdm(range(considered_length), desc = 'Computing M_tilda', leave = False)] )
-        int_2 = np.array( [(sum([np.dot(f[i_1], f[i_1]) for i_1 in range(i_2)]) * (self.T / self.n)) for i_2 in tqdm(range(considered_length), desc = 'Computing M_tilda', leave = False)] )
-        self.M_tilda = np.exp(-int_1 - 0.5 * int_2)
+        bool_0 = self.d == self.m + self.n
+        bool_1 = np.shape(self.kappa) == (self.n, )
+        bool_2 = np.shape(self.b) == (self.d, )
+        bool_3 = np.shape(self.sigma) == (self.d, self.d)
+        bool_4 = np.shape(self.time_steps)[0] == self.n_discr
+        bool_5 = (self.i_1 > 0) and (self.i_2 > 0) and (self.i_1 <= self.d) and (self.i_2 <= self.d)
+        return (bool_0 and bool_1 and bool_2 and bool_3 and bool_4 and bool_5)
 
 
-    # Compute optimal strategy of agents, as per the cited paper.
-    def compute_optimal_strategy(self):
+    def _compute_theta_Q(self):
         """
-        Compute the optimal strategy of insider and outsider agents, according to the cited paper.
+        Compute variables Theta and q from the parameters of the model.
         """
-        # Compute optimal health.
-        corresponding_indice = int(self.A * self.n / self.T)
-        # Optimal wealth at time A for the non-insider.
-        y = self.x / (self.A + 1)
-        self.c_outsider = [np.exp(self.r * (i *self.T / self.n)) * y / self.M[i] for i in range(corresponding_indice)]
-        self.XA_outsider = self.c_outsider[-1] # In this model, optimal consumption equals optimal wealth.
-
-        # Optimal wealth at time A for the insider.
-        self.c_insider = [np.exp(self.r * (i *self.T / self.n)) * y / self.M_tilda[i] for i in range(corresponding_indice)]
-        self.XA_insider = self.c_insider[-1] # In this model, optimal consumption equals optimal wealth.
+        aux_var = np.dot(np.linalg.inv(self.sigma), self.b - self.r)
+        self.theta = aux_var[:self.m]
+        self.q = - (aux_var[self.m:].T / self.kappa).T
 
 
-    # Computation of critical retions, as per the cited paper.
-    def __compute_critical_region(self, consumption):
+    def _simulate_prices(self, set_seed = True):
         """
-        Computes the statistical test for the given consumption process.
+        Simulate the prices of the assets by solving the equation with doleans exponential.
 
-        :param consumption: The consumption of an agent, under the form of an array [(time, consumption(time))] of the consumption at different times.
-        :return: Boolean array [b_1, ..., b_{n-1}] to attest whether the agent is in the critical region at time i.
+        :param set_seed: Wheter to set a seed for the generation of brownian and poisson processes.
+        :return: A np array of arrays P = [[P0], [P1], ...] with P0 = bond and Pi (i > 0) = risky assets.
         """
-        # Compute Y_i = \log(R_{t_{i+1}} c_{t_{i+1}}) - \log(R_t C_t)
-        # Where R_t = \exp(- r * t) is the discounting factor, and C_t is the consumption at time t.
-        consecutive_consumption = [(consumption[i], consumption[i+1]) for i in range(len(consumption) - 1)]
-        Y = [np.log(np.exp(-self.r * t1) * c1) - np.log(np.exp(-self.r * t0) * c0) for [(t0, c0), (t1, c1)] in consecutive_consumption]
+        # Initialize the generator of the processes and the integrator.
+        integrator = Integrate()
+        process_generator = ProcessesGenerator(set_seed = set_seed)
 
-        # Compute critical regions values.
-        critical_regions = [(abs(np.log(np.exp(-self.r * t1) * c1) - np.log(np.exp(-self.r * t0) * c0) - 0.5 * (t1 - t0) * self.eta_square) > 1.96 * np.sqrt((t1 - t0) * self.eta_square)) for [(t0, c0), (t1, c1)] in consecutive_consumption]
-        return critical_regions
+        # Generate brownian motion and poisson process.
+        self.W = process_generator.generate_brownian_motion(n_discr = self.n_discr, T = self.T, m = self.m)
+        self.N = process_generator.generate_poisson_process(n_discr = self.n_discr, T = self.T, n = self.n, kappa = self.kappa)
+
+        # Compute bond.
+        self.prices = [np.array([np.exp(self.r * t) for t in self.time_steps])]
+
+        # Compute prices of other assets.
+        for i in range(self.d):
+            riemann_fun = self.b[i] * np.ones(self.n_discr)
+            jump_fun = self.sigma[i][self.m:] * np.ones((self.n_discr, self.n))
+            ito_fun = self.sigma[i][:self.m] * np.ones((self.n_discr, self.m))
+            self.prices.append(integrator.doleans_exponential(riemann_fun, ito_fun, self.W, jump_fun, self.N, T = self.T))
+
+        # End computation.
+        self.prices = np.array(self.prices)
 
 
-    # Application of statistical test, as per the cited paper.
-    def apply_statistical_test(self):
+    def _plot_prices_evolution(self):
         """
-        Apply the statistical test to the simulated values of consumption for both the insider and non-insider agent.
+        Plots the evolution of the prices, assuming they have been computed.
         """
-        self.critical_regions_insider = self.__compute_critical_region([(i * self.T / self.n, self.c_insider[i]) for i in range(len(self.c_insider))])
-        self.critical_regions_outsider = self.__compute_critical_region([(i * self.T / self.n, self.c_outsider[i]) for i in range(len(self.c_outsider))])
+        counter = 0
+        label = "Bond"
+        for prices in self.prices:
+            plt.figure(counter)
+            counter += 1
+            plt.plot(self.time_steps, prices, label = "Price evolution: " + label)
+            plt.title("Price evolution: " + label)
+            plt.xlabel("Time")
+            plt.ylabel("Price: " + label)
+            plt.legend(loc = 'best')
+            label = "Asset " + str(counter)
+        plt.show()
+
+
+    def _compute_L(self):
+        """
+        Compute the value of the variable L that is known by the insider.
+        """
+        self.L = np.log(self.prices[self.i_1][-1]) - np.log(self.prices[self.i_2][-1])
+
+
+    def _compute_Y_non_insider(self):
+        """
+        Compute the process Y0 which gives all wanted informations about the strategy of the non insider.
+
+        This can be done by solving a doleans exponential.
+        """
+        # Initialize integrator.
+        integrator = Integrate()
+
+        # Compute different terms of the equation.
+        ito_fun = - self.theta * np.ones((self.n_discr, self.m))
+        jump_fun = (self.q - 1) * np.ones((self.n_discr, self.n))
+        riemann_fun = - np.dot(jump_fun, self.kappa)
+
+        # Compute Y0.
+        self.y_0 = integrator.doleans_exponential(riemann_fun, ito_fun, self.W, jump_fun, self.N, T = self.T)
+
+
+    def _plot_Y_non_insider(self):
+        """
+        Plots the evolution of the strategy of the non insider on [0; A].
+        """
+        plt.figure(1)
+        index_A = int(self.A * (self.n_discr - 1) / self.T)
+        plt.plot(self.time_steps[:index_A], 1 / self.y_0[:index_A], label = r"$\frac{1}{Y_0}$ (non insider)")
+        plt.title(r"$\frac{1}{Y_0}$ (non insider)")
+        plt.xlabel("Time")
+        plt.ylabel(r"$\frac{1}{Y_0}$ (non insider)")
+        plt.legend(loc = 'best')
+        plt.show()
+
+
+    def _compute_Z(self):
+        """
+        Compute the process Z as described numerically.
+
+        It is an approximation since we can not compute infinity sums.
+        """
+        # Initialize integrator.
+        integrator = Integrate()
+
+        # We compute the value of Sigma_t as per the cited paper.
+        sum_t = self.T * (np.linalg.norm(self.sigma[self.i_1 - 1][:self.m] - self.sigma[self.i_2 - 1][:self.m]) ** 2)
+        riemann_fun = (np.linalg.norm(self.sigma[self.i_1 - 1][:self.m] - self.sigma[self.i_2 - 1][:self.m]) ** 2) * np.ones(self.n_discr)
+        sum_t = sum_t - integrator.riemann_integrate(fun = riemann_fun, low = 0, upp = self.T, T = self.T, return_all_values = True)
+
+        # Z depends on whether there is an underlying jump process or not.
+        if self.n == 0:
+            # Purely diffusive market model.
+            p = []
+            for i, t in enumerate(self.time_steps):
+                sig = sum_t[i]
+                sig_0 = sum_t[0]
+                ito_fun = (self.sigma[self.i_1 - 1][:self.m] - self.sigma[self.i_2 - 1][:self.m]) * np.ones((self.n_discr, self.m))
+                I_1 = integrator.integrate(ito_fun, self.W, t, self.T, self.T, return_all_values = False)
+                I_0 = integrator.integrate(ito_fun, self.W, 0, self.T, self.T, return_all_values = False)
+                p.append(np.sqrt(sig_0 / sig) * np.exp(-I_1 ** 2 / (2 * sig) + I_0 ** 2 / (2 * sig_0)) )
+            self.Z = np.array(p)
+
+        else:
+            # Jump model.
+            # We make the approximation that the first term in the sum over kj is dominant.
+
+            # First : we compute m_t as per the cited paper.
+            aux_int = self.T * (self.b[self.i_1 - 1] - self.b[self.i_2 - 1] - 0.5 * (np.linalg.norm(self.sigma[self.i_1 - 1][:self.m]) ** 2 - np.linalg.norm(self.sigma[self.i_2 - 1][:self.m]) ** 2))
+            ito_fun = (self.sigma[self.i_1 - 1][:self.m] - self.sigma[self.i_2 - 1][:self.m]) * np.ones((self.n_discr, self.m))
+            jump_fun = np.log((1 + self.sigma[self.i_1 - 1][self.m:]) / (1 + self.sigma[self.i_2 - 1][self.m:])) * np.ones((self.n_discr, self.n))
+            ito_int = integrator.integrate(ito_fun, self.W, 0, self.T, self.T, return_all_values = True)
+            jump_int = integrator.integrate(jump_fun, self.N, 0, self.T, self.T, return_all_values = True)
+            m_t = aux_int + ito_int + jump_int
+
+            # Compute the numerator of the formula that computes Z.
+            p_num = []
+            for i in tqdm(range(self.n_discr), leave = False, desc = "Computing Z"):
+                t = self.time_steps[i]
+                x = self.L
+                sig = sum_t[i]
+                m = m_t[i]
+                # Compute product.
+                product = 1
+                for j in range(self.n):
+                    # Compute the sum with the approximation of only calculating self.nb_terms_sum terms.
+                    s = 0
+                    for k_j in range(1, self.nb_terms_sum + 1):
+                        # First, we compute the factor in the sum.
+                        factor = np.exp(- self.kappa[j] * (self.T - t)) * (self.kappa[j] ** k_j) / np.sqrt(2 * np.pi * sig)
+                        # Now, we compute the integral. Define the constants involved.
+                        alpha_x_t = (x - m)
+                        beta = np.log((1 + self.sigma[self.i_1 - 1][self.m:]) / (1 + self.sigma[self.i_2 - 1][self.m:]))
+                        # print(x, m, alpha_x_t, beta)
+                        # Define the integration function.
+                        def f(*v):
+                            integrand = alpha_x_t
+                            for ind, b in enumerate(beta):
+                                for l in range(k_j):
+                                    integrand -= b * (v[k_j * ind + l])
+                            # print(np.exp(- integrand ** 2))
+                            return np.exp((-integrand ** 2) / (2 * sig))
+                        # Define the integration bounds.
+                        bounds = []
+                        for l in range(k_j * self.n):
+                            if l % k_j == 0:
+                                bounds.insert(0, lambda *args : [t, self.T])
+                            else:
+                                bounds.insert(0, lambda *args : [args[0], self.T])
+                        # Actually compute integral.
+                        # print(integrate.nquad(f, bounds)[0])
+                        s += factor * integrate.nquad(f, bounds)[0]
+                    # Actualize product.
+                    product *= s
+                # Actualize the array containing numerator values.
+                p_num.append(product)
+
+            # Renormalize p.
+            self.Z = np.array(p_num) / p_num[0]
+
+
+    def _compute_Y_insider(self):
+        """
+        Compute the process Y which gives all wanted informations about the strategy of the insider.
+
+        It is obtained by multiplying Y_0 (strategy of non_insider) with the factor Z.
+        """
+        # Do the multiplication.
+        self.y = self.y_0 / self.Z
+
+
+    def _plot_Z(self):
+        """
+        Plots the evolution of Z on [0; A].
+        """
+        plt.figure(1)
+        index_A = int(self.A * (self.n_discr - 1) / self.T)
+        plt.plot(self.time_steps[:index_A], self.Z[:index_A], label = r"$Z$")
+        plt.title(r"$Z$")
+        plt.xlabel("Time")
+        plt.ylabel(r"$Z$")
+        plt.legend(loc = 'best')
+        plt.show()
+
+    def _plot_Z_with_approximation(self):
+        """
+        Plots the evolution of Z and its approximation on [0; A] (but only in a diffusive case).
+        """
+        if (self.n == 0):
+            plt.figure(1)
+            index_A = int(self.A * (self.n_discr - 1) / self.T)
+            plt.plot(self.time_steps[:index_A], self.Z[:index_A], label = r"$Z$")
+            plt.plot(self.time_steps[:index_A], [np.sqrt(self.T) / np.sqrt(self.T - t) for t in self.time_steps[:index_A]], label = r"$Z_{\simeq} $")
+            plt.title(r"$Z$")
+            plt.xlabel("Time")
+            plt.ylabel(r"$Z$")
+            plt.legend(loc = 'best')
+            plt.show()
+
+    def _plot_Y_insider(self):
+        """
+        Plots the evolution of the strategy of the insider on [0; A].
+        """
+        plt.figure(1)
+        index_A = int(self.A * (self.n_discr - 1) / self.T)
+        plt.plot(self.time_steps[:index_A], 1 / self.y[:index_A], label = r"$\frac{1}{Y}$ (insider)")
+        plt.title(r"$\frac{1}{Y}$ (insider)")
+        plt.xlabel("Time")
+        plt.ylabel(r"$\frac{1}{Y}$ (insider)")
+        plt.legend(loc = 'best')
+        plt.show()
+
+
+    def _plot_both_agents(self):
+        """
+        Plots the compared evolution of the strategy of both insider and non-insider on [0; A].
+        """
+        plt.figure(1)
+        index_A = int(self.A * (self.n_discr - 1) / self.T)
+        plt.plot(self.time_steps[:index_A], 1 / self.y[:index_A], label = r"$\frac{1}{Y}$ (insider)")
+        plt.plot(self.time_steps[:index_A], 1 / self.y_0[:index_A], label = r"$\frac{1}{Y_0}$ (non insider)")
+        plt.title(r"$\frac{1}{Y}$ compared for insider and non_insider")
+        plt.xlabel("Time")
+        plt.ylabel(r"$\frac{1}{Y}$")
+        plt.legend(loc = 'best')
+        plt.show()

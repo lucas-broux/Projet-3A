@@ -2,4 +2,13 @@
 
 \begin{document}
 
+\par Ce projet s'est voulu une étude du délit d'initié : nous nous sommes intéressés à l'influence sur un investisseur d'une information future sur l'état du marché, modélisée par une variable aléatoire $L$ des prix du marché au temps $T$.\\
+
+\par Nous avons principalement étudié la manière dont est modifiée la stratégie d'un tel initié. Ainsi, dans une première partie, nous avons étudié un modèle de marché diffusif (de type Black-Scholes), dans lequel - sous hypothèses techniques - il est possible de définir et expliciter la stratégie optimale de l'initié. Nous avons étudié en particulier un cas simplifié et mis en évidence un phénomène d'explosion en temps fini : le gain de l'initié tend à diverger lorsqu'arrive la date $T$; nous avons aussi établi une caractérisation intéressante du gain de l'initié par rapport au non initié : celui-ci est proportionnel à la densité conditionnelle de la loi de $L$ sachant $\mathcal{F}_t$ (la filtration naturelle engendrée par le marché en $t$). Dans le cadre de ce même cas particulier, nous avons réalisé des simulations numériques en choisissant des paramètres raisonnables, et appuyé nos résultats théoriques.\\
+
+\par Dans une seconde partie, nous avons cherché à étudier la stratégie de l'initié dans un cas plus général de marché avec processus ponctuel, dans lequel les prix "sautent" à des instants aléatoires afin de modéliser des situations catastrophiques (krach boursiers, ...). Dans ce cadre, bien que les formules régissant la stratégie de l'initié puissent s'expliciter sous une forme "close", nous avons mis en évidence les limitations du calcul informatique : répliquer numériquement la stratégie de l'initié requiert de calculer un nombre d'autant plus grand de termes que nous cherchons à nous approcher du temps $T$.
+\\
+
+\par Enfin, dans certains cas, il nous a été possible de proposer des tests statistiques pour décider si un agent est un initié ou non; toutefois, celui-ci requiert de connaitre d'avance la variable aléatoire $L$ connue par l'initié recherché : un tel test est ainsi inutilisable en pratique.
+
 \end{document}

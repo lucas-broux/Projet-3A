@@ -81,7 +81,7 @@ e^{- \int_{0}^{t} \left( l_{s} + \eta, dW_{s} - l_s ds \right) - \frac{1}{2} \in
 \end{cases}
 \end{displaymath}
 
-\par Donc le coefficient de proportionnalité de richesse entre les deux agents est : 
+\par Donc le coefficient de proportionnalité entre la richesse des deux agents est : 
 
 \begin{displaymath}
 	\begin{split}
@@ -119,9 +119,9 @@ d \log \left( p \left( t, L \right) \right) = \left(l_s, d W_s \right) - \frac{1
 	\end{split}
 \end{displaymath}
 
-\par L'interprétation est intéressante : pour tout $t$, la valeur de proportionnalité entre la richesse de l'initié et celle du non-initié correspond - à une constante initiale près -  à la densité conditionnelle de la variable $L$ sachant $\mathcal{F}_t$, prise en $x = L$. Ce résultat est en réalité général, et correspond à l'approche employée dans \cite{art5}.
+\par L'interprétation est intéressante : pour tout $t$, la valeur de proportionnalité entre la richesse de l'initié et celle du non-initié correspond - à une constante initiale près -  à la densité conditionnelle de la variable $L$ sachant $\mathcal{F}_t$, prise en $x = L$. Ce résultat est en réalité général, et correspond au point de vue présenté dans \cite{art5}.
 
-\subsubsection{Analyse asymptotique de $Z$}
+\subsubsection{Analyse asymptotique de $Z$} \label{analyse_asympt}
 
 \par Analysons le comportement de ce processus $Z$ afin d'étudier l'enrichissement de l'initié par rapport au non-initié. Remplaçons les termes browniens par leur espérance dans l'expression précédente de $Z$:
 
@@ -143,6 +143,43 @@ d \log \left( p \left( t, L \right) \right) = \left(l_s, d W_s \right) - \frac{1
 
 \par Nous retrouvons ainsi le phénomène d'explosion en temps fini mentionné précédemment : plus $A$ se rapproche de $T$, plus la richesse finale de l'initié est grande par rapport à celle du non-initié.
 
+\subsubsection{Test statistique}
+\par Dans ce cas particulier, nous pouvons en outre construire un test statistique afin de détecter si l'agent est ou non un initié. Nous considérons les hypothèses suivantes : \emph{l'agent n'est pas initié} (i.e. l'information $L$ possédée dès le début de son investissement appartient en réalité à l'ensemble d'informations dont disposent tous les autres investisseurs sur le marché), contre l'hypothèse alternative : \emph{l'agent est un initié}, (i.e. l'agent est le seul à disposer de cette information). \\
+
+Le test est donc décrit de manière suivante : 
+\begin{itemize}
+\item $H_0 : L \in \mathcal{F}_0$ (l'agent est un non initié) \
+\item $H_1 : L \notin \mathcal{F}_0$ (l'agent est un initié)
+\end{itemize}
+\
+
+Pour décider quelle hypothèse choisir, nous comparons les consommations optimales des agents, données par la formule $\displaystyle R_t c^*_t = \frac{X_0}{A+1}\frac{1}{Y}(t)$.\\
+\mathleft
+\begin{equation*}
+\begin{cases} \log R_t c^*_t = \log(\frac{X_0}{A+1}) + \frac{1}{2}  \int_{0}^{t} ||\eta_s||^2 ds + \int_{0}^{t} \eta_s dW_s , \text{ sous } H_0\\
+
+\log R_t c^*_t = \log(\frac{X_0}{A+1}) + \frac{1}{2}  \int_{0}^{t} ||\eta_s||^2 ds + \int_{0}^{t} \eta_s dW_s + \log q(t, L), \text{ sous } H_1 \end{cases}
+\end{equation*}
+
+Nous partitionnons $[0, T]$ en $0 \leq t_0 < t_1 < \dots <t_n = T$ et définissons 
+\mathcenter
+\begin{equation*}
+Y_i := \log(R_{t_{i+1}} c_{t_{i+1}}) - \log (R_{t_{i}}c_{t_{i}}), \quad 0 \leq i \leq n-1.
+\end{equation*}
+
+En supposant que les paramètres $b, r$ et $\sigma$ sont déterministes, nous avons sous $H_0$,
+\begin{equation*}
+\displaystyle Y_i =  \frac{1}{2} \int_{t_i}^{t_{i+1}} ||\eta_s||^2 ds + \int_{t_i}^{t_{i+1}} \eta_s dW_s 
+\end{equation*}
+dont nous constatons qu'elle est une variable aléatoire gaussienne $\mathcal{N}\big(\frac{1}{2} \int_{t_i}^{t_{i+1}} ||\eta_s||^2 ds , \int_{t_i}^{t_{i+1}} ||\eta_s||^2 ds \big)$, tandis que sous $H_1$, nous avons le terme supplémentaire $\displaystyle \log\big(\frac{q(t_{i+1}, L)}{q(t_i, L)}\big)$.\\
+
+Nous pouvons donc construire un test de région critique au niveau $\alpha = 0.05$ :
+\begin{equation*}
+RC_i = \Big\{ \omega : \big|Y_i (\omega) - \frac{1}{2} \int_{t_i}^{t_{i+1}} ||\eta_s||^2 ds \big| > 1.96 \sqrt{\int_{t_i}^{t_{i+1}} }\eta_s ds \Big\}
+\end{equation*}
+
+\par Remarquons que ce test dépend en réalité de la variable $L$ supposée connue par l'agent initié : il ne peut pas être utilisé en pratique.
+
 \subsubsection{Simulations numériques}
 
 \par Afin d'étudier numériquement les comportements des agents, nous avons implémenté ces formules en \emph{Python}. Par souci de généralité, nous avons choisi d'écrire notre code de la manière la plus générale et modulaire possible, c'est pourquoi nous décidons de ne pas le copier en annexe. Toutefois, il est disponible sur le \emph{repository Github} du projet (\url{https://github.com/lucas-broux/Projet-3A}).
@@ -161,6 +198,7 @@ d \log \left( p \left( t, L \right) \right) = \left(l_s, d W_s \right) - \frac{1
 T &= 1 \\
 A &= 0.95 \\
 d &= 2 \\
+r &= 0.1 \\
 b &= \begin{bmatrix}
 		0.1 & -0.05
 	\end{bmatrix} \\
@@ -190,7 +228,7 @@ b &= \begin{bmatrix}
   \caption{prix de l'actif risqué 2}
 \end{figure}
 
-\par La valeur de la variable connue par l'initié est $L = -0.12$. Le processus $Z$ est ensuite calculé et comparé avec l'estimation produite dans la sous-partie précédente :
+\par La valeur de la variable connue par l'initié est $L = -0.12$. Le processus $Z$ est ensuite calculé et comparé avec l'estimation produite dans la sous-partie \ref{analyse_asympt} :
 
 \begin{figure}[H]
   \centering

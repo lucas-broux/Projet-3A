@@ -3,7 +3,7 @@
 \begin{document}
 
 \par Dans cette première partie, nous considérons un modèle de marché financier sur un espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$, dont les prix des actions (un actif sans risque et $d$ actifs risqués) sont régis selon l'équation : 
-\begin{equation}
+\begin{equation}\label{equation_prices}
 \begin{cases}
 S^0_t &= S_0^0 + \displaystyle \int_{0}^{t} S^0_s r_s ds \\
 S_t^i &= S_0^i + \displaystyle \int_{0}^{t} S_s^i b_s^i ds +  \int_{0}^{t} S_s^i \sigma_s^i dW_s, 0\leq t \leq T, i = 1,...,d
@@ -20,10 +20,9 @@ où :
 
 \par L'information connue au temps $t$ par les investisseurs sur le marché est $\mathcal{F}_t$.
 Nous supposons que l'initié dispose en outre, dès le début de son investissement à $t=0$, d'une information supplémentaire sous la forme d'une variable aléatoire $L \in L^1(\Omega, \mathcal{F}_T)$ sur l'espace de probabilité filtré $(\Omega, \mathcal{F}_t; t \in [0,T], \mathbb{P})$. 
-%Dans le cas que nous avons étudié, $L = lnS^1_T - lnS^2_T$, le rapport au temps $T$ des deux actifs de prix $S^1$ et $S^2$. 
 Notons alors $\mathcal{Y}$ la filtration "naturelle" de l'initié obtenue par grossissement initial de $\mathcal{F}$, lui adjoignant la variable aléatoire $L : \mathcal{Y}_t = \mathcal{F}_t \vee \sigma(L), t \in [0, T]$.\\
 
-\par A l'instant $t=0$, l'initié dispose d'un capital $X_0$. Il consomme à une vitesse $c$, un processus positif $\mathcal{Y}$-adapté, vérifiant $\int_{0}^{T} c_s ds < \infty$, et place sur l'actif $i$ la quantité $\theta^i$. Notons $\pi_t^i = \theta^i_t S_t^i$ la somme investie sur la $i$-ième action pour $i =1, ..., d$. Sa richesse au temps $t$ s'exprime donc par : 
+\par A l'instant $t=0$, l'initié dispose d'un capital $X_0$. Il consomme à une vitesse $c$ (processus positif $\mathcal{Y}$-adapté vérifiant $\int_{0}^{T} c_s ds < \infty$ ), et place sur l'actif $i$ la quantité $\theta^i$. Notons $\pi_t^i = \theta^i_t S_t^i$ la somme investie sur la $i$-ième action pour $i =1, ..., d$. Sa richesse au temps $t$ s'exprime donc par : 
 \begin{center}
 $X_t = \displaystyle \sum_{i=0}^{d} \theta^i_t S_t^i - \int_{0}^{t} c_s ds$
 \end{center}
@@ -56,9 +55,9 @@ d(X_t R_t) &= X_t dR_t + R_t dX_t + d<X, R>_t \\
 &= -X_t r_t R_t dt + R_t (X_t r_t - c_t)dt + R_t(\pi_t, b_t - r_t\textbf{1})dt + R_t (\pi_t, \sigma_t dW_t)\\
 & = -R_t c_t dt + (R_t \pi_t,  b_t - r_t\textbf{1})dt + (R_t \pi_t, \sigma_t dW_t)
 \end{flalign*}
-Ainsi, la richesse $X$ actualisée vérifie l'équation : 
+Ainsi, la richesse $X$ actualisée de l'initié vérifie l'équation : 
 
-\begin{equation}
+\begin{equation}\label{equation_wealth}
 \displaystyle X_tR_t + \int_{0}^{t} R_s c_s ds + \int_{0}^{t} (R_s \pi_s,  b_s - r_s\textbf{1})ds + \int_{0}^{t}(R_s \pi_s, \sigma_s dW_s)
 \end{equation}
 \

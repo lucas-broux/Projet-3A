@@ -10,10 +10,13 @@
 \contentsline {subsection}{\numberline {2.4}Cas particulier : $L = \qopname \relax o{ln}\left ( S_T^{1} \right ) - \qopname \relax o{ln}\left ( S_T^{2} \right )$}{7}{subsection.2.4}
 \contentsline {subsubsection}{\numberline {2.4.1}Calcul explicite des richesses}{8}{subsubsection.2.4.1}
 \contentsline {subsubsection}{\numberline {2.4.2}Analyse asymptotique de $Z$}{10}{subsubsection.2.4.2}
-\contentsline {subsubsection}{\numberline {2.4.3}Simulations num\IeC {\'e}riques}{10}{subsubsection.2.4.3}
-\contentsline {section}{\numberline {3}Mod\IeC {\`e}le avec sauts}{14}{section.3}
-\contentsline {subsection}{\numberline {3.1}Description du mod\IeC {\`e}le, \IeC {\'e}volution des prix et de la richesse}{14}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Raisonnement}{14}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Cas particulier : $L = \qopname \relax o{ln}\left ( S_T^{1} \right ) - \qopname \relax o{ln}\left ( S_T^{2} \right )$}{15}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Formule explicite, faisabilit\IeC {\'e} num\IeC {\'e}rique}{15}{subsubsection.3.3.1}
-\contentsline {section}{\numberline {4}Conclusion}{17}{section.4}
+\contentsline {subsubsection}{\numberline {2.4.3}Test statistique}{10}{subsubsection.2.4.3}
+\contentsline {subsubsection}{\numberline {2.4.4}Simulations num\IeC {\'e}riques}{11}{subsubsection.2.4.4}
+\contentsline {section}{\numberline {3}Mod\IeC {\`e}le avec sauts}{15}{section.3}
+\contentsline {subsection}{\numberline {3.1}Description du mod\IeC {\`e}le, \IeC {\'e}volution des prix et de la richesse}{15}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Raisonnement}{15}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Cas particulier : $L = \qopname \relax o{ln}\left ( S_T^{1} \right ) - \qopname \relax o{ln}\left ( S_T^{2} \right )$}{16}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Formule explicite, faisabilit\IeC {\'e} num\IeC {\'e}rique}{16}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Simulations num\IeC {\'e}riques}{20}{subsubsection.3.3.2}
+\contentsline {section}{\numberline {4}Conclusion}{24}{section.4}
+\contentsline {section}{\numberline {5}Retour d'exp\IeC {\'e}rience sur le projet}{25}{section.5}
