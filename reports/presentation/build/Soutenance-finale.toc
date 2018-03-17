@@ -2,5 +2,11 @@
 \beamer@sectionintoc {1}{Introduction}{2}{0}{1}
 \beamer@subsectionintoc {1}{1}{Projet}{3}{0}{1}
 \beamer@subsectionintoc {1}{2}{Choix du sujet}{4}{0}{1}
-\beamer@sectionintoc {3}{Mod\IeC {\`e}le diffusif}{6}{0}{2}
+\beamer@sectionintoc {3}{Mod\IeC {\`e}le diffusif - cas particulier}{6}{0}{2}
 \beamer@subsectionintoc {3}{1}{Description du mod\IeC {\`e}le}{7}{0}{2}
+\beamer@subsectionintoc {3}{2}{Strat\IeC {\'e}gie optimale}{10}{0}{2}
+\beamer@subsectionintoc {3}{3}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{10}{0}{2}
+\beamer@subsectionintoc {3}{4}{Analyse du gain de l'initi\IeC {\'e}}{10}{0}{2}
+\beamer@subsectionintoc {3}{5}{Simulations}{10}{0}{2}
+\beamer@sectionintoc {4}{Conclusion}{10}{0}{3}
+\beamer@sectionintoc {5}{Retour d'exp\IeC {\'e}rience}{11}{0}{4}

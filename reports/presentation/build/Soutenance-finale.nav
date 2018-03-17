@@ -20,7 +20,7 @@
 \headcommand {\beamer@framepages {5}{5}}
 \headcommand {\beamer@sectionpages {5}{5}}
 \headcommand {\beamer@subsectionpages {5}{5}}
-\headcommand {\sectionentry {3}{Mod\IeC {\`e}le diffusif}{6}{Mod\IeC {\`e}le diffusif}{0}}
+\headcommand {\sectionentry {3}{Mod\IeC {\`e}le diffusif - cas particulier}{6}{Mod\IeC {\`e}le diffusif - cas particulier}{0}}
 \headcommand {\slideentry {3}{0}{1}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
 \headcommand {\beamer@subsectionpages {6}{6}}
@@ -31,8 +31,26 @@
 \headcommand {\beamer@framepages {8}{8}}
 \headcommand {\slideentry {3}{1}{3}{9/9}{Description du mod\IeC {\`e}le}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@partpages {1}{9}}
 \headcommand {\beamer@subsectionpages {7}{9}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{10}{Strat\IeC {\'e}gie optimale}}
+\headcommand {\beamer@subsectionpages {10}{9}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{10}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}}
+\headcommand {\beamer@subsectionpages {10}{9}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{10}{Analyse du gain de l'initi\IeC {\'e}}}
+\headcommand {\beamer@subsectionpages {10}{9}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{10}{Simulations}}
 \headcommand {\beamer@sectionpages {6}{9}}
-\headcommand {\beamer@documentpages {9}}
-\headcommand {\gdef \inserttotalframenumber {9}}
+\headcommand {\beamer@subsectionpages {10}{9}}
+\headcommand {\sectionentry {4}{Conclusion}{10}{Conclusion}{0}}
+\headcommand {\slideentry {4}{0}{1}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\beamer@sectionpages {10}{10}}
+\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\sectionentry {5}{Retour d'exp\IeC {\'e}rience}{11}{Retour d'exp\IeC {\'e}rience}{0}}
+\headcommand {\slideentry {5}{0}{1}{11/11}{}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@partpages {1}{11}}
+\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\beamer@sectionpages {11}{11}}
+\headcommand {\beamer@documentpages {11}}
+\headcommand {\gdef \inserttotalframenumber {11}}
