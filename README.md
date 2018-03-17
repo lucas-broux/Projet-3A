@@ -3,9 +3,9 @@ Academic project as part of the Financial Mathematics course (MAP552) at École 
 
 [1] L. Denis, A. Grorud, and M. Pontier. Formes de dirichlet sur un espace de wiener-poisson, application au grossissement de filtration. In Séminaire de Probabilitées XXXIV, pages 198{217. Springer, 2000.
 
-[2] H. Föllmer and P. Imkeller. Anticipation cancelled by b girsanov transformation : a paradox on wiener space. Ann. Inst. H. Poincaré Probabilités et Statististiques, 1993.
+[2] H. Föllmer and P. Imkeller. Anticipation cancelled by a girsanov transformation : a paradox on wiener space. Ann. Inst. H. Poincaré Probabilités et Statististiques, 1993.
 
-[3] A. Grorud and M. Pontier. Comment detecter le délit d'initié ? C. R. Acad. Sci. Paris, 1997.
+[3] A. Grorud and M. Pontier. Comment détecter le délit d'initié ? C. R. Acad. Sci. Paris, 1997.
 
 [4] A. Grorud and M. Pontier. Insider trading in a continuous time market model. International Journal of Theoretical and Applied Finance, 1998.
 

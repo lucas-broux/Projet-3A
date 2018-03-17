@@ -1,0 +1,157 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{makeidx}
+\makeatletter
+\newcommand{\mathleft}{\@fleqntrue\@mathmargin0pt}
+\newcommand{\mathcenter}{\@fleqnfalse}
+\makeatother
+\setlength\parindent{0pt}
+\makeindex
+
+\usetheme{Berlin}
+\title{Modélisation et détection de délit d'initié}
+\author{BROUX Lucas, HEANG Kitiyavirayuth}
+\date{20 mars 2018}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+% Prévoir 30 minutes de passage, 10 minutes de questions.
+
+\begin{document}
+
+%Title page
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Introduction}
+\subsection{Projet}
+\begin{frame}
+\frametitle{Présentation du projet}
+\begin{itemize}
+\item \textbf{Modélisation et détection de délit d'initié :}
+\par Que se passe t'il lorsqu'un agent dispose d'une information confidentielle sur l'évolution future du marché ?
+\item Objectifs :
+	\begin{itemize}
+	\item Analyser le gain de l'initié par rapport à un non-initié.
+	\item Simuler les stratégies de l'initié et du non-initié.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Choix du sujet}
+\begin{frame}
+\frametitle{Choix du sujet}
+\begin{itemize}
+\item Problématique concrète.
+\item Aspect théorique : notions profondes et techniques.
+\item Étude de cas particuliers possible à notre niveau.
+\end{itemize}
+\end{frame}
+
+%Table of contents
+\section*{Plan}
+\begin{frame}
+\frametitle{Plan de la présentation}
+\tableofcontents
+\end{frame}
+
+%Sections MODELE DIFFUSIF 
+\section{Modèle diffusif}
+
+%SUBSECTION DESCRIPTIF DU MODELE 
+\subsection{Description du modèle}
+
+%EVOLUTION DES PRIX
+\begin{frame}
+\frametitle{évolution des prix}
+On considère 2 actions risquées sur le marché financier sur l'espace de probabilité $(\Omega, \mathcal{F}_t; t \in[0, T], \mathbb{P})$, dont les prix évoluent selon l'équation : 
+\begin{equation*}
+\begin{cases} S^i_t = S^0_t + \int_{0}^{t} S^s_t b^s_t dt + \int_{0}^{t} S^i_s \sigma^i_s dW_s, \quad 0 \leq t \leq T, \quad i = \{1, 2\}\\
+S^0_t = S^0_0 +  \int_{0}^{t} S^0_s r_s ds \end{cases}
+\end{equation*}
+\begin{itemize}
+\item $W$ est un mouvement brownien de 2 dimension dont $\mathcal{F}$ est la filtration naturelle.\\
+\item Pour simplifier, on suppose que $b, r$ et $\sigma$ sont constants.
+\end{itemize}
+\end{frame}
+
+%INITI�
+\begin{frame}
+\frametitle{Initié}
+\begin{itemize}
+\item On suppose qu'à $t= 0$, l'initié dispose a une information sur le futur, $L := \ln(S^1_T) - \ln(S^2_T)$, dont les autres investisseurs sur le marché ne disposent pas.  \\
+\item Sa filtration naturelle est donc $\mathcal{Y}_t := \mathcal{F}_t \vee \sigma(L)$.\\
+\item Il dispose d'un capital $X_0$ à $t=0$, consomme à une vitesse $c$, et il place la quantité $\theta^i$ sur l'actif $i$.\\
+\item $\pi_t^i = \theta^i_t S^i_t$ : la somme investie sur le $i$-ième l'actif, $i= \{1, 2\}$.
+\end{itemize}
+\end{frame}
+
+%HYPOTHESE D'AUTOFINACEMENT
+\begin{frame}
+\frametitle{Hypothèse d'autofinancement}
+\begin{itemize}
+
+\item Sa richesse au temps $t$ s'exprime donc : 
+\begin{equation*}
+X_t = \displaystyle \sum_{i=0}^{2} \theta^i_t S^i_t - \int_{0}^{t} c_s ds
+\end{equation*}
+
+\item Nous supposons que son portefeuille est autofinançant : 
+\begin{equation*}
+dX_t = \displaystyle \sum_{i=0}^{2} \theta^i_t dS^i_t - c_t dt
+\end{equation*}
+
+\item En notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, on obtient : 
+\begin{equation*}
+X_t R_t + \int_{0}^{t} R_s c_s ds = \int_{0}^{t} (R_s \pi_s, b_s - r_s \textbf{1})ds + \int_{0}^{t} (R_s \pi_s, \sigma_s dW_s)
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
