@@ -3,54 +3,90 @@
 \headcommand {\beamer@sectionpages {1}{1}}
 \headcommand {\beamer@subsectionpages {1}{1}}
 \headcommand {\sectionentry {1}{Introduction}{2}{Introduction}{0}}
-\headcommand {\slideentry {1}{0}{1}{2/2}{}{0}}
+\headcommand {\beamer@subsectionpages {2}{1}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{2}{Projet}}
+\headcommand {\slideentry {1}{1}{1}{2/2}{Projet}{0}}
 \headcommand {\beamer@framepages {2}{2}}
 \headcommand {\beamer@subsectionpages {2}{2}}
-\headcommand {\beamer@subsectionentry {0}{1}{1}{3}{Projet}}
-\headcommand {\slideentry {1}{1}{1}{3/3}{Projet}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{3}{Choix du sujet}}
+\headcommand {\slideentry {1}{2}{1}{3/3}{Choix du sujet}{0}}
 \headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@sectionpages {2}{3}}
 \headcommand {\beamer@subsectionpages {3}{3}}
-\headcommand {\beamer@subsectionentry {0}{1}{2}{4}{Choix du sujet}}
-\headcommand {\slideentry {1}{2}{1}{4/4}{Choix du sujet}{0}}
+\headcommand {\sectionentry {2}{Plan}{4}{Plan}{0}}
+\headcommand {\slideentry {2}{0}{1}{4/4}{}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\beamer@sectionpages {2}{4}}
+\headcommand {\beamer@sectionpages {4}{4}}
 \headcommand {\beamer@subsectionpages {4}{4}}
-\headcommand {\sectionentry {2}{Plan}{5}{Plan}{0}}
-\headcommand {\slideentry {2}{0}{1}{5/5}{}{0}}
+\headcommand {\sectionentry {3}{Mod\IeC {\`e}le diffusif - cas particulier}{5}{Mod\IeC {\`e}le diffusif - cas particulier}{0}}
+\headcommand {\slideentry {3}{0}{1}{5/5}{}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\beamer@sectionpages {5}{5}}
 \headcommand {\beamer@subsectionpages {5}{5}}
-\headcommand {\sectionentry {3}{Mod\IeC {\`e}le diffusif - cas particulier}{6}{Mod\IeC {\`e}le diffusif - cas particulier}{0}}
-\headcommand {\slideentry {3}{0}{1}{6/6}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{6}{Description du mod\IeC {\`e}le}}
+\headcommand {\slideentry {3}{1}{1}{6/6}{Description du mod\IeC {\`e}le}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{7}{Description du mod\IeC {\`e}le}}
-\headcommand {\slideentry {3}{1}{1}{7/7}{Description du mod\IeC {\`e}le}{0}}
+\headcommand {\slideentry {3}{1}{2}{7/7}{Description du mod\IeC {\`e}le}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\slideentry {3}{1}{2}{8/8}{Description du mod\IeC {\`e}le}{0}}
+\headcommand {\slideentry {3}{1}{3}{8/8}{Description du mod\IeC {\`e}le}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {3}{1}{3}{9/9}{Description du mod\IeC {\`e}le}{0}}
+\headcommand {\slideentry {3}{1}{4}{9/9}{Description du mod\IeC {\`e}le}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@subsectionpages {7}{9}}
+\headcommand {\beamer@subsectionpages {6}{9}}
 \headcommand {\beamer@subsectionentry {0}{3}{2}{10}{Strat\IeC {\'e}gie optimale}}
-\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{10}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}}
-\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{10}{Analyse du gain de l'initi\IeC {\'e}}}
-\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\beamer@subsectionentry {0}{3}{5}{10}{Simulations}}
-\headcommand {\beamer@sectionpages {6}{9}}
-\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\sectionentry {4}{Conclusion}{10}{Conclusion}{0}}
-\headcommand {\slideentry {4}{0}{1}{10/10}{}{0}}
+\headcommand {\slideentry {3}{2}{1}{10/10}{Strat\IeC {\'e}gie optimale}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@sectionpages {10}{10}}
-\headcommand {\beamer@subsectionpages {10}{10}}
-\headcommand {\sectionentry {5}{Retour d'exp\IeC {\'e}rience}{11}{Retour d'exp\IeC {\'e}rience}{0}}
-\headcommand {\slideentry {5}{0}{1}{11/11}{}{0}}
+\headcommand {\slideentry {3}{2}{2}{11/11}{Strat\IeC {\'e}gie optimale}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@partpages {1}{11}}
-\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\beamer@sectionpages {11}{11}}
-\headcommand {\beamer@documentpages {11}}
-\headcommand {\gdef \inserttotalframenumber {11}}
+\headcommand {\beamer@subsectionpages {10}{11}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{12}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}}
+\headcommand {\slideentry {3}{3}{1}{12/12}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {3}{3}{2}{13/13}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\slideentry {3}{3}{3}{14/14}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\slideentry {3}{3}{4}{15/15}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {3}{3}{5}{16/16}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {3}{3}{6}{17/17}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@subsectionpages {12}{17}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{18}{Analyse du gain de l'initi\IeC {\'e}}}
+\headcommand {\slideentry {3}{4}{1}{18/18}{Analyse du gain de l'initi\IeC {\'e}}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\slideentry {3}{4}{2}{19/19}{Analyse du gain de l'initi\IeC {\'e}}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\slideentry {3}{4}{3}{20/20}{Analyse du gain de l'initi\IeC {\'e}}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\slideentry {3}{4}{4}{21/21}{Analyse du gain de l'initi\IeC {\'e}}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\slideentry {3}{4}{5}{22/22}{Analyse du gain de l'initi\IeC {\'e}}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\beamer@subsectionpages {18}{22}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{23}{Simulations}}
+\headcommand {\slideentry {3}{5}{1}{23/23}{Simulations}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\beamer@sectionpages {5}{23}}
+\headcommand {\beamer@subsectionpages {23}{23}}
+\headcommand {\sectionentry {4}{Conclusion}{24}{Conclusion}{0}}
+\headcommand {\slideentry {4}{0}{1}{24/24}{}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\slideentry {4}{0}{2}{25/25}{}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\beamer@sectionpages {24}{25}}
+\headcommand {\beamer@subsectionpages {24}{25}}
+\headcommand {\sectionentry {5}{Retour d'exp\IeC {\'e}rience}{26}{Retour d'exp\IeC {\'e}rience}{0}}
+\headcommand {\slideentry {5}{0}{1}{26/26}{}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\slideentry {5}{0}{2}{27/27}{}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\slideentry {5}{0}{3}{28/28}{}{0}}
+\headcommand {\beamer@framepages {28}{28}}
+\headcommand {\slideentry {5}{0}{4}{29/29}{}{0}}
+\headcommand {\beamer@framepages {29}{29}}
+\headcommand {\beamer@partpages {1}{29}}
+\headcommand {\beamer@subsectionpages {26}{29}}
+\headcommand {\beamer@sectionpages {26}{29}}
+\headcommand {\beamer@documentpages {29}}
+\headcommand {\gdef \inserttotalframenumber {29}}

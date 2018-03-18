@@ -4,9 +4,15 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{manfnt}
 \usepackage{graphicx}
 \usepackage{amsthm}
 \usepackage{url}
+\usepackage{makeidx}
+\usepackage{mathtools}
+\usepackage{dsfont}
+\usepackage{hyperref}
+\usepackage{float}
 \usepackage{makeidx}
 \makeatletter
 \newcommand{\mathleft}{\@fleqntrue\@mathmargin0pt}
@@ -41,8 +47,8 @@
 \titlepage
 \end{frame}
 
-\section{Introduction}
-\subsection{Projet}
+\section*{Introduction}
+\subsection*{Projet}
 \begin{frame}
 \frametitle{Présentation du projet}
 \begin{itemize}
@@ -51,12 +57,12 @@
 \item Objectifs :
 	\begin{itemize}
 	\item Analyser le gain de l'initié par rapport à un non-initié.
-	\item Simuler les stratégies de l'initié et du non-initié.
+	\item Simuler la richesse de l'initié et du non-initié.
 	\end{itemize}
 \end{itemize}
 \end{frame}
 
-\subsection{Choix du sujet}
+\subsection*{Choix du sujet}
 \begin{frame}
 \frametitle{Choix du sujet}
 \begin{itemize}
@@ -81,16 +87,32 @@
 
 %EVOLUTION DES PRIX
 \begin{frame}
-\frametitle{évolution des prix}
+\frametitle{Marché}
 On considère 2 actions risquées sur le marché financier sur l'espace de probabilité $(\Omega, \mathcal{F}_t; t \in[0, T], \mathbb{P})$, dont les prix évoluent selon l'équation : 
 \begin{equation*}
-\begin{cases} S^i_t = S^0_t + \int_{0}^{t} S^s_t b^s_t dt + \int_{0}^{t} S^i_s \sigma^i_s dW_s, \quad 0 \leq t \leq T, \quad i = \{1, 2\}\\
-S^0_t = S^0_0 +  \int_{0}^{t} S^0_s r_s ds \end{cases}
+\begin{cases} 
+S^0_t = S^0_0 +  \int_{0}^{t} S^0_s r_s ds \\
+S^1_t = S^1_0 + \int_{0}^{t} S^1_s b^1_s ds + \int_{0}^{t} S^1_s \sigma^1_s dW_s, \quad 0 \leq t \leq T\\
+S^2_t = S^2_0 + \int_{0}^{t} S^2_s b^2_s ds + \int_{0}^{t} S^2_s \sigma^2_s dW_s, \quad 0 \leq t \leq T
+\end{cases}
 \end{equation*}
 \begin{itemize}
-\item $W$ est un mouvement brownien de 2 dimension dont $\mathcal{F}$ est la filtration naturelle.\\
+\item $W$ est un mouvement brownien à 2 dimensions dont $\mathcal{F}$ est la filtration naturelle.\\
 \item Pour simplifier, on suppose que $b, r$ et $\sigma$ sont constants.
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Marché}
+Les prix peuvent donc s'expliciter : 
+\begin{displaymath}
+\begin{cases}
+S_t^0 &= S_0^0 e^{ r t } \\
+S_t^1 &= S_0^1 e^{ \left( b_1 - \frac{1}{2} ||\sigma_1||^2 \right) t + \left( \sigma_1, W \left( t \right) \right) }  \\
+S_t^2 &= S_0^2 e^{ \left( b_2 - \frac{1}{2} ||\sigma_2||^2 \right) t + \left( \sigma_2, W \left( t \right) \right) }
+\end{cases}
+\end{displaymath}
+
 \end{frame}
 
 %INITIE
@@ -111,12 +133,12 @@ S^0_t = S^0_0 +  \int_{0}^{t} S^0_s r_s ds \end{cases}
 
 \item Sa richesse au temps $t$ s'exprime donc : 
 \begin{equation*}
-X_t = \displaystyle \sum_{i=0}^{2} \theta^i_t S^i_t - \int_{0}^{t} c_s ds
+X_t = \displaystyle \theta^0_t S^0_t  + \theta^1_t S^1_t  + \theta^2_t S^2_t - \int_{0}^{t} c_s ds
 \end{equation*}
 
 \item Nous supposons que son portefeuille est autofinançant : 
 \begin{equation*}
-dX_t = \displaystyle \sum_{i=0}^{2} \theta^i_t dS^i_t - c_t dt
+dX_t = \displaystyle  \theta^0_t dS^0_t + \theta^1_t dS^1_t + \theta^2_t dS^2_t - c_t dt
 \end{equation*}
 
 \item En notant $R_t = (S^0_t)^{-1}$ le facteur d'actualisation, on obtient : 
@@ -127,19 +149,185 @@ X_t R_t + \int_{0}^{t} R_s c_s ds = \int_{0}^{t} (R_s \pi_s, b_s - r_s \textbf{1
 \end{frame}
 
 
-
 \subsection{Stratégie optimale}
+\begin{frame}
+\frametitle{Stratégie optimale}
+\par L'initié cherche à optimiser son "utilité" :
+\small
+\begin{align*}
+      J \colon &\underbrace{\mathcal{A}}_{\text{Stratégies admissibles}} \to \mathbb{R} \\
+       &\left( \pi, c \right) \xmapsto{\phantom{\mathcal{A}}} J \left( X_0, \pi, c \right) := \mathbb{E} \left[ \int_0^A \log  \left( c_t \right) dt + \log \left( \underbrace{X_A^{\pi, c}}_{\text{Richesse au temps } A} \right) \left\vert\right. \mathcal{Y}_0 \right]
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Stratégie optimale}
+
+\begin{itemize}
+
+\item où
+\begin{displaymath}
+\mathcal{A} = \left\lbrace \left( \pi, c \right), 
+\begin{cases} 
+\pi \enskip \mathcal{Y}-\text{prévisible}, \\
+c > 0 \enskip \mathcal{Y}-\text{adapté}, \\ 
+\int_0^T c_s ds < + \infty \enskip \text{et} \enskip \sigma^* \pi \in L^2 \left[ 0; T \right] \enskip \mathbb{P}-p.s., \\
+X^{\pi, c} \geq 0 \enskip dt \otimes d \mathbb{P}-p.s. 
+\end{cases}
+\right\rbrace
+\end{displaymath} 
+\item $A < T$ : \emph{Temps final}.
+\end{itemize}
+\par Peut-on caractériser $\mathcal{A}$ sous une forme exploitable ?
+\end{frame}
+
 
 \subsection{Résolution du problème d'optimisation}
+\begin{frame}
+\frametitle{Raisonnement}
+\end{frame}
+
+\begin{frame}
+\frametitle{Changement de probabilités}
+\end{frame}
+
+\begin{frame}
+\frametitle{Grossissement de filtration}
+\end{frame}
+
+\begin{frame}
+\frametitle{Changement de probabilité}
+\end{frame}
+
+\begin{frame}
+\frametitle{Caractérisation de $\mathcal{A}$}
+\end{frame}
+
+\begin{frame}
+\frametitle{Résolution du problème d'optimisation}
+\end{frame}
 
 \subsection{Analyse du gain de l'initié}
 
+\begin{frame}
+\frametitle{Forme explicite du gain}
+\par On a :
+\begin{displaymath}
+Y \left( t \right) = 
+\begin{cases}
+e^{- \left( \eta, W_{t} \right)-\frac{1}{2} t {\| \eta \|}^{2}} =: Y_0 \left( t \right) & \text{pour le non initié} \\
+e^{- \int_{0}^{t} \left( l_{s} + \eta, dW_{s} - l_s ds \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta \|}^{2} ds} & \text{pour l'initié}
+\end{cases}
+\end{displaymath}
+
+\par On s'intéresse au gain de l'initié par rapport au non-initié : 
+
+\begin{displaymath}
+	\begin{split}
+	Z \left( t \right) &:= \frac{Y_0 \left( t \right)}{Y \left( t \right)} = \frac{ e^{- \left( \eta, W_{t} \right)-\frac{1}{2} t {\| \eta \|}^{2}}}{e^{- \int_{0}^{t} \left( l_{s} + \eta, dW_{s} - l_s ds \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta \|}^{2} ds}} \\
+	&= e^{ \int_{0}^{t} \left[ \left( l_s, dW_{s} \right) ds \right] - \frac{1}{2} \int_{0}^{t} {\| l_{s} \|}^{2} ds}
+	\end{split}
+\end{displaymath}
+\end{frame}
+ 
+\begin{frame}
+\frametitle{Forme explicite du gain}
+\par Donc
+\begin{displaymath}
+d \log \left( Z \left( t \right) \right) = \underbrace{\left(l_s, d W_s \right)}_{ = \frac{d p \left( t, L \right)}{p \left( t, L \right)}} - \frac{1}{2} {\| l_{s} \|}^{2} ds = d p \left( t, L \right)
+\end{displaymath}
+
+\par Donc $\frac{Z \left( t \right)}{ p \left( t, L \right) }$ est constant :
+
+\begin{displaymath}
+	\begin{split}
+	Z \left( t \right) &= \frac{Z \left( 0 \right)}{ p \left( 0, L \right) } p \left( t, L \right)
+	\end{split}
+\end{displaymath}
+\par Interprétation : pour tout $t$, le gain proportionnel de l'initié correspond - à une constante initiale près -  à la densité conditionnelle de la variable $L$ sachant $\mathcal{F}_t$, prise en $x = L$.
+\end{frame}
+ 
+\begin{frame}
+\frametitle{Forme explicite du gain}
+\par On obtient donc :
+\begin{displaymath}
+	\begin{split}
+		\boxed{
+	Z \left( t \right) = \frac{\sqrt{T}}{\sqrt{T - t}} e^{\frac{- \left( \gamma, W \left( T \right) - W \left( t \right) \right)^2}{2 ||\gamma||^2 \left( T - t \right)} + \frac{\left( \gamma, W \left( T \right) \right)^2}{2 ||\gamma||^2 T }}
+		}
+	\end{split}
+\end{displaymath}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analyse du gain}
+\par En remplaçant $ \left( \gamma, W \left( T \right) - W \left( t \right) \right)^2 $ par son espérance $||\gamma||^2 \left( T - t \right)  $,
+
+\begin{displaymath}
+	Z \left( t \right) \simeq \frac{\sqrt{T}}{\sqrt{T - t}}
+\end{displaymath}
+
+\par \textdbend Ce raisonnement est heuristique. Pour calculer $\mathbb{E} \left[ Z \left( t \right) \right]$, il faudrait utiliser le théorème de transfert.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Visualisation}
+\par Moyenne de 10000 simulations de $Z$ (\emph{simulations\_averages.py}) : 
+
+\end{frame}
+
+
 \subsection{Simulations}
+
+\begin{frame}
+\frametitle{Simulations}
+\par Nous avons implémenté numériquement les formules (\emph{repository Github} du projet : \url{https://github.com/lucas-broux/Projet-3A}).
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/github.png}
+  \caption{}
+\end{figure}
+
+\end{frame}
 
 
 
 \section{Conclusion}
 
+\begin{frame}
+\frametitle{Conclusion}
+\begin{itemize}
+\item Il est possible d'exprimer et d'étudier le gain de l'initié dans des cas plus ou moins particuliers.
+\item Des théorèmes généraux mais techniques assurent que - sous hypothèses - le raisonnement reste vrai.
+\item Simulations numériques possibles dans certains cas, mais rendues difficiles dans d'autres.
+\end{itemize}
+\end{frame}
+
 \section{Retour d'expérience}
+
+\begin{frame}
+\frametitle{Retour d'expérience}
+\begin{itemize}
+\item Travail de lecture d'article :
+	\begin{itemize}
+	\item Identifier les passages trop techniques.
+	\item Étudier en détail les cas particuliers.
+	\end{itemize}
+\item Travail en binôme.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\Huge \center Merci !
+\huge\center Questions ?
+\end{frame}
+
+
+\begin{frame}
+\end{frame} % to enforce entries in the table of contents
+
 
 \end{document}
