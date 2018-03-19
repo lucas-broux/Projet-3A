@@ -280,8 +280,33 @@ B_t = W_t - \displaystyle \int_{0}^{t} \underbrace{\frac{\left( \gamma, W \left(
 \frametitle{Résolution du problème d'optimisation}
 Notre problème d'optimisation est donc 
 \begin{equation*}
+\mathbb{E}_{\mathbb{P}} \left[ \int_0^A \log  \left( c_t \right) dt + \log \left( X_A^{\pi, c}\right) \left\vert\right. \mathcal{Y}_0 \right]
+\end{equation*}
+sous contrainte 
+\begin{equation*}
+\mathbb{E}_{\mathbb{Q}_1} \left[ X_A^{\pi, c} R_A + \int_0^A R_t c_t dt \left\vert\right. \mathcal{Y}_0 \right] \leq X_0
+\end{equation*}
+
 \end{frame}
 
+\begin{frame}
+\frametitle{Résolution du problème d'optimisation}
+Les solutions du problème sont 
+\begin{equation*}
+\begin{cases}
+R_t c_t^* &= \frac{X_0}{A + 1} \frac{1}{Y} \left( t \right) \\
+R_t X_t^* &= \frac{X_0 \left( A + 1 - t \right)}{A + 1} \frac{1}{Y} \left( t \right)
+\end{cases}
+\end{equation*}
+où : 
+\begin{displaymath}
+Y \left( t \right) = 
+\begin{cases}
+e^{- \int_{0}^{t} \left( \eta_s, dW_{s} \right)-\frac{1}{2} \int_{0}^{t} {\| \eta_s \|}^{2} ds} & \text{pour le non initié} \\
+e^{- \int_{0}^{t} \left( l_{s} + \eta_s, dB_{s} \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta_s \|}^{2} ds} & \text{pour l'initié}
+\end{cases}
+\end{displaymath}
+\end{frame}
 \subsection{Analyse du gain de l'initié}
 
 \begin{frame}
@@ -410,6 +435,63 @@ Z \left( t \right) \geq  \frac{\sqrt{T}}{\sqrt{T - t}} \left( 1 + \left( \underb
 \begin{frame}
 \frametitle{Simulations}
 
+\end{frame}
+
+\section{Modèle avec sauts}
+\subsection{Description du modèle}
+
+\begin{frame}
+\frametitle{Marché}
+On considère $d$ actions risquées sur le marché sur l'espace de probabilité $(\Omega, \mathcal{F}_t; t\in [0, T], \mathbb{P})$. Les prix des actions, dirigés par un mouvement brownien $W$ de dimension $m$ et un processus de Poisson $N$ de dimension $n$, qui produit des sauts, ont pour équation :
+\begin{align*}
+\begin{cases}
+S^0_t &= S_0^0 + \int_{0}^{t} S^0_s r_s ds \\
+S_t^i &= S_0^i + \int_{0}^{t}S_s^i b_s^i ds + \int_{0}^{t}S_s^i \sigma^{ij}_t \sum_{j = 1}^{d} d(W^*, N^*)^{*}_j(s) \end{cases}
+\end{align*}
+$ 0 \leq t \leq T, i = 1, ..., d, m+n = d$
+\end{frame}
+
+\subsection{Raisonnement}
+
+\begin{frame}
+\frametitle{Raisonnement}
+\begin{itemize}
+\item On adapte les informations et le comportement de l'initié décrits dans le marché diffusif. 
+\item L'initié cherche à optimiser la fonction 
+\begin{equation*}
+\mathbb{E}_{\mathbb{P}} \Big[ \displaystyle \int_{0}^{A} \log (c_t)dt + \log(X_A^{\pi, c})\Big |\mathcal{Y}_0\Big]
+\end{equation*}
+dans l'ensemble de toutes les stratégies admissibles.
+\item Les méthodes dans le marché diffusif s'appliquent pour ce marché aussi pour faire grossir la filtration et se ramener à une mesure risque-neutre sur $(\Omega, \mathcal{Y}, \mathbb{Q}_1)$.
+\end{itemize}
+\end{frame}
+
+\subsection{Résolution du problème d'optimisation}
+\begin{frame}
+\frametitle{Résolution du problème d'optimisation}
+Le problème d'optimisation 
+\begin{equation*}
+\mathbb{E}_{\mathbb{P}} \Big[ \displaystyle \int_{0}^{A} \log (c_t)dt + \log(X_A^{\pi, c})\Big |\mathcal{Y}_0\Big]
+\end{equation*}
+sous contrainte 
+\begin{equation*}
+\mathbb{E}_{\mathbb{Q}_1} \left[ X_A^{\pi, c} R_A + \int_0^A R_t c_t dt \left\vert\right. \mathcal{Y}_0 \right] \leq X_0
+\end{equation*}
+a pour solutions : 
+\begin{displaymath}
+\text{pour } t \in [0, A], \quad \begin{cases}
+ R_t {c}_t^* &= \frac{X_0}{A+1} \frac{1}{Y}(t)\\
+ R_t {X}_t^* &= \frac{X_0(A+1-t)}{A+1}\frac{1}{Y}(t)\\
+ {\pi}_t^* &= (\sigma^*_t)^{-1}\frac{Y(t)}{Y(t^{-1})}\widehat{X}_t l_t
+\end{cases}
+\end{displaymath}
+\end{frame}
+
+\begin{frame}
+\frametitle{Résolution du problème d'optimisation}
+\begin{displaymath}
+Y_t = \varepsilon \left(\displaystyle \int_{0}^{t} \left(- \left( \eta_W \left( s \right), dW_s \right) + \left( - \eta_M \left(  s \right) - I_n, dM_s \right) \right)\right), 
+\end{displaymath}
 \end{frame}
 
 \section{Conclusion}
