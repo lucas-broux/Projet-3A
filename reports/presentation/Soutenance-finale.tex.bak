@@ -280,33 +280,8 @@ B_t = W_t - \displaystyle \int_{0}^{t} \underbrace{\frac{\left( \gamma, W \left(
 \frametitle{Résolution du problème d'optimisation}
 Notre problème d'optimisation est donc 
 \begin{equation*}
-\mathbb{E}_{\mathbb{P}} \left[ \int_0^A \log  \left( c_t \right) dt + \log \left( X_A^{\pi, c}\right) \left\vert\right. \mathcal{Y}_0 \right]
-\end{equation*}
-sous contrainte 
-\begin{equation*}
-\mathbb{E}_{\mathbb{Q}_1} \left[ X_A^{\pi, c} R_A + \int_0^A R_t c_t dt \left\vert\right. \mathcal{Y}_0 \right] \leq X_0
-\end{equation*}
-
 \end{frame}
 
-\begin{frame}
-\frametitle{Résolution du problème d'optimisation}
-Les solutions du problème sont 
-\begin{equation*}
-\begin{cases}
-R_t c_t^* &= \frac{X_0}{A + 1} \frac{1}{Y} \left( t \right) \\
-R_t X_t^* &= \frac{X_0 \left( A + 1 - t \right)}{A + 1} \frac{1}{Y} \left( t \right)
-\end{cases}
-\end{equation*}
-où : 
-\begin{displaymath}
-Y \left( t \right) = 
-\begin{cases}
-e^{- \int_{0}^{t} \left( \eta_s, dW_{s} \right)-\frac{1}{2} \int_{0}^{t} {\| \eta_s \|}^{2} ds} & \text{pour le non initié} \\
-e^{- \int_{0}^{t} \left( l_{s} + \eta_s, dB_{s} \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta_s \|}^{2} ds} & \text{pour l'initié}
-\end{cases}
-\end{displaymath}
-\end{frame}
 \subsection{Analyse du gain de l'initié}
 
 \begin{frame}
