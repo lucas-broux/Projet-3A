@@ -49,6 +49,7 @@ model.sigma = np.array([[0.75, 0],
 model.i_1 = 1
 model.i_2 = 2
 
+
 ###################################
 # Print model and model validity. #
 ###################################
@@ -59,7 +60,7 @@ print("Model validity: " + str(model._check_model_validity()))
 # Simulate market model and plot prices. #
 ##########################################
 model._simulate_prices()
-model._plot_prices_evolution()
+model._plot_prices_evolution(same_graph = True)
 model._compute_L()
 print("Value of the variable known to the insider: L = " + str(model.L))
 

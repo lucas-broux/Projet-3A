@@ -464,19 +464,146 @@ Z \left( t \right) \geq  \frac{\sqrt{T}}{\sqrt{T - t}} \left( 1 + \left( \underb
 \end{frame}
 
 \begin{frame}
-\frametitle{Simulations}
+\frametitle{Exemple de simulation}
+\par \emph{simulations\_diffusive\_model.py}, 
+\begin{displaymath}
+\begin{cases}
+T &= 1 \\
+A &= 0.95 \\
+d &= 2 \\
+r &= 0.1 \\
+b &= \begin{bmatrix}
+		0.1 & -0.05
+	\end{bmatrix} \\
+\sigma &= \begin{bmatrix}
+			0.75 & 0 \\
+			0 & 1
+		  \end{bmatrix}
+\end{cases}
+\end{displaymath}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple de simulation}
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/prices.png}
+  \caption{Évolution des prix}
+\end{figure}
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Simulations}
+\frametitle{Exemple de simulation}
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/compared_wealths.png}
+  \caption{Richesse comparée}
+\end{figure}
+\end{frame}
 
+\begin{frame}
+\frametitle{Choix des paramètres}
+\par On a 
+\begin{displaymath}
+\frac{1}{Y_0 \left( t \right)} = e^{ \left( \eta, W_{t} \right) + \frac{1}{2} t {\| \eta \|}^{2}} \quad \text{avec } \eta = (\sigma)^{-1} (b - r \textbf{1})
+\end{displaymath}
+\begin{itemize}
+\item Si $\eta$ grand ($\sigma$ petit ou/et $b$ éloigné de $r$): le terme en $t {\| \eta \|}^{2}$ domine : explosion de la richesse.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Simulations}
+\begin{figure}[H]
+\begin{minipage}{.15\textwidth}
+\begin{displaymath}
+\tiny
+\begin{cases}
+r &= 0.1 \\
+b &= \begin{bmatrix}
+		0.55 & -0.35
+	\end{bmatrix} \\
+\sigma &= \begin{bmatrix}
+			-0.25 & 0 \\
+			0 & -0.2
+		  \end{bmatrix}
+\end{cases}
+\end{displaymath}
+\end{minipage}%
+\begin{minipage}{.85\textwidth}
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_2/wealth_non_insider.png}
+\end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Choix des paramètres}
+\par On a 
+\begin{displaymath}
+\frac{1}{Y_0 \left( t \right)} = e^{ \left( \eta, W_{t} \right) + \frac{1}{2} t {\| \eta \|}^{2}} \quad \text{avec } \eta = (\sigma)^{-1} (b - r \textbf{1})
+\end{displaymath}
+\begin{itemize}
+\item Si $\eta$ grand ($\sigma$ petit ou/et $b$ éloigné de $r$): le terme en $t {\| \eta \|}^{2}$ domine : explosion de la richesse.
+\par \textbf{Interprétation} : faible volatilité et/ou fort drift : les agents peuvent établir de bonnes stratégies.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Choix des paramètres}
+\par On a 
+\begin{displaymath}
+\frac{1}{Y_0 \left( t \right)} = e^{ \left( \eta, W_{t} \right) + \frac{1}{2} t {\| \eta \|}^{2}} \quad \text{avec } \eta = (\sigma)^{-1} (b - r \textbf{1})
+\end{displaymath}
+\begin{itemize}
+\item Si $\eta$ petit ($\sigma$ grand ou/et $b$ proche de $r$): le terme en $\left( \eta, W_{t} \right)$ domine : caractère "aléatoire" de la richesse.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Simulations}
-
+\begin{figure}[H]
+\begin{minipage}{.15\textwidth}
+\begin{displaymath}
+\tiny
+\begin{cases}
+r &= 0.1 \\
+b &= \begin{bmatrix}
+		0.15 & 0.05
+	\end{bmatrix} \\
+\sigma &= \begin{bmatrix}
+			-0.75 & 0 \\
+			0 & 1
+		  \end{bmatrix}
+\end{cases}
+\end{displaymath}
+\end{minipage}%
+\begin{minipage}{.85\textwidth}
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_3/wealth_non_insider.png}
+\end{minipage}
+\end{figure}
 \end{frame}
+
+\begin{frame}
+\frametitle{Choix des paramètres}
+\par On a 
+\begin{displaymath}
+\frac{1}{Y_0 \left( t \right)} = e^{ \left( \eta, W_{t} \right) + \frac{1}{2} t {\| \eta \|}^{2}} \quad \text{avec } \eta = (\sigma)^{-1} (b - r \textbf{1})
+\end{displaymath}
+\begin{itemize}
+\item Si $\eta$ petit ($\sigma$ grand ou/et $b$ proche de $r$): le terme en $\left( \eta, W_{t} \right)$ domine : caractère "aléatoire" de la richesse.
+\par \textbf{Interprétation} : forte volatilité et/ou drift incertain : les agents ont du mal à établir de bonnes stratégies.
+\end{itemize}
+\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Simulations}
+%
+%\end{frame}
 
 \section{Modèle avec sauts}
 \subsection{Description du modèle}
