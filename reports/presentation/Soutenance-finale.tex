@@ -235,7 +235,7 @@ e^{- \int_{0}^{t} \left( l_{s} + \eta, dW_{s} - l_s ds \right) - \frac{1}{2} \in
 \frametitle{Forme explicite du gain}
 \par Donc
 \begin{displaymath}
-d \log \left( Z \left( t \right) \right) = \underbrace{\left(l_s, d W_s \right)}_{ = \frac{d p \left( t, L \right)}{p \left( t, L \right)}} - \frac{1}{2} {\| l_{s} \|}^{2} ds = d p \left( t, L \right)
+d \log \left( Z \left( t \right) \right) = \underbrace{\left(l_s, d W_s \right)}_{ = \frac{d p \left( t, L \right)}{p \left( t, L \right)}} - \frac{1}{2} {\| l_{s} \|}^{2} ds = d \log \left( p \left( t, L \right) \right)
 \end{displaymath}
 
 \par Donc $\frac{Z \left( t \right)}{ p \left( t, L \right) }$ est constant :
@@ -258,26 +258,57 @@ d \log \left( Z \left( t \right) \right) = \underbrace{\left(l_s, d W_s \right)}
 		}
 	\end{split}
 \end{displaymath}
+\par En remplaçant $ \left( \gamma, W \left( T \right) - W \left( t \right) \right)^2 $ par son espérance $||\gamma||^2 \left( T - t \right)  $,
+
+\begin{displaymath}
+	Z \left( t \right) \simeq \frac{\sqrt{T}}{\sqrt{T - t}} \quad \substack{\text{\textdbend raisonnement heuristique, } \\ \text{ n'est pas une estimation de } \mathbb{E} \left[ Z \left( t \right) \right]}
+\end{displaymath}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Analyse du gain}
-\par En remplaçant $ \left( \gamma, W \left( T \right) - W \left( t \right) \right)^2 $ par son espérance $||\gamma||^2 \left( T - t \right)  $,
 
+\par Cela fournit un minorant (via $e^x \geq 1 + x$) :
 \begin{displaymath}
-	Z \left( t \right) \simeq \frac{\sqrt{T}}{\sqrt{T - t}}
+Z \left( t \right) \geq  \frac{\sqrt{T}}{\sqrt{T - t}} \left( 1 + \left( \underbrace{\frac{- \left( \gamma, W \left( T \right) - W \left( t \right) \right)^2}{2 ||\gamma||^2 \left( T - t \right)} + \frac{\left( \gamma, W \left( T \right) \right)^2}{2 ||\gamma||^2 T }}_{\mathbb{E} \left[ \cdot \right] = 0} \right) \right)
 \end{displaymath}
 
-\par \textdbend Ce raisonnement est heuristique. Pour calculer $\mathbb{E} \left[ Z \left( t \right) \right]$, il faudrait utiliser le théorème de transfert.
+\par Donc
+\begin{displaymath}
+\mathbb{E} \left[ Z \left( t \right) \right] \geq  \frac{\sqrt{T}}{\sqrt{T - t}} \xrightarrow[t \to T]{} + \infty
+\end{displaymath}
+\end{frame}
 
+\begin{frame}
+\frametitle{Visualisation}
+\par Moyenne de 100 simulations de $Z$ (\emph{simulations\_averages.py}) : 
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/average_100.png}
+  \caption{}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Visualisation}
+\par Moyenne de 1000 simulations de $Z$ (\emph{simulations\_averages.py}) : 
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/average_1000.png}
+  \caption{}
+\end{figure}
 \end{frame}
 
 \begin{frame}
 \frametitle{Visualisation}
 \par Moyenne de 10000 simulations de $Z$ (\emph{simulations\_averages.py}) : 
-
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/average_10000.png}
+  \caption{}
+\end{figure}
 \end{frame}
-
 
 \subsection{Simulations}
 
@@ -292,7 +323,20 @@ d \log \left( Z \left( t \right) \right) = \underbrace{\left(l_s, d W_s \right)}
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Simulations}
 
+\end{frame}
+
+\begin{frame}
+\frametitle{Simulations}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Simulations}
+
+\end{frame}
 
 \section{Conclusion}
 

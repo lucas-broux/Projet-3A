@@ -62,7 +62,7 @@ print("Model validity: " + str(model._check_model_validity()))
 # Loop over simulations. #
 ##########################
 array_Zs = []
-sim_nb = 10000
+sim_nb = 100
 for s in tqdm(range(sim_nb), desc = 'Computing averages', leave = False):
     ##########################
     # Simulate market model. #
