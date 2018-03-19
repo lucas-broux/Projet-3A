@@ -170,15 +170,16 @@ class Model:
         self.prices = np.array(self.prices)
 
 
-    def _plot_prices_evolution(self):
+    def _plot_prices_evolution(self, same_graph = False):
         """
         Plots the evolution of the prices, assuming they have been computed.
         """
         counter = 0
         label = "Bond"
         for prices in self.prices:
-            plt.figure(counter)
-            counter += 1
+            if not same_graph:
+                plt.figure(counter)
+                counter += 1
             plt.plot(self.time_steps, prices, label = "Price evolution: " + label)
             plt.title("Price evolution: " + label)
             plt.xlabel("Time")
