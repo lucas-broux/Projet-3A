@@ -1,0 +1,32 @@
+\documentclass[../finalreport.tex]{subfiles}
+
+\begin{document}
+\par Revenons au problème d'optimisation, notre objectif étant de caractériser l'ensemble des stratégies admissibles.
+
+\par Nous pouvons montrer que 
+\begin{displaymath}
+\mathcal{A} = \left\lbrace \left( \pi, c \right), \mathbb{E}_{\mathbb{Q}_1} \left[ X_A^{\pi, c} R_A + \int_0^A R_t c_t dt \left\vert\right. \mathcal{Y}_0 \right] \leq X_0 \right\rbrace
+\end{displaymath}
+
+\par Cette contrainte traduit le fait que l'initié n'investit et ne dépense que l'argent qu'il n'a déjà : à chaque instant, il ne peut pas avoir mis en jeu depuis le début plus d'argent qu'il n'en avait à l'instant $t = 0$.
+\\
+
+\par Le problème d'optimisation se résout dans le cas général. Ici, nous avons supposé $U_1 = U_2 = \log$, et dans ce cas la stratégie optimale pour les agents est :
+\begin{displaymath}
+\begin{cases}
+R_t c_t^* &= \frac{X_0}{A + 1} \frac{1}{Y} \left( t \right) \\
+R_t X_t^* &= \frac{X_0 \left( A + 1 - t \right)}{A + 1} \frac{1}{Y} \left( t \right)
+\end{cases}
+\end{displaymath}
+
+\par où : 
+\begin{displaymath}
+Y \left( t \right) = 
+\begin{cases}
+e^{- \int_{0}^{t} \left( \eta_s, dW_{s} \right)-\frac{1}{2} \int_{0}^{t} {\| \eta_s \|}^{2} ds} & \text{pour le non initié} \\
+e^{- \int_{0}^{t} \left( l_{s} + \eta_s, dB_{s} \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta_s \|}^{2} ds} & \text{pour l'initié}
+\end{cases}
+\end{displaymath}
+
+
+\end{document}
