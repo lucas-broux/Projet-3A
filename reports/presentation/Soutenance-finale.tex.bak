@@ -197,17 +197,11 @@ X^{\pi, c} \geq 0 \enskip dt \otimes d \mathbb{P}-p.s.
 \end{itemize} 
 \end{frame}
 
-\begin{frame}
-\frametitle{Changement de probabilités}
-\textbf{Proposition : } Sous hypothèses (techniques mais raisonnables), il existe une mesure de probabilité $\mathbb{Q}$ équivalente à $\mathbb{P}$ sur $\mathcal{Y}_A$, telle que pour $t \leq A$, $\mathcal{F}_t$ et $\sigma \left( L \right)$ sont $\mathbb{Q}$-indépendantes.
-\par En outre, $\left( W_t, t \leq A \right)$ est un $\left(\Omega, \mathcal{F}, \mathbb{Q} \right)$-mouvement brownien.
-\end{frame}
-
-\begin{frame}
-\frametitle{Grossissement de filtration}
-\textbf{Propostion : } Sous hypothèses (techniques mais raisonnables), la loi conditionnelle de $L$ sachant $\mathcal{F}_t$ est absolument continue et il existe une version mesurable de la densité conditionnelle $(\omega, t, x) \mapsto p(\omega, t, x)$ qui est une $\mathcal{F}$-martingale et se représente par $ p(\omega, t, x) = p(0, x) + \int_{0}^{t}\alpha(\omega, s, x) dW_s$\
-
-\end{frame}
+%\begin{frame}
+%\frametitle{Changement de probabilités}
+%\textbf{Proposition : } Sous hypothèses (techniques mais raisonnables), il existe une mesure de probabilité $\mathbb{Q}$ équivalente à $\mathbb{P}$ sur $\mathcal{Y}_A$, telle que pour $t \leq A$, $\mathcal{F}_t$ et $\sigma \left( L \right)$ sont $\mathbb{Q}$-indépendantes.
+%\par En outre, $\left( W_t, t \leq A \right)$ est un $\left(\Omega, \mathcal{F}, \mathbb{Q} \right)$-mouvement brownien.
+%\end{frame}
 
 \begin{frame}
 \frametitle{Grossissement de filtration}
@@ -227,6 +221,14 @@ X^{\pi, c} \geq 0 \enskip dt \otimes d \mathbb{P}-p.s.
 \item On a montré que $p \left( t, x \right) = p \left( 0, x \right) + \int_0^t \left( \underbrace{ \frac{\left( x - \beta - \left( \gamma, W \left( t \right) \right) \right)}{||\gamma||^3 \sqrt{2 \pi} \left( T - t \right)^{\frac{3}{2}}} f \left( t, W \left( t \right) \right) \gamma}_{:= \alpha(s, x)}, dW \left( s \right) \right)$
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Grossissement de filtration}
+\textbf{Propostion : } Sous hypothèses (techniques mais raisonnables), la loi conditionnelle de $L$ sachant $\mathcal{F}_t$ est absolument continue et il existe une version mesurable de la densité conditionnelle $(\omega, t, x) \mapsto p(\omega, t, x)$ qui est une $\mathcal{F}$-martingale et se représente par $ p(\omega, t, x) = p(0, x) + \int_{0}^{t}\alpha(\omega, s, x) dW_s$\
+
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Grossissement de filtration}
@@ -250,19 +252,33 @@ B_t = W_t - \displaystyle \int_{0}^{t} \underbrace{\frac{\left( \gamma, W \left(
 \frametitle{Changement de probabilité}
 \begin{itemize}
 \item La forme de $l_t : = l(t, L)$ ne permet le changement de probabilité que sur $[0, A], A<T$ en non sur $[0, T]$. 
-\item On introduit donc $\xi_t = -l_t - \eta_t$ où $\eta_t = (\sigma_t)^{-1} (b_t - r_t \textbf{1})$.
+\item On introduit donc $\xi_t = -l_t - \eta_t$ où $\eta_t = (\sigma)^{-1} (b - r\textbf{1})$.
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}
 \frametitle{Changement de probabilité}
-\textbf{Proposition : } Posons $M_t = e^{ \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d}$ pour $t \in [0,A] , A<T$. Alors $M$ est une $(
-\mathcal{Y}, \mathbb{P})$-martingale uniformément intégrable et, sous $\mathbb{Q}_1 = M.\mathbb{P}$, le processus
-\begin{center}
- $\tilde{B}_t = B_t - \displaystyle \int_{0}^{t}\xi_s ds$
- \end{center}
- est un $(\mathcal{Y}, \mathbb{Q}_1)$-mouvement brownien et les prix actualisés sont des $(\mathcal{Y}, \mathbb{Q}_1)$-martingales locales.
+\begin{itemize}
+\item On peut vérifier que $\xi_t \in \mathbb{L}^2([0, T])$.
+\item Soit $Y_t = e^{ \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d}$, une martingale exponentielle, alors $Z_T > 0$ p.s. et $\mathbb{E}_{\mathbb{P}} (Z_T) = Z_0 = 1$.\\
+\item On peut donc appliquer le théorème de Girsanov qui nous dit que sous $\mathbb{Q}_1 = M. \mathbb{P}$, 
+\begin{equation*}
+\tilde{B}_t = B_t - \displaystyle \int_{0}^{t}\xi_s ds
+\end{equation*}
+est un $(\mathcal{Y}, \mathbb{Q}_1)$ mouvement brownien.
+\end{itemize}
+%\textbf{Proposition : } Posons $M_t = e^{ \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d}$ pour $t \in [0,A] , A<T$. Alors $M$ est une $(
+
+%\mathcal{Y}, \mathbb{P})$-martingale uniformément intégrable et, sous $\mathbb{Q}_1 = M.\mathbb{P}$, le processus
+
+%\begin{center}
+ 
+%$\tilde{B}_t = B_t - \displaystyle \int_{0}^{t}\xi_s ds$
+ 
+%\end{center}
+
+% est un $(\mathcal{Y}, \mathbb{Q}_1)$-mouvement brownien et les prix actualisés sont des $(\mathcal{Y}, \mathbb{Q}_1)$-martingales locales.
 \end{frame}
 
 \begin{frame}
@@ -286,12 +302,37 @@ sous contrainte
 \begin{equation*}
 \mathbb{E}_{\mathbb{Q}_1} \left[ X_A^{\pi, c} R_A + \int_0^A R_t c_t dt \left\vert\right. \mathcal{Y}_0 \right] \leq X_0
 \end{equation*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Résoltuion du problème d'optimisation}
+Le problème se résout en utilisant la méthode des multiplicateurs de Lagrange :
+\begin{align*}
+\mathcal{L} &= \mathbb{E}_{\mathbb{P}} \big[ \int_{0}^{A} \log (c_t) dt + \log (X^{\pi, c}_A ) | \mathcal{Y}_0 \big] \\
+&+ \lambda \Big( \mathbb{E}_{\mathbb{Q}_1} \big[ X^{\pi, c}_A R_A + \int_{0}^{A} R_t c_t dt | \mathcal{Y}_0 \big] - X_0 \Big)
+\end{align*}
 
 \end{frame}
 
 \begin{frame}
 \frametitle{Résolution du problème d'optimisation}
-Les solutions du problème sont 
+La solution du problème sont de la forme 
+\begin{equation*}
+\begin{cases} c^*_t = I_1 (\lambda^*Y_t R_t)\\
+X^{\pi^*, c*}_A = I_2 (\lambda^* Y_A R_A)
+\end{cases}
+\end{equation*}
+où $I_i(x) = ((\log(x))')^{-1} = \frac{1}{x}$ et $
+\lambda^*$ est la solution de l'équation 
+\begin{equation*}
+\mathbb{E}_{\mathbb{P}} \Big[ \int_0^A R_t Y_t I_1(\lambda^* R_t Y_t)dt + R_A Y_A I_2(\lambda^* R_A Y_A ) | \mathcal{Y}_0 \Big] = X_0.
+\end{equation*}
+$ \Leftrightarrow \lambda^* = \frac{X_0}{A +1}$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Résolution du problème d'optimisation}
+On obtient donc
 \begin{equation*}
 \begin{cases}
 R_t c_t^* &= \frac{X_0}{A + 1} \frac{1}{Y} \left( t \right) \\
@@ -489,9 +530,15 @@ a pour solutions :
 
 \begin{frame}
 \frametitle{Résolution du problème d'optimisation}
-\begin{displaymath}
-Y_t = \varepsilon \left(\displaystyle \int_{0}^{t} \left(- \left( \eta_W \left( s \right), dW_s \right) + \left( - \eta_M \left(  s \right) - I_n, dM_s \right) \right)\right), 
-\end{displaymath}
+\begin{itemize}
+\item avec $Y(t) = Y_0(t) / Z(t)$, la relation liant la stratégie optimale de l'initié ($Y(t)$) avec celle du non initié ($Y_0(t)$)\\
+\item $Z$ est la densité conditionnelle de $L$ sachant $\mathcal{F}_t$, prise en $x = L$,
+\item $Y_0 = \varepsilon \left(\displaystyle \int_{0}^{\cdot} \left(- \left( \eta_W \left( s \right), dW_s \right) + \left( - \eta_M \left(  s \right) - I_n, dM_s \right) \right)\right)$, où
+\begin{itemize}
+\item[•] $\eta_W \left( t \right) := m$ premières lignes de $(\sigma_t)^{-1}(b_t - r_t I_d)$.\
+\item[•] $ \eta_M \left( t \right)$ est un processus de dimension $n$, dont les composants sont supposés positifs, tel que $q_t. \kappa_t := n$ dernières lignes de $(\sigma_t)^{-1}(b_t - r_t I_d)$.
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \section{Conclusion}
