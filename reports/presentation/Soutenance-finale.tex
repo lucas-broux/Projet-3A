@@ -190,7 +190,6 @@ X^{\pi, c} \geq 0 \enskip dt \otimes d \mathbb{P}-p.s.
 \item La filtration de $W$ empèche le changement de probabilité pour se ramener à une mesure risque-neutre.
 \item On va donc : 
 \begin{itemize}
-\item construire une probabilité $\mathbb{Q}$ pour laquelle $W$ est un $(\Omega, \mathcal{F}, \mathbb{Q})$-mouvement brownien.
 \item construisons un nouveau mouvement brownien $B$ sur l'espace de probabilité filtré  $(\Omega, \mathcal{Y}, \mathbb{P})$ par la méthode de grossissement de filtration.\\
 \item construire un mouvement brownien $\tilde{B}$ sur $(\Omega, \mathcal{Y}, \mathbb{Q}_1)$, avec $\mathbb{Q}_1$ probabilité risque-neutre sur $\mathcal{Y}$.
 \end{itemize}
@@ -206,7 +205,7 @@ X^{\pi, c} \geq 0 \enskip dt \otimes d \mathbb{P}-p.s.
 \begin{frame}
 \frametitle{Grossissement de filtration}
 \begin{itemize}
-\item On a $L = \ln(S^1_T) - \ln(S^2_t)$
+\item On a $L = \ln(S^1_T) - \ln(S^2_T)$
 \begin{equation*}
 = \underbrace{\ln ( \frac{S_0^1}{S_0^2} ) + ( ( b_1 - b_2 ) - \frac{1}{2} (||\sigma_1||^2 - ||\sigma_2|^2 ) ) T}_{=: \beta} + ( \underbrace{\sigma_1 - \sigma_2}_{=: \gamma}, W ( T ) ).
 \end{equation*}
@@ -664,6 +663,30 @@ a pour solutions :
 \item[•] $ \eta_M \left( t \right)$ est un processus de dimension $n$, dont les composants sont supposés positifs, tel que $q_t. \kappa_t := n$ dernières lignes de $(\sigma_t)^{-1}(b_t - r_t I_d)$.
 \end{itemize}
 \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Cas particulier}
+\par Cas particulier : $L = \ln \left( S_T^{1} \right) - \ln \left( S_T^{2} \right)$.
+
+\small
+\begin{displaymath}
+Z \left( t \right) = \dfrac{\prod\limits_{j = 1}^{n} \sum\limits_{k_j = 0}^{+ \infty} \dfrac{e^{- {\kappa}_j \left( T - t\right)}}{\sqrt{2 \pi {\Sigma}_t}} {\displaystyle \int_{{\left( F_{t, T, k_j}\right)}^n}} e^{\left( \frac{- \left( L - m_t - \sum\limits_{j = 1}^{n} \sum\limits_{l_j = 1}^{k_j} \ln \left( \frac{1 + {\sigma}_{i_1, j}}{1 + {\sigma}_{i_2, j}} \right) \left( t_{j, l_j} \right) \right)^2}{2 {\Sigma}_t} \right)} \prod d t_{j, l_j}}{\prod\limits_{j = 1}^{n} \sum\limits_{k_j = 0}^{+ \infty} \dfrac{e^{- {\kappa}_j T}}{\sqrt{2 \pi {\Sigma}_0}} {\displaystyle \int_{{\left( F_{0, T, k_j}\right)}^n}} e^{\left( \frac{- \left( L - m_0 - \sum\limits_{j = 1}^{n} \sum\limits_{l_j = 1}^{k_j} \ln \left( \frac{1 + {\sigma}_{i_1, j}}{1 + {\sigma}_{i_2, j}} \right) \left( t_{j, l_j} \right) \right)^2}{2 {\Sigma}_t} \right)} \prod d t_{j, l_j}}
+\end{displaymath}
+\end{frame}
+
+\begin{frame}
+\frametitle{Cas particulier}
+où
+\scriptsize
+\begin{displaymath}
+\begin{cases}
+{\Sigma}_t &= \displaystyle \int_{s = t}^{T} \left\Vert \sigma_{1, 1} - \sigma_{2, 1} \right\Vert^2 ds \\
+L - m_t &= \displaystyle \int_{s = t}^{T} \left( \sigma_{1, W} - \sigma_{2, W} \right) dW(s) + \int_{s = t}^{T} \ln \left( \frac{1 + \sigma_{1, N}}{1 + \sigma_{2, N}} \right) dN(s) \\
+{\left( F_{t, T, k_j}\right)}^n &= \left\lbrace \left( t_{j, l_j} \right)_{\substack{1\leq j\leq n \\ 1\leq l_j\leq k_j}} \in \mathbb{R}^{k_1 + ... + k_n}, t \leq t_{j, l_1} \leq ... \leq t_{j, l_{k_j}} \leq T \text{ pour } 1 \leq j \leq n \right\rbrace
+\end{cases}
+\end{displaymath}
 \end{frame}
 
 \section{Conclusion}

@@ -1,0 +1,13 @@
+\babel@toc {french}{}
+\beamer@sectionintoc {3}{Mod\IeC {\`e}le diffusif - cas particulier}{5}{0}{1}
+\beamer@subsectionintoc {3}{1}{Description du mod\IeC {\`e}le}{6}{0}{1}
+\beamer@subsectionintoc {3}{2}{Strat\IeC {\'e}gie optimale}{10}{0}{1}
+\beamer@subsectionintoc {3}{3}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{12}{0}{1}
+\beamer@subsectionintoc {3}{4}{Analyse du gain de l'initi\IeC {\'e}}{25}{0}{1}
+\beamer@subsectionintoc {3}{5}{Simulations}{32}{0}{1}
+\beamer@sectionintoc {4}{Mod\IeC {\`e}le avec sauts}{42}{0}{2}
+\beamer@subsectionintoc {4}{1}{Description du mod\IeC {\`e}le}{43}{0}{2}
+\beamer@subsectionintoc {4}{2}{Raisonnement}{44}{0}{2}
+\beamer@subsectionintoc {4}{3}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{45}{0}{2}
+\beamer@sectionintoc {5}{Conclusion}{49}{0}{3}
+\beamer@sectionintoc {6}{Retour d'exp\IeC {\'e}rience}{51}{0}{4}
