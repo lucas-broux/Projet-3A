@@ -156,7 +156,7 @@ X_t R_t + \int_{0}^{t} R_s c_s ds = \int_{0}^{t} (R_s \pi_s, b_s - r_s \textbf{1
 \small
 \begin{align*}
       J \colon &\underbrace{\mathcal{A}}_{\text{Stratégies admissibles}} \to \mathbb{R} \\
-       &\left( \pi, c \right) \xmapsto{\phantom{\mathcal{A}}} J \left( X_0, \pi, c \right) := \mathbb{E} \left[ \int_0^A \log  \left( c_t \right) dt + \log \left( \underbrace{X_A^{\pi, c}}_{\text{Richesse au temps } A} \right) \left\vert\right. \mathcal{Y}_0 \right]
+       &\left( \pi, c \right) \xmapsto{\phantom{\mathcal{A}}} J \left( X_0, \pi, c \right) := \mathbb{E}_{\mathbb{P}} \left[ \int_0^A \log  \left( c_t \right) dt + \log \left( \underbrace{X_A^{\pi, c}}_{\text{Richesse au temps } A} \right) \left\vert\right. \mathcal{Y}_0 \right]
 \end{align*}
 
 \end{frame}
@@ -252,7 +252,7 @@ B_t = W_t - \displaystyle \int_{0}^{t} \underbrace{\frac{\left( \gamma, W \left(
 \frametitle{Changement de probabilité}
 \begin{itemize}
 \item La forme de $l_t : = l(t, L)$ ne permet le changement de probabilité que sur $[0, A], A<T$ en non sur $[0, T]$. 
-\item On introduit donc $\xi_t = -l_t - \eta_t$ où $\eta_t = (\sigma)^{-1} (b - r\textbf{1})$.
+\item On introduit donc $\xi_t = -l_t - \eta$ où $\eta = (\sigma)^{-1} (b - r\textbf{1})$.
 \end{itemize}
 
 \end{frame}
@@ -261,7 +261,7 @@ B_t = W_t - \displaystyle \int_{0}^{t} \underbrace{\frac{\left( \gamma, W \left(
 \frametitle{Changement de probabilité}
 \begin{itemize}
 \item On peut vérifier que $\xi_t \in \mathbb{L}^2([0, T])$.
-\item Soit $Y_t = e^{ \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d}$, une martingale exponentielle, alors $Z_T > 0$ p.s. et $\mathbb{E}_{\mathbb{P}} (Z_T) = Z_0 = 1$.\\
+\item Soit $Y_t = e^{ \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d}$, une martingale exponentielle, alors $Y_T > 0$ p.s. et $\mathbb{E}_{\mathbb{P}} (Y_T) = Z_0 = 1$.\\
 \item On peut donc appliquer le théorème de Girsanov qui nous dit que sous $\mathbb{Q}_1 = Y. \mathbb{P}$, 
 \begin{equation*}
 \tilde{B}_t = B_t - \displaystyle \int_{0}^{t}\xi_s ds
@@ -283,13 +283,11 @@ est un $(\mathcal{Y}, \mathbb{Q}_1)$ mouvement brownien.
 
 \begin{frame}
 \frametitle{Caractérisation de $\mathcal{A}$}
-\begin{itemize}
-\item Pour caracteriser $\mathcal{A}$, on introduit d'abord la \textit{stratégie de consommation-placement $(\pi, c)$ $ \mathcal{Y}$-admissible} qui rassure que la richesse finale $X^{\pi, c}$ pour la stratégie est toujours à valeurs positives ou nulles. .
-\item Par propositions, on obtient 
+
+Par propositions, on obtient 
 \begin{equation*}
 \mathcal{A} = \left\lbrace \left( \pi, c \right), \mathbb{E}_{\mathbb{Q}_1} \left[ X_A^{\pi, c} R_A + \int_0^A R_t c_t dt \left\vert\right. \mathcal{Y}_0 \right] \leq X_0 \right\rbrace .
 \end{equation*}
-\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -343,8 +341,8 @@ où :
 \begin{displaymath}
 Y \left( t \right) = 
 \begin{cases}
-e^{- \int_{0}^{t} \left( \eta_s, dW_{s} \right)-\frac{1}{2} \int_{0}^{t} {\| \eta_s \|}^{2} ds} & \text{pour le non initié} \\
-e^{- \int_{0}^{t} \left( l_{s} + \eta_s, dB_{s} \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta_s \|}^{2} ds} & \text{pour l'initié}
+e^{- \int_{0}^{t} \left( \eta, dW_{s} \right)-\frac{1}{2} \int_{0}^{t} {\| \eta \|}^{2} ds} & \text{pour le non initié} \\
+e^{- \int_{0}^{t} \left( l_{s} + \eta, dB_{s} \right) - \frac{1}{2} \int_{0}^{t} {\| l_{s} + \eta \|}^{2} ds} & \text{pour l'initié}
 \end{cases}
 \end{displaymath}
 \end{frame}

@@ -84,42 +84,54 @@
 \headcommand {\beamer@framepages {34}{34}}
 \headcommand {\slideentry {3}{5}{4}{35/35}{Simulations}{0}}
 \headcommand {\beamer@framepages {35}{35}}
-\headcommand {\sectionentry {4}{Mod\IeC {\`e}le avec sauts}{36}{Mod\IeC {\`e}le avec sauts}{0}}
-\headcommand {\beamer@sectionpages {5}{35}}
-\headcommand {\beamer@subsectionpages {32}{35}}
-\headcommand {\slideentry {4}{0}{1}{36/36}{}{0}}
+\headcommand {\slideentry {3}{5}{5}{36/36}{Simulations}{0}}
 \headcommand {\beamer@framepages {36}{36}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{37}{Description du mod\IeC {\`e}le}}\headcommand {\beamer@subsectionpages {36}{36}}
-\headcommand {\slideentry {4}{1}{1}{37/37}{Description du mod\IeC {\`e}le}{0}}
+\headcommand {\slideentry {3}{5}{6}{37/37}{Simulations}{0}}
 \headcommand {\beamer@framepages {37}{37}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{38}{Raisonnement}}\headcommand {\beamer@subsectionpages {37}{37}}
-\headcommand {\slideentry {4}{2}{1}{38/38}{Raisonnement}{0}}
+\headcommand {\slideentry {3}{5}{7}{38/38}{Simulations}{0}}
 \headcommand {\beamer@framepages {38}{38}}
-\headcommand {\beamer@subsectionentry {0}{4}{3}{39}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}}\headcommand {\beamer@subsectionpages {38}{38}}
-\headcommand {\slideentry {4}{3}{1}{39/39}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
+\headcommand {\slideentry {3}{5}{8}{39/39}{Simulations}{0}}
 \headcommand {\beamer@framepages {39}{39}}
-\headcommand {\slideentry {4}{3}{2}{40/40}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
+\headcommand {\slideentry {3}{5}{9}{40/40}{Simulations}{0}}
 \headcommand {\beamer@framepages {40}{40}}
-\headcommand {\sectionentry {5}{Conclusion}{41}{Conclusion}{0}}
-\headcommand {\beamer@sectionpages {36}{40}}
-\headcommand {\beamer@subsectionpages {39}{40}}
-\headcommand {\slideentry {5}{0}{1}{41/41}{}{0}}
+\headcommand {\slideentry {3}{5}{10}{41/41}{Simulations}{0}}
 \headcommand {\beamer@framepages {41}{41}}
-\headcommand {\slideentry {5}{0}{2}{42/42}{}{0}}
+\headcommand {\sectionentry {4}{Mod\IeC {\`e}le avec sauts}{42}{Mod\IeC {\`e}le avec sauts}{0}}
+\headcommand {\beamer@sectionpages {5}{41}}
+\headcommand {\beamer@subsectionpages {32}{41}}
+\headcommand {\slideentry {4}{0}{1}{42/42}{}{0}}
 \headcommand {\beamer@framepages {42}{42}}
-\headcommand {\sectionentry {6}{Retour d'exp\IeC {\'e}rience}{43}{Retour d'exp\IeC {\'e}rience}{0}}
-\headcommand {\beamer@sectionpages {41}{42}}
-\headcommand {\beamer@subsectionpages {41}{42}}
-\headcommand {\slideentry {6}{0}{1}{43/43}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{43}{Description du mod\IeC {\`e}le}}\headcommand {\beamer@subsectionpages {42}{42}}
+\headcommand {\slideentry {4}{1}{1}{43/43}{Description du mod\IeC {\`e}le}{0}}
 \headcommand {\beamer@framepages {43}{43}}
-\headcommand {\slideentry {6}{0}{2}{44/44}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{44}{Raisonnement}}\headcommand {\beamer@subsectionpages {43}{43}}
+\headcommand {\slideentry {4}{2}{1}{44/44}{Raisonnement}{0}}
 \headcommand {\beamer@framepages {44}{44}}
-\headcommand {\slideentry {6}{0}{3}{45/45}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{45}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}}\headcommand {\beamer@subsectionpages {44}{44}}
+\headcommand {\slideentry {4}{3}{1}{45/45}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
 \headcommand {\beamer@framepages {45}{45}}
-\headcommand {\slideentry {6}{0}{4}{46/46}{}{0}}
+\headcommand {\slideentry {4}{3}{2}{46/46}{R\IeC {\'e}solution du probl\IeC {\`e}me d'optimisation}{0}}
 \headcommand {\beamer@framepages {46}{46}}
-\headcommand {\beamer@partpages {1}{46}}
-\headcommand {\beamer@subsectionpages {43}{46}}
-\headcommand {\beamer@sectionpages {43}{46}}
-\headcommand {\beamer@documentpages {46}}
-\headcommand {\def \inserttotalframenumber {46}}
+\headcommand {\sectionentry {5}{Conclusion}{47}{Conclusion}{0}}
+\headcommand {\beamer@sectionpages {42}{46}}
+\headcommand {\beamer@subsectionpages {45}{46}}
+\headcommand {\slideentry {5}{0}{1}{47/47}{}{0}}
+\headcommand {\beamer@framepages {47}{47}}
+\headcommand {\slideentry {5}{0}{2}{48/48}{}{0}}
+\headcommand {\beamer@framepages {48}{48}}
+\headcommand {\sectionentry {6}{Retour d'exp\IeC {\'e}rience}{49}{Retour d'exp\IeC {\'e}rience}{0}}
+\headcommand {\beamer@sectionpages {47}{48}}
+\headcommand {\beamer@subsectionpages {47}{48}}
+\headcommand {\slideentry {6}{0}{1}{49/49}{}{0}}
+\headcommand {\beamer@framepages {49}{49}}
+\headcommand {\slideentry {6}{0}{2}{50/50}{}{0}}
+\headcommand {\beamer@framepages {50}{50}}
+\headcommand {\slideentry {6}{0}{3}{51/51}{}{0}}
+\headcommand {\beamer@framepages {51}{51}}
+\headcommand {\slideentry {6}{0}{4}{52/52}{}{0}}
+\headcommand {\beamer@framepages {52}{52}}
+\headcommand {\beamer@partpages {1}{52}}
+\headcommand {\beamer@subsectionpages {49}{52}}
+\headcommand {\beamer@sectionpages {49}{52}}
+\headcommand {\beamer@documentpages {52}}
+\headcommand {\def \inserttotalframenumber {52}}

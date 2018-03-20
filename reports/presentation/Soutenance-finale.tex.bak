@@ -156,7 +156,7 @@ X_t R_t + \int_{0}^{t} R_s c_s ds = \int_{0}^{t} (R_s \pi_s, b_s - r_s \textbf{1
 \small
 \begin{align*}
       J \colon &\underbrace{\mathcal{A}}_{\text{Stratégies admissibles}} \to \mathbb{R} \\
-       &\left( \pi, c \right) \xmapsto{\phantom{\mathcal{A}}} J \left( X_0, \pi, c \right) := \mathbb{E} \left[ \int_0^A \log  \left( c_t \right) dt + \log \left( \underbrace{X_A^{\pi, c}}_{\text{Richesse au temps } A} \right) \left\vert\right. \mathcal{Y}_0 \right]
+       &\left( \pi, c \right) \xmapsto{\phantom{\mathcal{A}}} J \left( X_0, \pi, c \right) := \mathbb{E}_{\mathbb{P}} \left[ \int_0^A \log  \left( c_t \right) dt + \log \left( \underbrace{X_A^{\pi, c}}_{\text{Richesse au temps } A} \right) \left\vert\right. \mathcal{Y}_0 \right]
 \end{align*}
 
 \end{frame}
@@ -262,7 +262,7 @@ B_t = W_t - \displaystyle \int_{0}^{t} \underbrace{\frac{\left( \gamma, W \left(
 \begin{itemize}
 \item On peut vérifier que $\xi_t \in \mathbb{L}^2([0, T])$.
 \item Soit $Y_t = e^{ \int_{0}^{t} \xi_s dB_s - \frac{1}{2} \int_{0}^{t} ||\xi_s||^2 d}$, une martingale exponentielle, alors $Z_T > 0$ p.s. et $\mathbb{E}_{\mathbb{P}} (Z_T) = Z_0 = 1$.\\
-\item On peut donc appliquer le théorème de Girsanov qui nous dit que sous $\mathbb{Q}_1 = M. \mathbb{P}$, 
+\item On peut donc appliquer le théorème de Girsanov qui nous dit que sous $\mathbb{Q}_1 = Y. \mathbb{P}$, 
 \begin{equation*}
 \tilde{B}_t = B_t - \displaystyle \int_{0}^{t}\xi_s ds
 \end{equation*}
@@ -464,19 +464,146 @@ Z \left( t \right) \geq  \frac{\sqrt{T}}{\sqrt{T - t}} \left( 1 + \left( \underb
 \end{frame}
 
 \begin{frame}
-\frametitle{Simulations}
+\frametitle{Exemple de simulation}
+\par \emph{simulations\_diffusive\_model.py}, 
+\begin{displaymath}
+\begin{cases}
+T &= 1 \\
+A &= 0.95 \\
+d &= 2 \\
+r &= 0.1 \\
+b &= \begin{bmatrix}
+		0.1 & -0.05
+	\end{bmatrix} \\
+\sigma &= \begin{bmatrix}
+			0.75 & 0 \\
+			0 & 1
+		  \end{bmatrix}
+\end{cases}
+\end{displaymath}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exemple de simulation}
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/prices.png}
+  \caption{Évolution des prix}
+\end{figure}
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Simulations}
+\frametitle{Exemple de simulation}
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_1/compared_wealths.png}
+  \caption{Richesse comparée}
+\end{figure}
+\end{frame}
 
+\begin{frame}
+\frametitle{Choix des paramètres}
+\par On a 
+\begin{displaymath}
+\frac{1}{Y_0 \left( t \right)} = e^{ \left( \eta, W_{t} \right) + \frac{1}{2} t {\| \eta \|}^{2}} \quad \text{avec } \eta = (\sigma)^{-1} (b - r \textbf{1})
+\end{displaymath}
+\begin{itemize}
+\item Si $\eta$ grand ($\sigma$ petit ou/et $b$ éloigné de $r$): le terme en $t {\| \eta \|}^{2}$ domine : explosion de la richesse.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Simulations}
+\begin{figure}[H]
+\begin{minipage}{.15\textwidth}
+\begin{displaymath}
+\tiny
+\begin{cases}
+r &= 0.1 \\
+b &= \begin{bmatrix}
+		0.55 & -0.35
+	\end{bmatrix} \\
+\sigma &= \begin{bmatrix}
+			-0.25 & 0 \\
+			0 & -0.2
+		  \end{bmatrix}
+\end{cases}
+\end{displaymath}
+\end{minipage}%
+\begin{minipage}{.85\textwidth}
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_2/wealth_non_insider.png}
+\end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Choix des paramètres}
+\par On a 
+\begin{displaymath}
+\frac{1}{Y_0 \left( t \right)} = e^{ \left( \eta, W_{t} \right) + \frac{1}{2} t {\| \eta \|}^{2}} \quad \text{avec } \eta = (\sigma)^{-1} (b - r \textbf{1})
+\end{displaymath}
+\begin{itemize}
+\item Si $\eta$ grand ($\sigma$ petit ou/et $b$ éloigné de $r$): le terme en $t {\| \eta \|}^{2}$ domine : explosion de la richesse.
+\par \textbf{Interprétation} : faible volatilité et/ou fort drift : les agents peuvent établir de bonnes stratégies.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Choix des paramètres}
+\par On a 
+\begin{displaymath}
+\frac{1}{Y_0 \left( t \right)} = e^{ \left( \eta, W_{t} \right) + \frac{1}{2} t {\| \eta \|}^{2}} \quad \text{avec } \eta = (\sigma)^{-1} (b - r \textbf{1})
+\end{displaymath}
+\begin{itemize}
+\item Si $\eta$ petit ($\sigma$ grand ou/et $b$ proche de $r$): le terme en $\left( \eta, W_{t} \right)$ domine : caractère "aléatoire" de la richesse.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Simulations}
-
+\begin{figure}[H]
+\begin{minipage}{.15\textwidth}
+\begin{displaymath}
+\tiny
+\begin{cases}
+r &= 0.1 \\
+b &= \begin{bmatrix}
+		0.15 & 0.05
+	\end{bmatrix} \\
+\sigma &= \begin{bmatrix}
+			-0.75 & 0 \\
+			0 & 1
+		  \end{bmatrix}
+\end{cases}
+\end{displaymath}
+\end{minipage}%
+\begin{minipage}{.85\textwidth}
+  \centering
+    \includegraphics[width=0.7\textwidth]{images/simulation_3/wealth_non_insider.png}
+\end{minipage}
+\end{figure}
 \end{frame}
+
+\begin{frame}
+\frametitle{Choix des paramètres}
+\par On a 
+\begin{displaymath}
+\frac{1}{Y_0 \left( t \right)} = e^{ \left( \eta, W_{t} \right) + \frac{1}{2} t {\| \eta \|}^{2}} \quad \text{avec } \eta = (\sigma)^{-1} (b - r \textbf{1})
+\end{displaymath}
+\begin{itemize}
+\item Si $\eta$ petit ($\sigma$ grand ou/et $b$ proche de $r$): le terme en $\left( \eta, W_{t} \right)$ domine : caractère "aléatoire" de la richesse.
+\par \textbf{Interprétation} : forte volatilité et/ou drift incertain : les agents ont du mal à établir de bonnes stratégies.
+\end{itemize}
+\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Simulations}
+%
+%\end{frame}
 
 \section{Modèle avec sauts}
 \subsection{Description du modèle}
